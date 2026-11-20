@@ -1,29 +1,28 @@
-# Welcome to your Lovable project
+# Erun Consulting Group
 
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+Website for Erun Consulting Group — data analytics, automation and AI implementation.
+_Turning complexity into clarity._
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Requires [Bun](https://bun.sh) (or Node.js 22+ with npm).
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+bun install
+bun run dev      # local dev server on http://localhost:8080
+bun run build    # production build
+bun run test     # unit tests
 ```
+
+## Deployment
+
+The site deploys to [Vercel](https://vercel.com). Import the repository and keep the
+default settings: Vercel detects the build and serves the output from `.vercel/output`.
+Every push to `main` triggers a new production deployment.
 
 ## Built with
 
 - TanStack Start
-- TypeScript
-- React
+- React and TypeScript
 - Tailwind CSS
+- Three.js
