@@ -3,15 +3,39 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowDown, ArrowUpRight, ArrowRight, Check, Menu, X, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClarityScene } from "@/components/clarity-scene";
+import {
+  HOME_DESCRIPTION,
+  HOME_TITLE,
+  LINKEDIN_URL,
+  SITE_NAME,
+  SITE_URL,
+  SOCIAL_IMAGE,
+  structuredData,
+} from "@/lib/site";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [
-    { title: "Erun Group — Turning Complexity Into Clarity" },
-    { name: "description", content: "Analytical expertise, smarter automation, and practical AI implementation. Erun Group helps organizations work better." },
-    { property: "og:title", content: "Erun Group — Turning Complexity Into Clarity" },
-    { property: "og:description", content: "Data Analytics. Automation. AI Implementation. Thoughtful analysis, practical execution, measurable impact." },
-    { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
-  ] }),
+  head: () => ({
+    meta: [
+      { title: HOME_TITLE },
+      { name: "description", content: HOME_DESCRIPTION },
+      { property: "og:title", content: HOME_TITLE },
+      { property: "og:description", content: HOME_DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:locale", content: "en_CA" },
+      { property: "og:image", content: SOCIAL_IMAGE.url },
+      { property: "og:image:width", content: String(SOCIAL_IMAGE.width) },
+      { property: "og:image:height", content: String(SOCIAL_IMAGE.height) },
+      { property: "og:image:alt", content: `${SITE_NAME} logo` },
+      // Square logo image, so the small summary card fits better than the large one.
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: HOME_TITLE },
+      { name: "twitter:description", content: HOME_DESCRIPTION },
+      { name: "twitter:image", content: SOCIAL_IMAGE.url },
+    ],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(structuredData) }],
+  }),
   component: Index,
 });
 
@@ -69,7 +93,7 @@ function Index() {
       <section id="expertise" className="snap-section expertise-section"><div className="section-heading"><div className="eyebrow">01 / OUR EXPERTISE</div><h2>What We Do<span className="text-primary">.</span></h2><p>Clarity in your data. Confidence in your next move.</p></div><div className="expertise-grid">{[{ title: "Data Analytics", text: "Insights that drive better decisions.", visual: <AnalyticsVisual /> }, { title: "Automation", text: "Smarter workflows. Less manual work.", visual: <WorkflowVisual /> }, { title: "AI Implementation", text: "Practical AI. Real applications.", visual: <AIVisual /> }].map((service, i) => <article className="expertise-item" key={service.title}>{service.visual}<div className="service-heading"><span className="service-index">0{i + 1}</span><h3>{service.title}</h3><ArrowUpRight size={20} /></div><p>{service.text}</p></article>)}</div><div className="section-bottom"><span>THREE DISCIPLINES. ONE CLEAR DIRECTION.</span><Button variant="nav" onClick={() => goTo(2)}>Our approach <ArrowDown /></Button></div></section>
       <section id="approach" className="snap-section approach-section"><div className="section-heading"><div className="eyebrow">02 / OUR APPROACH</div><h2>From Challenge<br />to Solution<span className="text-primary">.</span></h2></div><div className="approach-stages">{["Understand", "Design", "Deliver"].map((title, i) => <Button variant="ghost" key={title} className={`approach-stage ${stage === i ? "selected" : ""}`} onClick={() => setStage(i)} aria-pressed={stage === i}><span className="stage-number">0{i + 1}</span><div className={`stage-art stage-art-${i}`} aria-hidden="true">{Array.from({ length: 9 }, (_, j) => <span key={j} />)}</div><span className="stage-title">{title}</span><span className="stage-copy">{["Make sense of the challenge.", "Shape the right solution.", "Make progress tangible."][i]}</span></Button>)}</div><p className="approach-summary">Thoughtful analysis. Practical execution. Measurable impact.</p><div className="section-bottom"><span>GOOD SOLUTIONS BEGIN WITH THE RIGHT QUESTIONS.</span><span>03 / 05</span></div></section>
       <section id="about" className="snap-section about-section"><div className="eyebrow">03 / ABOUT ERUN</div><div className="about-content"><div><h2>Built Around<br />Better Solutions<span className="text-primary">.</span></h2><p>Erun brings together analytical thinking, business understanding, and technology to help organizations work smarter.</p><Button variant="editorial" onClick={() => goTo(4)}>Let’s make progress <ArrowUpRight /></Button></div><div className="architecture-art" role="img" aria-label="Interconnected architectural frames forming one coherent structure">{Array.from({ length: 6 }, (_, i) => <div key={i} className={`architecture-frame frame-${i}`} />)}<div className="architecture-baseline" /><span>THINKING IN SYSTEMS.</span></div></div><div className="section-bottom"><span>BUSINESS FIRST. TECHNOLOGY WITH PURPOSE.</span><span>04 / 05</span></div></section>
-      <section id="contact" className="snap-section contact-section"><div className="eyebrow">04 / START A CONVERSATION</div><div className="contact-layout"><div><h2>Let’s Make<br />It Work Better<span className="text-primary">.</span></h2><p>Have a challenge in mind? Let’s talk.</p><Button variant="editorial" onClick={() => formRef.current?.querySelector("input")?.focus()}>Get in Touch <ArrowUpRight /></Button><div className="linkedin-link"><Button variant="nav" disabled title="Company LinkedIn link not supplied"><Linkedin size={16} /> LinkedIn <ArrowUpRight size={14} /></Button><span>Company link coming soon</span></div></div><form ref={formRef} onSubmit={submitEnquiry} className="contact-form"><label>Your name<input required name="name" autoComplete="name" placeholder="Alex Morgan" /></label><label>Email address<input required type="email" name="email" autoComplete="email" placeholder="alex@company.com" /></label><label>What’s on your mind?<textarea required name="message" rows={3} placeholder="Tell us a little about your challenge…" /></label><Button variant="default" type="submit" className="enquiry-button">Prepare enquiry <ArrowUpRight /></Button><p className="form-note" role="status">{contactStatus || "Enquiries can be copied. Direct delivery coming soon."}</p></form></div><footer className="site-footer"><a href="#home" className="wordmark">erun<span>.</span></a><span>Data Analytics · Automation · AI Implementation</span><span>© {new Date().getFullYear()} Erun Group</span><Button variant="nav" size="icon" aria-label="Back to top" onClick={() => goTo(0)}><ArrowRight className="back-top-icon" /></Button></footer></section>
+      <section id="contact" className="snap-section contact-section"><div className="eyebrow">04 / START A CONVERSATION</div><div className="contact-layout"><div><h2>Let’s Make<br />It Work Better<span className="text-primary">.</span></h2><p>Have a challenge in mind? Let’s talk.</p><Button variant="editorial" onClick={() => formRef.current?.querySelector("input")?.focus()}>Get in Touch <ArrowUpRight /></Button><div className="linkedin-link"><Button variant="nav" asChild><a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label={`${SITE_NAME} on LinkedIn (opens in a new tab)`}><Linkedin size={16} /> LinkedIn <ArrowUpRight size={14} /></a></Button></div></div><form ref={formRef} onSubmit={submitEnquiry} className="contact-form"><label>Your name<input required name="name" autoComplete="name" placeholder="Alex Morgan" /></label><label>Email address<input required type="email" name="email" autoComplete="email" placeholder="alex@company.com" /></label><label>What’s on your mind?<textarea required name="message" rows={3} placeholder="Tell us a little about your challenge…" /></label><Button variant="default" type="submit" className="enquiry-button">Prepare enquiry <ArrowUpRight /></Button><p className="form-note" role="status">{contactStatus || "Enquiries can be copied. Direct delivery coming soon."}</p></form></div><footer className="site-footer"><a href="#home" className="wordmark">erun<span>.</span></a><span>Data Analytics · Automation · AI Implementation</span><span>© {new Date().getFullYear()} Erun Group</span><Button variant="nav" size="icon" aria-label="Back to top" onClick={() => goTo(0)}><ArrowRight className="back-top-icon" /></Button></footer></section>
     </main>
   </div>;
 }
