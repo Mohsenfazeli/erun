@@ -86,7 +86,7 @@ function Index() {
     <main>
       <section id="home" className="hero-section snap-section">
         <div className="hero-grid" aria-hidden="true" /><ClarityScene />
-        <div className="hero-content"><div className="eyebrow"><span className="small-rule" /> ERUN GROUP</div><h1>Turning<br />Complexity<br />Into <span className="clarity-word">Clarity<span className="headline-period">.</span></span></h1><p className="hero-description">Analytics. Automation.<br />AI Implementation.</p><Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>Explore Our Expertise <ArrowUpRight /></Button></div>
+        <div className="hero-content"><div className="eyebrow"><span className="small-rule" /> ERUN GROUP</div><h1>Turning<br />Complexity<br />Into <span className="clarity-word">Clarity<span className="headline-period">.</span></span></h1><p className="hero-description">Data Analytics. Automation.<br />AI Implementation.</p><Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>Explore Our Expertise <ArrowUpRight /></Button></div>
         <div className="scene-caption"><span className="live-dot" /> COMPLEXITY, CONNECTED.</div>
         <div className="hero-bottom"><Button variant="nav" className="scroll-cue" onClick={() => goTo(1)}><ArrowDown /> SCROLL TO DISCOVER</Button><span className="hero-bottom-note">Analytical thinking. Practical progress.</span><span className="section-counter">01 <span>/ 05</span></span></div>
       </section>
