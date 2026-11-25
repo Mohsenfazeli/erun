@@ -2,6 +2,7 @@
 export const SITE_URL = "https://www.erungroup.ca";
 export const SITE_NAME = "Erun Consulting Group";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/erungroup";
+export const CONTACT_EMAIL = "contact@erungroup.ca";
 
 export const HOME_TITLE = "Erun Consulting Group | AI & Data Analytics Consulting in Vancouver";
 export const HOME_DESCRIPTION =
@@ -39,6 +40,7 @@ export const structuredData = {
       logo: SOCIAL_IMAGE.url,
       description: HOME_DESCRIPTION,
       slogan: "Turning Complexity Into Clarity.",
+      email: CONTACT_EMAIL,
       knowsAbout: services.map((service) => service.name),
       areaServed,
       makesOffer: services.map((service) => ({
