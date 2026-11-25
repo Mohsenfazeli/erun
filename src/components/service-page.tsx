@@ -75,6 +75,23 @@ export function ServicePage({ service }: { service: Service }) {
         </div>
       </section>
 
+      <section className="service-block" aria-labelledby="technologies-title">
+        <div className="service-block-label">
+          <span className="eyebrow">TECHNOLOGIES</span>
+          <h2 id="technologies-title">Tools we use</h2>
+        </div>
+        <div>
+          <ul className="technology-list">
+            {service.technologies.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p className="technology-note">
+            We choose tools to suit the problem and what your organization already uses.
+          </p>
+        </div>
+      </section>
+
       <nav className="other-services" aria-label="Other services">
         <span className="eyebrow">OTHER SERVICES</span>
         {others.map((item) => (

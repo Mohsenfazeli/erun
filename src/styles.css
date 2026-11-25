@@ -281,6 +281,19 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
   .applications-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 26px; }
   .applications-grid li { padding-top: 12px; }.applications-grid h3 { font-size: 15px; margin: 6px 0 4px; }.applications-grid p { font-size: 11px; }
 }
+/* Technologies: plain text, monochrome, no logos. */
+.technology-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; border-top: 1px solid var(--border); }
+.technology-list li { padding: 16px 26px 16px 0; margin-right: 26px; border-right: 1px solid var(--border); font-size: 15px; font-weight: 550; }
+.technology-list li:last-child { border-right: 0; margin-right: 0; }
+.technology-note { margin: 16px 0 0; font-size: 12px; color: var(--muted-foreground); }
+.technology-line { display: flex; align-items: baseline; gap: 28px; margin-top: 44px; }
+.technology-line .eyebrow { flex-shrink: 0; }
+.technology-line ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 0; font-size: 12px; color: var(--muted-foreground); }
+.technology-line li:not(:last-child)::after { content: "·"; margin: 0 12px; color: var(--primary); }
+@media (max-width: 700px) {
+  .technology-list { border-top: 0; row-gap: 6px; }.technology-list li { padding: 0; margin: 0; border-right: 0; font-size: 14px; }.technology-list li:not(:last-child)::after { content: "·"; margin: 0 10px; color: var(--primary); }
+  .technology-line { flex-direction: column; gap: 10px; margin-top: 28px; }.technology-line ul { font-size: 11px; }.technology-line li:not(:last-child)::after { margin: 0 8px; }
+}
 /* Erun Approach: four stages joined by a line that fills as the stages advance. */
 .approach-track { list-style: none; margin: 56px 0 30px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .approach-track li { position: relative; padding-right: 32px; }
