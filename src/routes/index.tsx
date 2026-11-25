@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ClarityScene } from "@/components/clarity-scene";
 import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
-import { servicePath } from "@/lib/services";
+import { servicePath, technologies } from "@/lib/services";
 import { scrollBehavior } from "@/lib/utils";
 import { sendEnquiry } from "@/lib/contact.functions";
 import {
@@ -328,6 +328,14 @@ function Index() {
               </li>
             ))}
           </ul>
+          <div className="technology-line">
+            <span className="eyebrow">TECHNOLOGIES</span>
+            <ul aria-label="Technologies">
+              {technologies.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
           <div className="section-bottom">
             <span>DIFFERENT SECTORS. THE SAME NEED FOR CLARITY.</span>
             <span>04 / 06</span>
