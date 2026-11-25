@@ -10,33 +10,77 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesAiImplementationRouteImport } from './routes/services.ai-implementation'
+import { Route as ServicesAutomationRouteImport } from './routes/services.automation'
+import { Route as ServicesDataAnalyticsRouteImport } from './routes/services.data-analytics'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesAiImplementationRoute =
+  ServicesAiImplementationRouteImport.update({
+    id: '/services/ai-implementation',
+    path: '/services/ai-implementation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesAutomationRoute = ServicesAutomationRouteImport.update({
+  id: '/services/automation',
+  path: '/services/automation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesDataAnalyticsRoute = ServicesDataAnalyticsRouteImport.update({
+  id: '/services/data-analytics',
+  path: '/services/data-analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/services/ai-implementation': typeof ServicesAiImplementationRoute
+  '/services/automation': typeof ServicesAutomationRoute
+  '/services/data-analytics': typeof ServicesDataAnalyticsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/services/ai-implementation': typeof ServicesAiImplementationRoute
+  '/services/automation': typeof ServicesAutomationRoute
+  '/services/data-analytics': typeof ServicesDataAnalyticsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/services/ai-implementation': typeof ServicesAiImplementationRoute
+  '/services/automation': typeof ServicesAutomationRoute
+  '/services/data-analytics': typeof ServicesDataAnalyticsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/services/ai-implementation'
+    | '/services/automation'
+    | '/services/data-analytics'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/services/ai-implementation'
+    | '/services/automation'
+    | '/services/data-analytics'
+  id:
+    | '__root__'
+    | '/'
+    | '/services/ai-implementation'
+    | '/services/automation'
+    | '/services/data-analytics'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ServicesAiImplementationRoute: typeof ServicesAiImplementationRoute
+  ServicesAutomationRoute: typeof ServicesAutomationRoute
+  ServicesDataAnalyticsRoute: typeof ServicesDataAnalyticsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +92,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/ai-implementation': {
+      id: '/services/ai-implementation'
+      path: '/services/ai-implementation'
+      fullPath: '/services/ai-implementation'
+      preLoaderRoute: typeof ServicesAiImplementationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/automation': {
+      id: '/services/automation'
+      path: '/services/automation'
+      fullPath: '/services/automation'
+      preLoaderRoute: typeof ServicesAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/data-analytics': {
+      id: '/services/data-analytics'
+      path: '/services/data-analytics'
+      fullPath: '/services/data-analytics'
+      preLoaderRoute: typeof ServicesDataAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ServicesAiImplementationRoute: ServicesAiImplementationRoute,
+  ServicesAutomationRoute: ServicesAutomationRoute,
+  ServicesDataAnalyticsRoute: ServicesDataAnalyticsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

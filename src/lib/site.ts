@@ -17,7 +17,7 @@ const services = [
   { name: "AI Implementation", description: "Practical AI. Real applications." },
 ];
 
-const areaServed = [
+export const areaServed = [
   {
     "@type": "City",
     name: "Vancouver",
@@ -26,7 +26,7 @@ const areaServed = [
   { "@type": "AdministrativeArea", name: "British Columbia" },
 ];
 
-const organizationId = `${SITE_URL}/#organization`;
+export const organizationId = `${SITE_URL}/#organization`;
 
 export const structuredData = {
   "@context": "https://schema.org",
@@ -59,3 +59,39 @@ export const structuredData = {
     },
   ],
 };
+
+/** Head tags for an inner page: title, description, social cards, canonical and JSON-LD. */
+export function pageHead({
+  title,
+  description,
+  path,
+  jsonLd,
+}: {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: object;
+}) {
+  const url = `${SITE_URL}${path}`;
+  return {
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+      { property: "og:locale", content: "en_CA" },
+      { property: "og:image", content: SOCIAL_IMAGE.url },
+      { property: "og:image:width", content: String(SOCIAL_IMAGE.width) },
+      { property: "og:image:height", content: String(SOCIAL_IMAGE.height) },
+      { property: "og:image:alt", content: `${SITE_NAME} logo` },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: SOCIAL_IMAGE.url },
+    ],
+    links: [{ rel: "canonical", href: url }],
+    scripts: jsonLd ? [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }] : [],
+  };
+}

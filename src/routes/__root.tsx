@@ -18,7 +18,7 @@ import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <PageShell cta={false}>
+    <PageShell cta={null}>
       <section className="page-intro not-found">
         <div className="eyebrow">
           <span className="small-rule" /> 404 / PAGE NOT FOUND
