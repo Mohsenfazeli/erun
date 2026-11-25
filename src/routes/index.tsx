@@ -45,13 +45,40 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const sections = ["home", "expertise", "approach", "about", "contact"];
-const labels = ["Home", "Expertise", "Approach", "About", "Contact"];
+const sections = ["home", "expertise", "approach", "applications", "about", "contact"];
+const labels = ["Home", "Expertise", "Approach", "Applications", "About", "Contact"];
 const approachStages = [
   { title: "Discover", text: "Understand the business, its challenges, and objectives." },
   { title: "Design", text: "Define the right solution, methodology, and implementation strategy." },
   { title: "Develop", text: "Build, test, and refine practical solutions." },
   { title: "Deliver", text: "Implement, integrate, and support continuous improvement." },
+];
+// Potential application areas, not past clients or partnerships.
+const applicationAreas = [
+  {
+    title: "Business intelligence & operational performance",
+    text: "Consistent measures of how the organization is performing.",
+  },
+  {
+    title: "Financial & economic analytics",
+    text: "Costs, pricing, forecasts, and the economic case for decisions.",
+  },
+  {
+    title: "Transportation & logistics",
+    text: "Demand, capacity, scheduling, and service performance.",
+  },
+  {
+    title: "Retail & service operations",
+    text: "Customer demand, staffing, and service quality.",
+  },
+  {
+    title: "Knowledge & document management",
+    text: "Finding, organizing, and using what the organization already knows.",
+  },
+  {
+    title: "Business process optimization",
+    text: "Simpler, faster processes with fewer manual steps.",
+  },
 ];
 
 function Index() {
@@ -67,7 +94,7 @@ function Index() {
           if (entry.isIntersecting) {
             const index = sections.indexOf(entry.target.id);
             setActive(index);
-            if (index === 2) setStage(0);
+            if (entry.target.id === "approach") setStage(0);
           }
       },
       { threshold: 0.45 },
@@ -85,7 +112,11 @@ function Index() {
     return () => window.clearTimeout(timer);
   }, []);
   useEffect(() => {
-    if (active !== 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (
+      sections[active] !== "approach" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
     const timer = window.setInterval(
       () => setStage((current) => (current + 1) % approachStages.length),
       3500,
@@ -183,7 +214,7 @@ function Index() {
             </Button>
             <span className="hero-bottom-note">Analytical thinking. Practical progress.</span>
             <span className="section-counter">
-              01 <span>/ 05</span>
+              01 <span>/ 06</span>
             </span>
           </div>
         </section>
@@ -277,11 +308,33 @@ function Index() {
           </ol>
           <div className="section-bottom">
             <span>GOOD SOLUTIONS BEGIN WITH THE RIGHT QUESTIONS.</span>
-            <span>03 / 05</span>
+            <span>03 / 06</span>
+          </div>
+        </section>
+        <section id="applications" className="snap-section applications-section">
+          <div className="section-heading">
+            <div className="eyebrow">03 / INDUSTRIES & APPLICATIONS</div>
+            <h2>
+              Where It Applies<span className="text-primary">.</span>
+            </h2>
+            <p>Areas where data, automation, and AI can make a practical difference.</p>
+          </div>
+          <ul className="applications-grid">
+            {applicationAreas.map((item, i) => (
+              <li key={item.title}>
+                <span className="area-index">0{i + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="section-bottom">
+            <span>DIFFERENT SECTORS. THE SAME NEED FOR CLARITY.</span>
+            <span>04 / 06</span>
           </div>
         </section>
         <section id="about" className="snap-section about-section">
-          <div className="eyebrow">03 / ABOUT ERUN</div>
+          <div className="eyebrow">04 / ABOUT ERUN</div>
           <div className="about-content">
             <div>
               <h2>
@@ -293,7 +346,7 @@ function Index() {
                 Erun brings together analytical thinking, business understanding, and technology to
                 help organizations work smarter.
               </p>
-              <Button variant="editorial" onClick={() => goTo(4)}>
+              <Button variant="editorial" onClick={() => goToId("contact")}>
                 Let’s make progress <ArrowUpRight />
               </Button>
             </div>
@@ -311,11 +364,11 @@ function Index() {
           </div>
           <div className="section-bottom">
             <span>BUSINESS FIRST. TECHNOLOGY WITH PURPOSE.</span>
-            <span>04 / 05</span>
+            <span>05 / 06</span>
           </div>
         </section>
         <section id="contact" className="snap-section contact-section">
-          <div className="eyebrow">04 / START A CONVERSATION</div>
+          <div className="eyebrow">05 / START A CONVERSATION</div>
           <div className="contact-layout">
             <div>
               <h2>
