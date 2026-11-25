@@ -20,8 +20,6 @@ export type Service = {
   deliverables: string[];
   outcomes: string[];
   ctaTitle: string;
-  /** Tools typically used for this service: plain text, no logos or implied partnerships. */
-  technologies: string[];
 };
 
 export const services: Service[] = [
@@ -72,7 +70,6 @@ export const services: Service[] = [
       "Decisions grounded in evidence rather than assumption",
     ],
     ctaTitle: "Let’s talk about your data",
-    technologies: ["Python", "SQL", "R", "Microsoft Power BI", "Microsoft Fabric"],
   },
   {
     slug: "automation",
@@ -121,7 +118,6 @@ export const services: Service[] = [
       "Processes that are consistent and easier to scale",
     ],
     ctaTitle: "Let’s find the work worth automating",
-    technologies: ["Python", "SQL", "Microsoft Fabric", "Microsoft Power BI", "Cloud platforms"],
   },
   {
     slug: "ai-implementation",
@@ -170,7 +166,6 @@ export const services: Service[] = [
       "AI adoption that is measured, controlled and useful",
     ],
     ctaTitle: "Let’s explore where AI can help",
-    technologies: ["OpenAI", "Python", "SQL", "Cloud platforms"],
   },
 ];
 
@@ -210,14 +205,3 @@ export function serviceHead(service: Service) {
     },
   });
 }
-
-/** Every technology the site mentions, for the homepage line. */
-export const technologies = [
-  "Python",
-  "SQL",
-  "R",
-  "Microsoft Power BI",
-  "Microsoft Fabric",
-  "OpenAI",
-  "Cloud platforms",
-];
