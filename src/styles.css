@@ -265,6 +265,22 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
 .other-services { display: flex; align-items: center; flex-wrap: wrap; gap: 40px; border-top: 1px solid var(--border); padding: 40px 0; }
 .other-services a { display: inline-flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 550; color: var(--foreground); text-decoration: none; transition: color 0.3s; }
 .other-services a:hover { color: var(--primary); }
+/* Industries & Applications: six potential areas as a light text grid. */
+.applications-section { padding-bottom: 120px; }
+.applications-grid { list-style: none; margin: 48px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 48px; }
+.applications-grid li { position: relative; border-top: 1px solid var(--border); padding-top: 18px; }
+.applications-grid li::before { content: ""; position: absolute; top: -1px; left: 0; width: 28px; height: 1px; background: var(--primary); transition: width 0.6s ease; }
+.applications-grid li:hover::before { width: 100%; }
+.area-index { font-size: 9px; color: var(--muted-foreground); }
+.applications-grid h3 { font-size: 17px; font-weight: 600; line-height: 1.35; margin: 10px 0 8px; }
+.applications-grid p { font-size: 12px; line-height: 1.7; color: var(--muted-foreground); margin: 0; }
+@media (min-width: 1500px) { .applications-grid h3 { font-size: 20px; }.applications-grid p { font-size: 14px; } }
+@media (max-width: 1050px) { .applications-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 36px; } }
+@media (max-width: 700px) {
+  .applications-section { justify-content: flex-start; padding-bottom: 100px; }
+  .applications-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 26px; }
+  .applications-grid li { padding-top: 12px; }.applications-grid h3 { font-size: 15px; margin: 6px 0 4px; }.applications-grid p { font-size: 11px; }
+}
 /* Erun Approach: four stages joined by a line that fills as the stages advance. */
 .approach-track { list-style: none; margin: 56px 0 30px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .approach-track li { position: relative; padding-right: 32px; }
