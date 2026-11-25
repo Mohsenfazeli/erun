@@ -47,6 +47,12 @@ export const Route = createFileRoute("/")({
 
 const sections = ["home", "expertise", "approach", "about", "contact"];
 const labels = ["Home", "Expertise", "Approach", "About", "Contact"];
+const approachStages = [
+  { title: "Discover", text: "Understand the business, its challenges, and objectives." },
+  { title: "Design", text: "Define the right solution, methodology, and implementation strategy." },
+  { title: "Develop", text: "Build, test, and refine practical solutions." },
+  { title: "Deliver", text: "Implement, integrate, and support continuous improvement." },
+];
 
 function Index() {
   const [active, setActive] = useState(0);
@@ -70,7 +76,7 @@ function Index() {
   }, []);
   useEffect(() => {
     if (active !== 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setStage((current) => (current + 1) % 3), 3500);
+    const timer = window.setInterval(() => setStage((current) => (current + 1) % approachStages.length), 3500);
     return () => window.clearInterval(timer);
   }, [active]);
   function goTo(index: number) {
@@ -120,7 +126,40 @@ function Index() {
         <div className="hero-bottom"><Button variant="nav" className="scroll-cue" onClick={() => goTo(1)}><ArrowDown /> SCROLL TO DISCOVER</Button><span className="hero-bottom-note">Analytical thinking. Practical progress.</span><span className="section-counter">01 <span>/ 05</span></span></div>
       </section>
       <section id="expertise" className="snap-section expertise-section"><div className="section-heading"><div className="eyebrow">01 / OUR EXPERTISE</div><h2>What We Do<span className="text-primary">.</span></h2><p>Clarity in your data. Confidence in your next move.</p></div><div className="expertise-grid">{[{ title: "Data Analytics", text: "Insights that drive better decisions.", visual: <AnalyticsVisual />, to: servicePath("data-analytics") }, { title: "Automation", text: "Smarter workflows. Less manual work.", visual: <WorkflowVisual />, to: servicePath("automation") }, { title: "AI Implementation", text: "Practical AI. Real applications.", visual: <AIVisual />, to: servicePath("ai-implementation") }].map((service, i) => <article className="expertise-item" key={service.title}><Link to={service.to} className="expertise-link">{service.visual}<div className="service-heading"><span className="service-index">0{i + 1}</span><h3>{service.title}</h3><ArrowUpRight size={20} /></div><p>{service.text}</p></Link></article>)}</div><div className="section-bottom"><span>THREE DISCIPLINES. ONE CLEAR DIRECTION.</span><Button variant="nav" onClick={() => goTo(2)}>Our approach <ArrowDown /></Button></div></section>
-      <section id="approach" className="snap-section approach-section"><div className="section-heading"><div className="eyebrow">02 / OUR APPROACH</div><h2>From Challenge<br />to Solution<span className="text-primary">.</span></h2></div><div className="approach-stages">{["Understand", "Design", "Deliver"].map((title, i) => <Button variant="ghost" key={title} className={`approach-stage ${stage === i ? "selected" : ""}`} onClick={() => setStage(i)} aria-pressed={stage === i}><span className="stage-number">0{i + 1}</span><div className={`stage-art stage-art-${i}`} aria-hidden="true">{Array.from({ length: 9 }, (_, j) => <span key={j} />)}</div><span className="stage-title">{title}</span><span className="stage-copy">{["Make sense of the challenge.", "Shape the right solution.", "Make progress tangible."][i]}</span></Button>)}</div><p className="approach-summary">Thoughtful analysis. Practical execution. Measurable impact.</p><div className="section-bottom"><span>GOOD SOLUTIONS BEGIN WITH THE RIGHT QUESTIONS.</span><span>03 / 05</span></div></section>
+      <section id="approach" className="snap-section approach-section">
+        <div className="section-heading">
+          <div className="eyebrow">02 / OUR APPROACH</div>
+          <h2>
+            From Complexity
+            <br />
+            to Capability<span className="text-primary">.</span>
+          </h2>
+          <p>
+            A structured approach to understanding challenges, developing solutions, and
+            delivering measurable value.
+          </p>
+        </div>
+        <ol className="approach-track">
+          {approachStages.map((item, i) => (
+            <li
+              key={item.title}
+              className={[i < stage ? "passed" : "", i <= stage ? "reached" : "", i === stage ? "selected" : ""].join(" ").trim()}
+            >
+              <button
+                type="button"
+                className="approach-step"
+                aria-pressed={stage === i}
+                onClick={() => setStage(i)}
+              >
+                <span className="step-node" aria-hidden="true" />
+                <span className="stage-number">0{i + 1}</span>
+                <span className="stage-title">{item.title}</span>
+                <span className="stage-copy">{item.text}</span>
+              </button>
+            </li>
+          ))}
+        </ol>
+        <div className="section-bottom"><span>GOOD SOLUTIONS BEGIN WITH THE RIGHT QUESTIONS.</span><span>03 / 05</span></div></section>
       <section id="about" className="snap-section about-section"><div className="eyebrow">03 / ABOUT ERUN</div><div className="about-content"><div><h2>Built Around<br />Better Solutions<span className="text-primary">.</span></h2><p>Erun brings together analytical thinking, business understanding, and technology to help organizations work smarter.</p><Button variant="editorial" onClick={() => goTo(4)}>Let’s make progress <ArrowUpRight /></Button></div><div className="architecture-art" role="img" aria-label="Interconnected architectural frames forming one coherent structure">{Array.from({ length: 6 }, (_, i) => <div key={i} className={`architecture-frame frame-${i}`} />)}<div className="architecture-baseline" /><span>THINKING IN SYSTEMS.</span></div></div><div className="section-bottom"><span>BUSINESS FIRST. TECHNOLOGY WITH PURPOSE.</span><span>04 / 05</span></div></section>
       <section id="contact" className="snap-section contact-section"><div className="eyebrow">04 / START A CONVERSATION</div><div className="contact-layout"><div><h2>Let’s Make<br />It Work Better<span className="text-primary">.</span></h2><p>Have a challenge in mind? Let’s talk.</p><Button variant="editorial" onClick={() => formRef.current?.querySelector("input")?.focus()}>Get in Touch <ArrowUpRight /></Button><div className="linkedin-link"><Button variant="nav" asChild><a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label={`${SITE_NAME} on LinkedIn (opens in a new tab)`}><Linkedin size={16} /> LinkedIn <ArrowUpRight size={14} /></a></Button></div></div><form ref={formRef} onSubmit={submitEnquiry} className="contact-form"><label>Your name<input required name="name" autoComplete="name" placeholder="Alex Morgan" /></label><label>Email address<input required type="email" name="email" autoComplete="email" placeholder="alex@company.com" /></label><label>What’s on your mind?<textarea required name="message" rows={3} placeholder="Tell us a little about your challenge…" /></label><div className="form-trap" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div><Button variant="default" type="submit" className="enquiry-button" disabled={sending}>Send enquiry <ArrowUpRight /></Button><p className="form-note" role="status">{contactStatus || <>Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></>}</p></form></div><SiteFooter onBackToTop={() => goTo(0)} /></section>
     </main>
