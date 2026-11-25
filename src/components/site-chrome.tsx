@@ -169,15 +169,33 @@ export function ConsultationCta({
 }
 
 /** Shared frame for every page other than the homepage. */
-export function PageShell({ children, cta = true }: { children: ReactNode; cta?: boolean }) {
+export function PageShell({
+  children,
+  cta = <ConsultationCta />,
+}: {
+  children: ReactNode;
+  /** Closing call to action; pass null to leave it out. */
+  cta?: ReactNode;
+}) {
   return (
     <div className="erun-site page-site">
       <SiteHeader />
       <main className="page-main">
         {children}
-        {cta ? <ConsultationCta /> : null}
+        {cta}
       </main>
       <SiteFooter className="page-footer" />
     </div>
+  );
+}
+
+/** The standard "Book a consultation" link to the homepage contact form. */
+export function ConsultationLink({ className }: { className?: string }) {
+  return (
+    <Button variant="editorial" className={className} asChild>
+      <Link to="/" hash="contact">
+        {CONSULTATION_LABEL} <ArrowUpRight />
+      </Link>
+    </Button>
   );
 }
