@@ -61,7 +61,17 @@ function Index() {
   const [sending, setSending] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => { for (const entry of entries) if (entry.isIntersecting) { const index = sections.indexOf(entry.target.id); setActive(index); if (index === 2) setStage(0); } }, { threshold: 0.45 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries)
+          if (entry.isIntersecting) {
+            const index = sections.indexOf(entry.target.id);
+            setActive(index);
+            if (index === 2) setStage(0);
+          }
+      },
+      { threshold: 0.45 },
+    );
     document.querySelectorAll("main > section").forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
@@ -76,7 +86,10 @@ function Index() {
   }, []);
   useEffect(() => {
     if (active !== 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setStage((current) => (current + 1) % approachStages.length), 3500);
+    const timer = window.setInterval(
+      () => setStage((current) => (current + 1) % approachStages.length),
+      3500,
+    );
     return () => window.clearInterval(timer);
   }, [active]);
   function goTo(index: number) {
@@ -115,53 +128,266 @@ function Index() {
       setSending(false);
     }
   }
-  return <div className="erun-site">
-    <SiteHeader onNavigate={goToId} activeId={sections[active]} />
-    <aside className="section-progress" aria-label="Section navigation">{sections.map((section, i) => <Button key={section} variant="ghost" size="icon" aria-label={`Go to ${labels[i]}`} aria-current={active === i ? "location" : undefined} onClick={() => goTo(i)} className={active === i ? "progress-dot current" : "progress-dot"}><span /><span className="progress-label">{labels[i]}</span></Button>)}</aside>
-    <main>
-      <section id="home" className="hero-section snap-section">
-        <div className="hero-grid" aria-hidden="true" /><ClarityScene />
-        <div className="hero-content"><div className="eyebrow"><span className="small-rule" /> ERUN GROUP</div><h1>Turning<br />Complexity<br />Into <span className="clarity-word">Clarity<span className="headline-period">.</span></span></h1><p className="hero-description">Data Analytics. Automation.<br />AI Implementation.</p><Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>Explore Our Expertise <ArrowUpRight /></Button></div>
-        <div className="scene-caption"><span className="live-dot" /> COMPLEXITY, CONNECTED.</div>
-        <div className="hero-bottom"><Button variant="nav" className="scroll-cue" onClick={() => goTo(1)}><ArrowDown /> SCROLL TO DISCOVER</Button><span className="hero-bottom-note">Analytical thinking. Practical progress.</span><span className="section-counter">01 <span>/ 05</span></span></div>
-      </section>
-      <section id="expertise" className="snap-section expertise-section"><div className="section-heading"><div className="eyebrow">01 / OUR EXPERTISE</div><h2>What We Do<span className="text-primary">.</span></h2><p>Clarity in your data. Confidence in your next move.</p></div><div className="expertise-grid">{[{ title: "Data Analytics", text: "Insights that drive better decisions.", visual: <AnalyticsVisual />, to: servicePath("data-analytics") }, { title: "Automation", text: "Smarter workflows. Less manual work.", visual: <WorkflowVisual />, to: servicePath("automation") }, { title: "AI Implementation", text: "Practical AI. Real applications.", visual: <AIVisual />, to: servicePath("ai-implementation") }].map((service, i) => <article className="expertise-item" key={service.title}><Link to={service.to} className="expertise-link">{service.visual}<div className="service-heading"><span className="service-index">0{i + 1}</span><h3>{service.title}</h3><ArrowUpRight size={20} /></div><p>{service.text}</p></Link></article>)}</div><div className="section-bottom"><span>THREE DISCIPLINES. ONE CLEAR DIRECTION.</span><Button variant="nav" onClick={() => goTo(2)}>Our approach <ArrowDown /></Button></div></section>
-      <section id="approach" className="snap-section approach-section">
-        <div className="section-heading">
-          <div className="eyebrow">02 / OUR APPROACH</div>
-          <h2>
-            From Complexity
-            <br />
-            to Capability<span className="text-primary">.</span>
-          </h2>
-          <p>
-            A structured approach to understanding challenges, developing solutions, and
-            delivering measurable value.
-          </p>
-        </div>
-        <ol className="approach-track">
-          {approachStages.map((item, i) => (
-            <li
-              key={item.title}
-              className={[i < stage ? "passed" : "", i <= stage ? "reached" : "", i === stage ? "selected" : ""].join(" ").trim()}
-            >
-              <button
-                type="button"
-                className="approach-step"
-                aria-pressed={stage === i}
-                onClick={() => setStage(i)}
+  return (
+    <div className="erun-site">
+      <SiteHeader onNavigate={goToId} activeId={sections[active]} />
+      <aside className="section-progress" aria-label="Section navigation">
+        {sections.map((section, i) => (
+          <Button
+            key={section}
+            variant="ghost"
+            size="icon"
+            aria-label={`Go to ${labels[i]}`}
+            aria-current={active === i ? "location" : undefined}
+            onClick={() => goTo(i)}
+            className={active === i ? "progress-dot current" : "progress-dot"}
+          >
+            <span />
+            <span className="progress-label">{labels[i]}</span>
+          </Button>
+        ))}
+      </aside>
+      <main>
+        <section id="home" className="hero-section snap-section">
+          <div className="hero-grid" aria-hidden="true" />
+          <ClarityScene />
+          <div className="hero-content">
+            <div className="eyebrow">
+              <span className="small-rule" /> ERUN GROUP
+            </div>
+            <h1>
+              Turning
+              <br />
+              Complexity
+              <br />
+              Into{" "}
+              <span className="clarity-word">
+                Clarity<span className="headline-period">.</span>
+              </span>
+            </h1>
+            <p className="hero-description">
+              Data Analytics. Automation.
+              <br />
+              AI Implementation.
+            </p>
+            <Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>
+              Explore Our Expertise <ArrowUpRight />
+            </Button>
+          </div>
+          <div className="scene-caption">
+            <span className="live-dot" /> COMPLEXITY, CONNECTED.
+          </div>
+          <div className="hero-bottom">
+            <Button variant="nav" className="scroll-cue" onClick={() => goTo(1)}>
+              <ArrowDown /> SCROLL TO DISCOVER
+            </Button>
+            <span className="hero-bottom-note">Analytical thinking. Practical progress.</span>
+            <span className="section-counter">
+              01 <span>/ 05</span>
+            </span>
+          </div>
+        </section>
+        <section id="expertise" className="snap-section expertise-section">
+          <div className="section-heading">
+            <div className="eyebrow">01 / OUR EXPERTISE</div>
+            <h2>
+              What We Do<span className="text-primary">.</span>
+            </h2>
+            <p>Clarity in your data. Confidence in your next move.</p>
+          </div>
+          <div className="expertise-grid">
+            {[
+              {
+                title: "Data Analytics",
+                text: "Insights that drive better decisions.",
+                visual: <AnalyticsVisual />,
+                to: servicePath("data-analytics"),
+              },
+              {
+                title: "Automation",
+                text: "Smarter workflows. Less manual work.",
+                visual: <WorkflowVisual />,
+                to: servicePath("automation"),
+              },
+              {
+                title: "AI Implementation",
+                text: "Practical AI. Real applications.",
+                visual: <AIVisual />,
+                to: servicePath("ai-implementation"),
+              },
+            ].map((service, i) => (
+              <article className="expertise-item" key={service.title}>
+                <Link to={service.to} className="expertise-link">
+                  {service.visual}
+                  <div className="service-heading">
+                    <span className="service-index">0{i + 1}</span>
+                    <h3>{service.title}</h3>
+                    <ArrowUpRight size={20} />
+                  </div>
+                  <p>{service.text}</p>
+                </Link>
+              </article>
+            ))}
+          </div>
+          <div className="section-bottom">
+            <span>THREE DISCIPLINES. ONE CLEAR DIRECTION.</span>
+            <Button variant="nav" onClick={() => goTo(2)}>
+              Our approach <ArrowDown />
+            </Button>
+          </div>
+        </section>
+        <section id="approach" className="snap-section approach-section">
+          <div className="section-heading">
+            <div className="eyebrow">02 / OUR APPROACH</div>
+            <h2>
+              From Complexity
+              <br />
+              to Capability<span className="text-primary">.</span>
+            </h2>
+            <p>
+              A structured approach to understanding challenges, developing solutions, and
+              delivering measurable value.
+            </p>
+          </div>
+          <ol className="approach-track">
+            {approachStages.map((item, i) => (
+              <li
+                key={item.title}
+                className={[
+                  i < stage ? "passed" : "",
+                  i <= stage ? "reached" : "",
+                  i === stage ? "selected" : "",
+                ]
+                  .join(" ")
+                  .trim()}
               >
-                <span className="step-node" aria-hidden="true" />
-                <span className="stage-number">0{i + 1}</span>
-                <span className="stage-title">{item.title}</span>
-                <span className="stage-copy">{item.text}</span>
-              </button>
-            </li>
-          ))}
-        </ol>
-        <div className="section-bottom"><span>GOOD SOLUTIONS BEGIN WITH THE RIGHT QUESTIONS.</span><span>03 / 05</span></div></section>
-      <section id="about" className="snap-section about-section"><div className="eyebrow">03 / ABOUT ERUN</div><div className="about-content"><div><h2>Built Around<br />Better Solutions<span className="text-primary">.</span></h2><p>Erun brings together analytical thinking, business understanding, and technology to help organizations work smarter.</p><Button variant="editorial" onClick={() => goTo(4)}>Let’s make progress <ArrowUpRight /></Button></div><div className="architecture-art" role="img" aria-label="Interconnected architectural frames forming one coherent structure">{Array.from({ length: 6 }, (_, i) => <div key={i} className={`architecture-frame frame-${i}`} />)}<div className="architecture-baseline" /><span>THINKING IN SYSTEMS.</span></div></div><div className="section-bottom"><span>BUSINESS FIRST. TECHNOLOGY WITH PURPOSE.</span><span>04 / 05</span></div></section>
-      <section id="contact" className="snap-section contact-section"><div className="eyebrow">04 / START A CONVERSATION</div><div className="contact-layout"><div><h2>Let’s Make<br />It Work Better<span className="text-primary">.</span></h2><p>Have a challenge in mind? Let’s talk.</p><Button variant="editorial" onClick={() => formRef.current?.querySelector("input")?.focus()}>Get in Touch <ArrowUpRight /></Button><div className="linkedin-link"><Button variant="nav" asChild><a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label={`${SITE_NAME} on LinkedIn (opens in a new tab)`}><Linkedin size={16} /> LinkedIn <ArrowUpRight size={14} /></a></Button></div></div><form ref={formRef} onSubmit={submitEnquiry} className="contact-form"><label>Your name<input required name="name" autoComplete="name" placeholder="Alex Morgan" /></label><label>Email address<input required type="email" name="email" autoComplete="email" placeholder="alex@company.com" /></label><label>What’s on your mind?<textarea required name="message" rows={3} placeholder="Tell us a little about your challenge…" /></label><div className="form-trap" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div><Button variant="default" type="submit" className="enquiry-button" disabled={sending}>Send enquiry <ArrowUpRight /></Button><p className="form-note" role="status">{contactStatus || <>Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></>}</p></form></div><SiteFooter onBackToTop={() => goTo(0)} /></section>
-    </main>
-  </div>;
+                <button
+                  type="button"
+                  className="approach-step"
+                  aria-pressed={stage === i}
+                  onClick={() => setStage(i)}
+                >
+                  <span className="step-node" aria-hidden="true" />
+                  <span className="stage-number">0{i + 1}</span>
+                  <span className="stage-title">{item.title}</span>
+                  <span className="stage-copy">{item.text}</span>
+                </button>
+              </li>
+            ))}
+          </ol>
+          <div className="section-bottom">
+            <span>GOOD SOLUTIONS BEGIN WITH THE RIGHT QUESTIONS.</span>
+            <span>03 / 05</span>
+          </div>
+        </section>
+        <section id="about" className="snap-section about-section">
+          <div className="eyebrow">03 / ABOUT ERUN</div>
+          <div className="about-content">
+            <div>
+              <h2>
+                Built Around
+                <br />
+                Better Solutions<span className="text-primary">.</span>
+              </h2>
+              <p>
+                Erun brings together analytical thinking, business understanding, and technology to
+                help organizations work smarter.
+              </p>
+              <Button variant="editorial" onClick={() => goTo(4)}>
+                Let’s make progress <ArrowUpRight />
+              </Button>
+            </div>
+            <div
+              className="architecture-art"
+              role="img"
+              aria-label="Interconnected architectural frames forming one coherent structure"
+            >
+              {Array.from({ length: 6 }, (_, i) => (
+                <div key={i} className={`architecture-frame frame-${i}`} />
+              ))}
+              <div className="architecture-baseline" />
+              <span>THINKING IN SYSTEMS.</span>
+            </div>
+          </div>
+          <div className="section-bottom">
+            <span>BUSINESS FIRST. TECHNOLOGY WITH PURPOSE.</span>
+            <span>04 / 05</span>
+          </div>
+        </section>
+        <section id="contact" className="snap-section contact-section">
+          <div className="eyebrow">04 / START A CONVERSATION</div>
+          <div className="contact-layout">
+            <div>
+              <h2>
+                Let’s Make
+                <br />
+                It Work Better<span className="text-primary">.</span>
+              </h2>
+              <p>Have a challenge in mind? Let’s talk.</p>
+              <Button
+                variant="editorial"
+                onClick={() => formRef.current?.querySelector("input")?.focus()}
+              >
+                Get in Touch <ArrowUpRight />
+              </Button>
+              <div className="linkedin-link">
+                <Button variant="nav" asChild>
+                  <a
+                    href={LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${SITE_NAME} on LinkedIn (opens in a new tab)`}
+                  >
+                    <Linkedin size={16} /> LinkedIn <ArrowUpRight size={14} />
+                  </a>
+                </Button>
+              </div>
+            </div>
+            <form ref={formRef} onSubmit={submitEnquiry} className="contact-form">
+              <label>
+                Your name
+                <input required name="name" autoComplete="name" placeholder="Alex Morgan" />
+              </label>
+              <label>
+                Email address
+                <input
+                  required
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  placeholder="alex@company.com"
+                />
+              </label>
+              <label>
+                What’s on your mind?
+                <textarea
+                  required
+                  name="message"
+                  rows={3}
+                  placeholder="Tell us a little about your challenge…"
+                />
+              </label>
+              <div className="form-trap" aria-hidden="true">
+                <label>
+                  Website
+                  <input name="website" tabIndex={-1} autoComplete="off" />
+                </label>
+              </div>
+              <Button variant="default" type="submit" className="enquiry-button" disabled={sending}>
+                Send enquiry <ArrowUpRight />
+              </Button>
+              <p className="form-note" role="status">
+                {contactStatus || (
+                  <>
+                    Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+                  </>
+                )}
+              </p>
+            </form>
+          </div>
+          <SiteFooter onBackToTop={() => goTo(0)} />
+        </section>
+      </main>
+    </div>
+  );
 }
