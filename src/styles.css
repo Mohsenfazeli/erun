@@ -178,22 +178,23 @@ body { margin: 0; }
 .mobile-menu { display: none; }
 .snap-section { position: relative; min-height: 100svh; scroll-snap-align: start; padding: 145px 8.2% 82px 5.2%; display: flex; flex-direction: column; justify-content: center; }
 .hero-section { height: 96svh; min-height: 730px; padding-top: 128px; padding-bottom: 110px; justify-content: center; }
-/* Hero visual: economic curves (src/components/economic-flow.tsx), coloured from --primary. */
+/* Hero visual: economic curves (src/components/economic-flow.tsx). Brand blue (--primary) for the main curve and points;
+   the logo light blue (--chart-2) for faint parts, because faint tints of --primary read as lilac on white. */
 .economic-flow { position: absolute; width: 66%; height: 86%; right: -9%; top: 7%; pointer-events: none; }
 .economic-flow svg { display: block; width: 100%; height: 100%; }
-.flow-field-dot { fill: var(--primary); opacity: 0.3; }
+.flow-field-dot { fill: var(--chart-2); opacity: 0.5; }
 .flow-stop-white { stop-color: white; }
 .flow-stop-black { stop-color: black; }
-.flow-shade-top { stop-color: var(--primary); stop-opacity: 0.13; }
-.flow-shade-bottom { stop-color: var(--primary); stop-opacity: 0; }
+.flow-shade-top { stop-color: var(--chart-2); stop-opacity: 0.2; }
+.flow-shade-bottom { stop-color: var(--chart-2); stop-opacity: 0; }
 .flow-primary { fill: none; stroke: var(--primary); stroke-width: 3; stroke-linecap: round; }
-.flow-secondary { fill: none; stroke: var(--primary); stroke-width: 1.2; stroke-linecap: round; opacity: 0.32; }
-.flow-secondary-1 { opacity: 0.5; }
-.flow-secondary-2 { opacity: 0.26; stroke-dasharray: 2 7; stroke-width: 1.6; }
-.flow-secondary-3 { opacity: 0.2; }
+.flow-secondary { fill: none; stroke: var(--chart-2); stroke-width: 1.2; stroke-linecap: round; opacity: 0.6; }
+.flow-secondary-1 { opacity: 0.85; }
+.flow-secondary-2 { opacity: 0.55; stroke-dasharray: 2 7; stroke-width: 1.6; }
+.flow-secondary-3 { opacity: 0.4; }
 .flow-point-core { fill: var(--primary); }
-.flow-point-halo { fill: var(--primary); opacity: 0.14; }
-.flow-point-minor .flow-point-core { opacity: 0.7; }
+.flow-point-halo { fill: var(--chart-2); opacity: 0.3; }
+.flow-point-minor .flow-point-core { fill: var(--chart-2); }
 .hero-content { position: relative; z-index: 2; width: fit-content; pointer-events: none; }
 .hero-content button { pointer-events: auto; }
 .eyebrow { display: flex; align-items: center; gap: 14px; font-size: 10px; font-weight: 650; letter-spacing: 0; color: var(--muted-foreground); }
