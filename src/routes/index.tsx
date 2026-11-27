@@ -52,47 +52,41 @@ const labels = ["Home", "Expertise", "Approach", "Applications", "About", "Lab",
 const approachStages = [
   {
     title: "Discover",
-    text: "Understand the economic question, its market context and the decisions it informs.",
+    text: "Understand your objectives, challenges and the decisions that matter.",
   },
-  {
-    title: "Design",
-    text: "Choose the methodology, data and tools, from econometric models to AI-assisted analysis.",
-  },
-  {
-    title: "Develop",
-    text: "Build, validate and refine models, data pipelines and analytical tools.",
-  },
+  { title: "Design", text: "Define the right methodology, data and technology for your needs." },
+  { title: "Develop", text: "Build, validate and refine reliable analytical solutions." },
   {
     title: "Deliver",
-    text: "Put results into everyday use and support adoption and continuous improvement.",
+    text: "Implement solutions that create lasting value and support better decisions.",
   },
 ];
 // Potential economic application areas, not past clients or partnerships. Six, to
 // keep the existing three-column grid even.
 const applicationAreas = [
   {
-    title: "Market & Industry Economics",
-    text: "Supply and demand, competition and industry performance.",
+    title: "Markets & Industries",
+    text: "Market dynamics, competition, pricing and industry performance.",
   },
   {
-    title: "Labour & Workforce Economics",
-    text: "Labour markets, wages, productivity and workforce needs.",
+    title: "Labour & Workforce",
+    text: "Employment trends, wages, productivity and workforce planning.",
   },
   {
-    title: "Regional & Urban Economics",
-    text: "Regional growth, housing, land use and spatial patterns.",
+    title: "Regional & Urban Development",
+    text: "Regional growth, housing, land use and spatial analysis.",
   },
   {
-    title: "Policy & Regulatory Analysis",
-    text: "Policy impact, cost-benefit analysis and regulatory review.",
+    title: "Policy & Regulation",
+    text: "Policy evaluation, regulatory impacts and cost-benefit analysis.",
   },
   {
-    title: "Transportation Economics",
-    text: "Travel demand, pricing, service levels and market structure.",
+    title: "Transportation & Mobility",
+    text: "Travel demand, pricing, accessibility and market performance.",
   },
   {
-    title: "Economic Forecasting & Intelligence",
-    text: "Economic indicators, forecasts and scenario simulation.",
+    title: "Forecasting & Intelligence",
+    text: "Economic trends, predictive modelling and scenario analysis.",
   },
 ];
 
@@ -151,8 +145,8 @@ function Index() {
     const data = new FormData(form);
     const field = (name: string) => String(data.get(name) ?? "");
     setSending(true);
-    setContactStatus("Sending your enquiry…");
-    const failed = `Sorry, your enquiry could not be sent. Please email ${CONTACT_EMAIL} instead.`;
+    setContactStatus("Sending your message…");
+    const failed = `Sorry, your message could not be sent. Please email ${CONTACT_EMAIL} instead.`;
     try {
       const result = await sendEnquiry({
         data: {
@@ -164,7 +158,7 @@ function Index() {
       });
       if (result.ok) {
         form.reset();
-        setContactStatus("Thank you. Your enquiry has been sent.");
+        setContactStatus("Thank you. Your message has been sent.");
       } else {
         setContactStatus(failed);
       }
@@ -209,8 +203,8 @@ function Index() {
               </span>
             </h1>
             <p className="hero-description">
-              We bring together economic expertise, advanced analytics, automation and artificial
-              intelligence to transform how economic analysis is conducted.
+              We combine economics and technology to deliver deeper insights, streamline analytical
+              processes and enable better decisions.
             </p>
             <Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>
               Explore Our Expertise <ArrowUpRight />
@@ -235,25 +229,25 @@ function Index() {
             <h2>
               What We Do<span className="text-primary">.</span>
             </h2>
-            <p>Three capabilities. One discipline: economics.</p>
+            <p>Three capabilities at the intersection of economics and technology.</p>
           </div>
           <div className="expertise-grid">
             {[
               {
-                title: "Economic Analytics",
-                text: "Economic intelligence from complex data.",
+                title: "Analytics",
+                text: "Understand markets, uncover insights and anticipate change.",
                 visual: <AnalyticsVisual />,
                 to: servicePath("economic-analytics"),
               },
               {
-                title: "Economic Workflow Automation",
-                text: "Faster, more reliable economic analysis.",
+                title: "Automation",
+                text: "Simplify complex workflows and improve analytical efficiency.",
                 visual: <WorkflowVisual />,
                 to: servicePath("economic-workflow-automation"),
               },
               {
-                title: "AI Adoption in Economics",
-                text: "AI for economic research and analysis.",
+                title: "AI Adoption",
+                text: "Integrate AI into research, analysis and decision-making.",
                 visual: <AIVisual />,
                 to: servicePath("ai-adoption-in-economics"),
               },
@@ -284,9 +278,9 @@ function Index() {
             <h2>
               From Question
               <br />
-              to Evidence<span className="text-primary">.</span>
+              to Impact<span className="text-primary">.</span>
             </h2>
-            <p>A structured approach that pairs economic reasoning with modern analytical tools.</p>
+            <p>A structured approach combining economic expertise with modern technology.</p>
           </div>
           <ol className="approach-track">
             {approachStages.map((item, i) => (
@@ -321,11 +315,11 @@ function Index() {
         </section>
         <section id="applications" className="snap-section applications-section">
           <div className="section-heading">
-            <div className="eyebrow">03 / AREAS OF APPLICATION</div>
+            <div className="eyebrow">03 / AREAS OF FOCUS</div>
             <h2>
-              Where It Applies<span className="text-primary">.</span>
+              Areas of Focus<span className="text-primary">.</span>
             </h2>
-            <p>The economic questions we help organizations answer.</p>
+            <p>Applying economics and technology to real-world challenges.</p>
           </div>
           <ul className="applications-grid">
             {applicationAreas.map((item, i) => (
@@ -351,10 +345,9 @@ function Index() {
                 Meets Technology<span className="text-primary">.</span>
               </h2>
               <p>
-                Erun Consulting Group is a specialized consulting firm dedicated to modernizing
-                economics through technology. We combine economic expertise and analytical rigour
-                with automation and artificial intelligence to build more efficient, reliable ways
-                to understand complex economic questions.
+                Erun is a specialized consulting firm combining the rigour of economics with the
+                power of modern technology. Through analytics, automation and AI, we help
+                organizations solve complex challenges and make better-informed decisions.
               </p>
               <Button variant="editorial" onClick={() => goToId("contact")}>
                 Let’s make progress <ArrowUpRight />
@@ -383,11 +376,11 @@ function Index() {
           <div className="contact-layout">
             <div>
               <h2>
-                Let’s Modernize
+                Let’s Build
                 <br />
-                Your Analysis<span className="text-primary">.</span>
+                What’s Next<span className="text-primary">.</span>
               </h2>
-              <p>Have an economic question or analytical challenge in mind? Let’s talk.</p>
+              <p>Tell us what you’re working on. Together, we can find a smarter way forward.</p>
               <Button
                 variant="editorial"
                 onClick={() => formRef.current?.querySelector("input")?.focus()}
@@ -409,7 +402,7 @@ function Index() {
             </div>
             <form ref={formRef} onSubmit={submitEnquiry} className="contact-form">
               <label>
-                Your name
+                Full name
                 <input required name="name" autoComplete="name" placeholder="Alex Morgan" />
               </label>
               <label>
@@ -423,12 +416,12 @@ function Index() {
                 />
               </label>
               <label>
-                What’s on your mind?
+                How can we help?
                 <textarea
                   required
                   name="message"
                   rows={3}
-                  placeholder="Tell us a little about your challenge…"
+                  placeholder="Tell us about your project or objectives…"
                 />
               </label>
               <div className="form-trap" aria-hidden="true">
@@ -438,7 +431,7 @@ function Index() {
                 </label>
               </div>
               <Button variant="default" type="submit" className="enquiry-button" disabled={sending}>
-                Send enquiry <ArrowUpRight />
+                Send message <ArrowUpRight />
               </Button>
               <p className="form-note" role="status">
                 {contactStatus || (

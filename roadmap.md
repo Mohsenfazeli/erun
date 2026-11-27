@@ -16,3 +16,4 @@
 - [ ] 8. Final pass: SEO, accessibility and performance across all pages.
 - [x] Repositioned around economics: Economic Analytics, Analytical Automation, AI Adoption (old service URLs redirect).
 - [x] New tagline "Modernizing Economics."; services renamed Economic Workflow Automation and AI Adoption in Economics (earlier URLs redirect).
+- [x] Content refinement: services shown as Analytics, Automation and AI Adoption; lighter economic vocabulary (URLs unchanged).

@@ -8,29 +8,25 @@ export const CONTACT_EMAIL = "contact@erungroup.ca";
 export const TAGLINE = "Modernizing Economics.";
 export const HOME_TITLE = "Erun Consulting Group | Modernizing Economics";
 export const HOME_DESCRIPTION =
-  "Erun Consulting Group combines economics, advanced analytics, automation and artificial intelligence to modernize economic analysis and decision-making.";
+  "Erun Consulting Group combines economics, analytics, automation and AI to help organizations uncover insights, improve analytical workflows and make better decisions.";
 /** The three practice areas, in order, as shown in the footer and metadata. */
-export const SERVICE_NAMES = [
-  "Economic Analytics",
-  "Economic Workflow Automation",
-  "AI Adoption in Economics",
-] as const;
+export const SERVICE_NAMES = ["Analytics", "Automation", "AI Adoption"] as const;
 
 // Existing brand mark, reused as the social preview and logo image.
 export const SOCIAL_IMAGE = { url: `${SITE_URL}/icon-512.png`, width: 512, height: 512 };
 
 const services = [
   {
-    name: "Economic Analytics",
-    description: "Econometric modelling, economic forecasting and market analysis.",
+    name: "Analytics",
+    description: "Economic modelling, forecasting, market analysis and scenario analysis.",
   },
   {
-    name: "Economic Workflow Automation",
-    description: "Automated economic reporting, data pipelines and indicator monitoring.",
+    name: "Automation",
+    description: "Data pipelines, automated reporting, indicator monitoring and data validation.",
   },
   {
-    name: "AI Adoption in Economics",
-    description: "AI for economic research, analysis and decision-making.",
+    name: "AI Adoption",
+    description: "Practical AI for research, knowledge management and decision-making.",
   },
 ];
 
