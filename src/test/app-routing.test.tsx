@@ -11,6 +11,10 @@ describe("App routing", () => {
 
   it.each([
     "/",
+    "/services/economic-analytics",
+    "/services/analytical-automation",
+    "/services/ai-adoption",
+    // Earlier service URLs, kept as permanent redirects.
     "/services/data-analytics",
     "/services/automation",
     "/services/ai-implementation",

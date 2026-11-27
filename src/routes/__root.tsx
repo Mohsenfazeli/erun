@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Erun Group" },
-      { name: "description", content: "Data Analytics. Automation. AI Implementation." },
+      { name: "description", content: "Economic Analytics. Analytical Automation. AI Adoption." },
       { name: "author", content: "Erun Consulting Group" },
       { property: "og:title", content: "Erun Group" },
       { property: "og:description", content: "Turning Complexity Into Clarity." },

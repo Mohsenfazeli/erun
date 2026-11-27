@@ -3,7 +3,7 @@ import { useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { CONTACT_EMAIL } from "@/lib/site";
+import { CONTACT_EMAIL, SERVICE_NAMES } from "@/lib/site";
 import { scrollBehavior } from "@/lib/utils";
 
 // Homepage sections the main navigation points to. The homepage scrolls to them in
@@ -135,7 +135,7 @@ export function SiteFooter({ className, onBackToTop }: FooterProps) {
       <Link to="/" className="wordmark">
         erun<span>.</span>
       </Link>
-      <span>Data Analytics · Automation · AI Implementation</span>
+      <span>{SERVICE_NAMES.join(" · ")}</span>
       <span>© {new Date().getFullYear()} Erun Group</span>
       <Button variant="nav" size="icon" aria-label="Back to top" onClick={backToTop}>
         <ArrowRight className="back-top-icon" />

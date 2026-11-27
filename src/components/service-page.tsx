@@ -8,9 +8,9 @@ import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-
 import { servicePath, services, type Service, type ServiceSlug } from "@/lib/services";
 
 const visuals: Record<ServiceSlug, () => ReactNode> = {
-  "data-analytics": () => <AnalyticsVisual />,
-  automation: () => <WorkflowVisual />,
-  "ai-implementation": () => <AIVisual />,
+  "economic-analytics": () => <AnalyticsVisual />,
+  "analytical-automation": () => <WorkflowVisual />,
+  "ai-adoption": () => <AIVisual />,
 };
 
 export function ServicePage({ service }: { service: Service }) {
