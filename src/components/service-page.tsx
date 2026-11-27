@@ -9,8 +9,8 @@ import { servicePath, services, type Service, type ServiceSlug } from "@/lib/ser
 
 const visuals: Record<ServiceSlug, () => ReactNode> = {
   "economic-analytics": () => <AnalyticsVisual />,
-  "analytical-automation": () => <WorkflowVisual />,
-  "ai-adoption": () => <AIVisual />,
+  "economic-workflow-automation": () => <WorkflowVisual />,
+  "ai-adoption-in-economics": () => <AIVisual />,
 };
 
 export function ServicePage({ service }: { service: Service }) {

@@ -15,11 +15,13 @@ import { Route as LabHrAssistantRouteImport } from './routes/lab.hr-assistant'
 import { Route as LabMonthlyReportRouteImport } from './routes/lab.monthly-report'
 import { Route as LabPerformanceDashboardRouteImport } from './routes/lab.performance-dashboard'
 import { Route as ServicesAiAdoptionRouteImport } from './routes/services.ai-adoption'
+import { Route as ServicesAiAdoptionInEconomicsRouteImport } from './routes/services.ai-adoption-in-economics'
 import { Route as ServicesAiImplementationRouteImport } from './routes/services.ai-implementation'
 import { Route as ServicesAnalyticalAutomationRouteImport } from './routes/services.analytical-automation'
 import { Route as ServicesAutomationRouteImport } from './routes/services.automation'
 import { Route as ServicesDataAnalyticsRouteImport } from './routes/services.data-analytics'
 import { Route as ServicesEconomicAnalyticsRouteImport } from './routes/services.economic-analytics'
+import { Route as ServicesEconomicWorkflowAutomationRouteImport } from './routes/services.economic-workflow-automation'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -51,6 +53,12 @@ const ServicesAiAdoptionRoute = ServicesAiAdoptionRouteImport.update({
   path: '/services/ai-adoption',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesAiAdoptionInEconomicsRoute =
+  ServicesAiAdoptionInEconomicsRouteImport.update({
+    id: '/services/ai-adoption-in-economics',
+    path: '/services/ai-adoption-in-economics',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesAiImplementationRoute =
   ServicesAiImplementationRouteImport.update({
     id: '/services/ai-implementation',
@@ -79,6 +87,12 @@ const ServicesEconomicAnalyticsRoute =
     path: '/services/economic-analytics',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ServicesEconomicWorkflowAutomationRoute =
+  ServicesEconomicWorkflowAutomationRouteImport.update({
+    id: '/services/economic-workflow-automation',
+    path: '/services/economic-workflow-automation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -86,11 +100,13 @@ export interface FileRoutesByFullPath {
   '/lab/monthly-report': typeof LabMonthlyReportRoute
   '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
   '/services/ai-adoption': typeof ServicesAiAdoptionRoute
+  '/services/ai-adoption-in-economics': typeof ServicesAiAdoptionInEconomicsRoute
   '/services/ai-implementation': typeof ServicesAiImplementationRoute
   '/services/analytical-automation': typeof ServicesAnalyticalAutomationRoute
   '/services/automation': typeof ServicesAutomationRoute
   '/services/data-analytics': typeof ServicesDataAnalyticsRoute
   '/services/economic-analytics': typeof ServicesEconomicAnalyticsRoute
+  '/services/economic-workflow-automation': typeof ServicesEconomicWorkflowAutomationRoute
   '/lab/': typeof LabIndexRoute
 }
 export interface FileRoutesByTo {
@@ -99,11 +115,13 @@ export interface FileRoutesByTo {
   '/lab/monthly-report': typeof LabMonthlyReportRoute
   '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
   '/services/ai-adoption': typeof ServicesAiAdoptionRoute
+  '/services/ai-adoption-in-economics': typeof ServicesAiAdoptionInEconomicsRoute
   '/services/ai-implementation': typeof ServicesAiImplementationRoute
   '/services/analytical-automation': typeof ServicesAnalyticalAutomationRoute
   '/services/automation': typeof ServicesAutomationRoute
   '/services/data-analytics': typeof ServicesDataAnalyticsRoute
   '/services/economic-analytics': typeof ServicesEconomicAnalyticsRoute
+  '/services/economic-workflow-automation': typeof ServicesEconomicWorkflowAutomationRoute
   '/lab': typeof LabIndexRoute
 }
 export interface FileRoutesById {
@@ -113,11 +131,13 @@ export interface FileRoutesById {
   '/lab/monthly-report': typeof LabMonthlyReportRoute
   '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
   '/services/ai-adoption': typeof ServicesAiAdoptionRoute
+  '/services/ai-adoption-in-economics': typeof ServicesAiAdoptionInEconomicsRoute
   '/services/ai-implementation': typeof ServicesAiImplementationRoute
   '/services/analytical-automation': typeof ServicesAnalyticalAutomationRoute
   '/services/automation': typeof ServicesAutomationRoute
   '/services/data-analytics': typeof ServicesDataAnalyticsRoute
   '/services/economic-analytics': typeof ServicesEconomicAnalyticsRoute
+  '/services/economic-workflow-automation': typeof ServicesEconomicWorkflowAutomationRoute
   '/lab/': typeof LabIndexRoute
 }
 export interface FileRouteTypes {
@@ -128,11 +148,13 @@ export interface FileRouteTypes {
     | '/lab/monthly-report'
     | '/lab/performance-dashboard'
     | '/services/ai-adoption'
+    | '/services/ai-adoption-in-economics'
     | '/services/ai-implementation'
     | '/services/analytical-automation'
     | '/services/automation'
     | '/services/data-analytics'
     | '/services/economic-analytics'
+    | '/services/economic-workflow-automation'
     | '/lab/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -141,11 +163,13 @@ export interface FileRouteTypes {
     | '/lab/monthly-report'
     | '/lab/performance-dashboard'
     | '/services/ai-adoption'
+    | '/services/ai-adoption-in-economics'
     | '/services/ai-implementation'
     | '/services/analytical-automation'
     | '/services/automation'
     | '/services/data-analytics'
     | '/services/economic-analytics'
+    | '/services/economic-workflow-automation'
     | '/lab'
   id:
     | '__root__'
@@ -154,11 +178,13 @@ export interface FileRouteTypes {
     | '/lab/monthly-report'
     | '/lab/performance-dashboard'
     | '/services/ai-adoption'
+    | '/services/ai-adoption-in-economics'
     | '/services/ai-implementation'
     | '/services/analytical-automation'
     | '/services/automation'
     | '/services/data-analytics'
     | '/services/economic-analytics'
+    | '/services/economic-workflow-automation'
     | '/lab/'
   fileRoutesById: FileRoutesById
 }
@@ -168,11 +194,13 @@ export interface RootRouteChildren {
   LabMonthlyReportRoute: typeof LabMonthlyReportRoute
   LabPerformanceDashboardRoute: typeof LabPerformanceDashboardRoute
   ServicesAiAdoptionRoute: typeof ServicesAiAdoptionRoute
+  ServicesAiAdoptionInEconomicsRoute: typeof ServicesAiAdoptionInEconomicsRoute
   ServicesAiImplementationRoute: typeof ServicesAiImplementationRoute
   ServicesAnalyticalAutomationRoute: typeof ServicesAnalyticalAutomationRoute
   ServicesAutomationRoute: typeof ServicesAutomationRoute
   ServicesDataAnalyticsRoute: typeof ServicesDataAnalyticsRoute
   ServicesEconomicAnalyticsRoute: typeof ServicesEconomicAnalyticsRoute
+  ServicesEconomicWorkflowAutomationRoute: typeof ServicesEconomicWorkflowAutomationRoute
   LabIndexRoute: typeof LabIndexRoute
 }
 
@@ -220,6 +248,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesAiAdoptionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/ai-adoption-in-economics': {
+      id: '/services/ai-adoption-in-economics'
+      path: '/services/ai-adoption-in-economics'
+      fullPath: '/services/ai-adoption-in-economics'
+      preLoaderRoute: typeof ServicesAiAdoptionInEconomicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/ai-implementation': {
       id: '/services/ai-implementation'
       path: '/services/ai-implementation'
@@ -255,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesEconomicAnalyticsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/economic-workflow-automation': {
+      id: '/services/economic-workflow-automation'
+      path: '/services/economic-workflow-automation'
+      fullPath: '/services/economic-workflow-automation'
+      preLoaderRoute: typeof ServicesEconomicWorkflowAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -264,11 +306,14 @@ const rootRouteChildren: RootRouteChildren = {
   LabMonthlyReportRoute: LabMonthlyReportRoute,
   LabPerformanceDashboardRoute: LabPerformanceDashboardRoute,
   ServicesAiAdoptionRoute: ServicesAiAdoptionRoute,
+  ServicesAiAdoptionInEconomicsRoute: ServicesAiAdoptionInEconomicsRoute,
   ServicesAiImplementationRoute: ServicesAiImplementationRoute,
   ServicesAnalyticalAutomationRoute: ServicesAnalyticalAutomationRoute,
   ServicesAutomationRoute: ServicesAutomationRoute,
   ServicesDataAnalyticsRoute: ServicesDataAnalyticsRoute,
   ServicesEconomicAnalyticsRoute: ServicesEconomicAnalyticsRoute,
+  ServicesEconomicWorkflowAutomationRoute:
+    ServicesEconomicWorkflowAutomationRoute,
   LabIndexRoute: LabIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -15,3 +15,4 @@
 - [ ] 7. Insights: hidden editorial page and article template, not in navigation or sitemap until real articles exist.
 - [ ] 8. Final pass: SEO, accessibility and performance across all pages.
 - [x] Repositioned around economics: Economic Analytics, Analytical Automation, AI Adoption (old service URLs redirect).
+- [x] New tagline "Modernizing Economics."; services renamed Economic Workflow Automation and AI Adoption in Economics (earlier URLs redirect).
