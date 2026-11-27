@@ -1,7 +1,7 @@
 # Erun Consulting Group
 
 Website for Erun Consulting Group — Modernizing Economics: analytics, automation and AI adoption at the intersection of economics and technology.
-_Turning complexity into clarity._
+_Modernizing Economics._
 
 ## Development
 
@@ -40,4 +40,3 @@ Code lives in `src/routes/lab.*.tsx`, `src/components/lab/` and `src/lib/lab/`. 
 - TanStack Start
 - React and TypeScript
 - Tailwind CSS
-- Three.js

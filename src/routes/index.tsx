@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowDown, ArrowUpRight, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ClarityScene } from "@/components/clarity-scene";
+import { EconomicFlow } from "@/components/economic-flow";
 import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
 import { LabSection } from "@/components/lab/lab-section";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
@@ -189,8 +189,7 @@ function Index() {
       </aside>
       <main>
         <section id="home" className="hero-section snap-section">
-          <div className="hero-grid" aria-hidden="true" />
-          <ClarityScene />
+          <EconomicFlow />
           <div className="hero-content">
             <div className="eyebrow">
               <span className="small-rule" /> ERUN GROUP
