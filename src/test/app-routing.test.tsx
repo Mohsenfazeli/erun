@@ -12,12 +12,14 @@ describe("App routing", () => {
   it.each([
     "/",
     "/services/economic-analytics",
-    "/services/analytical-automation",
-    "/services/ai-adoption",
+    "/services/economic-workflow-automation",
+    "/services/ai-adoption-in-economics",
     // Earlier service URLs, kept as permanent redirects.
     "/services/data-analytics",
     "/services/automation",
     "/services/ai-implementation",
+    "/services/analytical-automation",
+    "/services/ai-adoption",
   ])("matches a page for %s instead of falling back to not found", (path) => {
     const matches = router.matchRoutes(path);
 

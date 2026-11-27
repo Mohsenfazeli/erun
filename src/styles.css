@@ -188,7 +188,7 @@ body { margin: 0; }
 h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; letter-spacing: 0; }
 .clarity-word { color: var(--primary); }
 .headline-period { color: var(--foreground); }
-.hero-description { color: var(--muted-foreground); font-size: 16px; line-height: 1.8; margin: 0 0 30px; }
+.hero-description { color: var(--muted-foreground); font-size: 16px; line-height: 1.8; margin: 0 0 30px; max-width: 470px; }
 .explore-button { font-size: 12px; height: 42px; padding: 0 0 10px; gap: 32px; }
 .scene-caption { position: absolute; right: 15.5%; bottom: 23%; display: flex; align-items: center; gap: 9px; font-size: 8px; color: var(--muted-foreground); }
 .live-dot { width: 5px; height: 5px; background: var(--primary); border-radius: 50%; display: inline-block; }

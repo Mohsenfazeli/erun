@@ -14,7 +14,7 @@ import {
   HOME_DESCRIPTION,
   HOME_TITLE,
   LINKEDIN_URL,
-  POSITIONING,
+  SERVICE_NAMES,
   SITE_NAME,
   SITE_URL,
   SOCIAL_IMAGE,
@@ -52,43 +52,47 @@ const labels = ["Home", "Expertise", "Approach", "Applications", "About", "Lab",
 const approachStages = [
   {
     title: "Discover",
-    text: "Understand the economic context, organizational challenges and decision-making needs.",
+    text: "Understand the economic question, its market context and the decisions it informs.",
   },
   {
     title: "Design",
-    text: "Define the analytical methodology, technology and implementation strategy.",
+    text: "Choose the methodology, data and tools, from econometric models to AI-assisted analysis.",
   },
-  { title: "Develop", text: "Build, validate and refine models, tools and analytical solutions." },
+  {
+    title: "Develop",
+    text: "Build, validate and refine models, data pipelines and analytical tools.",
+  },
   {
     title: "Deliver",
-    text: "Implement solutions and support their adoption and continuous improvement.",
+    text: "Put results into everyday use and support adoption and continuous improvement.",
   },
 ];
-// Potential application areas, not past clients or partnerships.
+// Potential economic application areas, not past clients or partnerships. Six, to
+// keep the existing three-column grid even.
 const applicationAreas = [
   {
-    title: "Market & Economic Intelligence",
-    text: "Market trends, economic conditions and industry performance.",
-  },
-  {
-    title: "Forecasting & Scenario Analysis",
-    text: "Demand forecasting, predictive models and economic simulations.",
-  },
-  {
-    title: "Pricing & Financial Economics",
-    text: "Cost analysis, pricing strategies and financial feasibility.",
-  },
-  {
-    title: "Policy & Program Evaluation",
-    text: "Impact assessment, performance measurement and evidence-based evaluation.",
+    title: "Market & Industry Economics",
+    text: "Supply and demand, competition and industry performance.",
   },
   {
     title: "Labour & Workforce Economics",
-    text: "Labour markets, workforce planning and employment trends.",
+    text: "Labour markets, wages, productivity and workforce needs.",
   },
   {
-    title: "Regional & Sector Economics",
-    text: "Regional development, industry dynamics and spatial analysis.",
+    title: "Regional & Urban Economics",
+    text: "Regional growth, housing, land use and spatial patterns.",
+  },
+  {
+    title: "Policy & Regulatory Analysis",
+    text: "Policy impact, cost-benefit analysis and regulatory review.",
+  },
+  {
+    title: "Transportation Economics",
+    text: "Travel demand, pricing, service levels and market structure.",
+  },
+  {
+    title: "Economic Forecasting & Intelligence",
+    text: "Economic indicators, forecasts and scenario simulation.",
   },
 ];
 
@@ -198,32 +202,28 @@ function Index() {
               <span className="small-rule" /> ERUN GROUP
             </div>
             <h1>
-              Turning
+              Modernizing
               <br />
-              Complexity
-              <br />
-              Into{" "}
               <span className="clarity-word">
-                Clarity<span className="headline-period">.</span>
+                Economics<span className="headline-period">.</span>
               </span>
             </h1>
             <p className="hero-description">
-              Economic Analytics. Analytical Automation.
-              <br />
-              AI Adoption.
+              We bring together economic expertise, advanced analytics, automation and artificial
+              intelligence to transform how economic analysis is conducted.
             </p>
             <Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>
               Explore Our Expertise <ArrowUpRight />
             </Button>
           </div>
           <div className="scene-caption">
-            <span className="live-dot" /> COMPLEXITY, CONNECTED.
+            <span className="live-dot" /> ECONOMICS, CONNECTED.
           </div>
           <div className="hero-bottom">
             <Button variant="nav" className="scroll-cue" onClick={() => goTo(1)}>
               <ArrowDown /> SCROLL TO DISCOVER
             </Button>
-            <span className="hero-bottom-note">{POSITIONING}</span>
+            <span className="hero-bottom-note">{SERVICE_NAMES.join(" · ")}</span>
             <span className="section-counter">
               01 <span>/ 07</span>
             </span>
@@ -235,27 +235,27 @@ function Index() {
             <h2>
               What We Do<span className="text-primary">.</span>
             </h2>
-            <p>Economic understanding. Analytical precision. Practical innovation.</p>
+            <p>Three capabilities. One discipline: economics.</p>
           </div>
           <div className="expertise-grid">
             {[
               {
                 title: "Economic Analytics",
-                text: "Economic insights that drive better decisions.",
+                text: "Economic intelligence from complex data.",
                 visual: <AnalyticsVisual />,
                 to: servicePath("economic-analytics"),
               },
               {
-                title: "Analytical Automation",
-                text: "Streamlined analysis. Smarter workflows.",
+                title: "Economic Workflow Automation",
+                text: "Faster, more reliable economic analysis.",
                 visual: <WorkflowVisual />,
-                to: servicePath("analytical-automation"),
+                to: servicePath("economic-workflow-automation"),
               },
               {
-                title: "AI Adoption",
-                text: "Practical AI for research, analysis and decision-making.",
+                title: "AI Adoption in Economics",
+                text: "AI for economic research and analysis.",
                 visual: <AIVisual />,
-                to: servicePath("ai-adoption"),
+                to: servicePath("ai-adoption-in-economics"),
               },
             ].map((service, i) => (
               <article className="expertise-item" key={service.title}>
@@ -272,7 +272,7 @@ function Index() {
             ))}
           </div>
           <div className="section-bottom">
-            <span>THREE DISCIPLINES. ONE CLEAR DIRECTION.</span>
+            <span>THREE CAPABILITIES. ONE DISCIPLINE.</span>
             <Button variant="nav" onClick={() => goTo(2)}>
               Our approach <ArrowDown />
             </Button>
@@ -282,14 +282,11 @@ function Index() {
           <div className="section-heading">
             <div className="eyebrow">02 / OUR APPROACH</div>
             <h2>
-              From Complexity
+              From Question
               <br />
-              to Capability<span className="text-primary">.</span>
+              to Evidence<span className="text-primary">.</span>
             </h2>
-            <p>
-              A structured approach to understanding challenges, developing solutions, and
-              delivering measurable value.
-            </p>
+            <p>A structured approach that pairs economic reasoning with modern analytical tools.</p>
           </div>
           <ol className="approach-track">
             {approachStages.map((item, i) => (
@@ -328,7 +325,7 @@ function Index() {
             <h2>
               Where It Applies<span className="text-primary">.</span>
             </h2>
-            <p>Applying economics, analytics and technology to real-world challenges.</p>
+            <p>The economic questions we help organizations answer.</p>
           </div>
           <ul className="applications-grid">
             {applicationAreas.map((item, i) => (
@@ -340,7 +337,7 @@ function Index() {
             ))}
           </ul>
           <div className="section-bottom">
-            <span>DIFFERENT SECTORS. THE SAME NEED FOR CLARITY.</span>
+            <span>MANY SECTORS. ONE ECONOMIC LENS.</span>
             <span>04 / 07</span>
           </div>
         </section>
@@ -349,14 +346,15 @@ function Index() {
           <div className="about-content">
             <div>
               <h2>
-                Built Around
+                Where Economics
                 <br />
-                Better Solutions<span className="text-primary">.</span>
+                Meets Technology<span className="text-primary">.</span>
               </h2>
               <p>
-                Erun is a specialized consulting firm at the intersection of economics, data
-                analytics and technology. We help organizations understand complex challenges,
-                improve analytical capabilities and turn economic insights into practical decisions.
+                Erun Consulting Group is a specialized consulting firm dedicated to modernizing
+                economics through technology. We combine economic expertise and analytical rigour
+                with automation and artificial intelligence to build more efficient, reliable ways
+                to understand complex economic questions.
               </p>
               <Button variant="editorial" onClick={() => goToId("contact")}>
                 Let’s make progress <ArrowUpRight />
@@ -385,11 +383,11 @@ function Index() {
           <div className="contact-layout">
             <div>
               <h2>
-                Let’s Make
+                Let’s Modernize
                 <br />
-                It Work Better<span className="text-primary">.</span>
+                Your Analysis<span className="text-primary">.</span>
               </h2>
-              <p>Have an economic, analytical or technology challenge in mind? Let’s talk.</p>
+              <p>Have an economic question or analytical challenge in mind? Let’s talk.</p>
               <Button
                 variant="editorial"
                 onClick={() => formRef.current?.querySelector("input")?.focus()}

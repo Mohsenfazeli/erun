@@ -1,6 +1,6 @@
 # Erun Consulting Group
 
-Website for Erun Consulting Group — economic analytics, analytical automation and AI adoption.
+Website for Erun Consulting Group — Modernizing Economics: economic analytics, economic workflow automation and AI adoption in economics.
 _Turning complexity into clarity._
 
 ## Development

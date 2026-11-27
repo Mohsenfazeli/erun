@@ -4,27 +4,33 @@ export const SITE_NAME = "Erun Consulting Group";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/erungroup";
 export const CONTACT_EMAIL = "contact@erungroup.ca";
 
-export const HOME_TITLE = "Erun Consulting Group | Economic Analytics, Automation & AI";
+/** Erun's official tagline and central brand statement. */
+export const TAGLINE = "Modernizing Economics.";
+export const HOME_TITLE = "Erun Consulting Group | Modernizing Economics";
 export const HOME_DESCRIPTION =
-  "Vancouver-based economic consulting firm specializing in economic analytics, analytical automation and AI adoption.";
-/** Supporting statement under the tagline "Turning Complexity Into Clarity." */
-export const POSITIONING = "Economics, data and technology for better decisions.";
+  "Erun Consulting Group combines economics, advanced analytics, automation and artificial intelligence to modernize economic analysis and decision-making.";
 /** The three practice areas, in order, as shown in the footer and metadata. */
 export const SERVICE_NAMES = [
   "Economic Analytics",
-  "Analytical Automation",
-  "AI Adoption",
+  "Economic Workflow Automation",
+  "AI Adoption in Economics",
 ] as const;
 
 // Existing brand mark, reused as the social preview and logo image.
 export const SOCIAL_IMAGE = { url: `${SITE_URL}/icon-512.png`, width: 512, height: 512 };
 
 const services = [
-  { name: "Economic Analytics", description: "Economic insights that drive better decisions." },
-  { name: "Analytical Automation", description: "Streamlined analysis. Smarter workflows." },
   {
-    name: "AI Adoption",
-    description: "Practical AI for research, analysis and decision-making.",
+    name: "Economic Analytics",
+    description: "Econometric modelling, economic forecasting and market analysis.",
+  },
+  {
+    name: "Economic Workflow Automation",
+    description: "Automated economic reporting, data pipelines and indicator monitoring.",
+  },
+  {
+    name: "AI Adoption in Economics",
+    description: "AI for economic research, analysis and decision-making.",
   },
 ];
 
@@ -50,9 +56,14 @@ export const structuredData = {
       url: `${SITE_URL}/`,
       logo: SOCIAL_IMAGE.url,
       description: HOME_DESCRIPTION,
-      slogan: "Turning Complexity Into Clarity.",
+      slogan: TAGLINE,
       email: CONTACT_EMAIL,
-      knowsAbout: ["Economics", ...services.map((service) => service.name)],
+      knowsAbout: [
+        "Economics",
+        "Econometrics",
+        "Economic forecasting",
+        ...services.map((service) => service.name),
+      ],
       areaServed,
       makesOffer: services.map((service) => ({
         "@type": "Offer",
