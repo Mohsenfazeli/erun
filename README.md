@@ -20,6 +20,21 @@ The site deploys to [Vercel](https://vercel.com). Import the repository and keep
 default settings: Vercel detects the build and serves the output from `.vercel/output`.
 Every push to `main` triggers a new production deployment.
 
+Environment variables (set in Vercel, see `.env.example`):
+
+- `RESEND_API_KEY`: contact form.
+- `GEMINI_API_KEY` (optional): the Lab HR Assistant. Without it the assistant answers offline by quoting the closest handbook section. `GEMINI_MODEL` overrides the default `gemini-2.5-flash`.
+
+## Erun Lab
+
+`/lab` is a one-screen page with three working prototypes, one per service, all on sample data for a fictional company (Northwind Coastal Supply):
+
+- `/lab/performance-dashboard`: KPIs, a six-month forecast and revenue mix.
+- `/lab/monthly-report`: a generated monthly report with written commentary (prints to PDF).
+- `/lab/hr-assistant`: an AI assistant grounded in sample policy documents, with citations.
+
+Code lives in `src/routes/lab.*.tsx`, `src/components/lab/` and `src/lib/lab/`. The assistant runs through the `askLabAssistant` server function (`src/lib/lab/assistant.functions.ts`).
+
 ## Built with
 
 - TanStack Start
