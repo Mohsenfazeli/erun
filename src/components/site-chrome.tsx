@@ -12,6 +12,7 @@ const navItems = [
   { id: "expertise", label: "Expertise" },
   { id: "approach", label: "Approach" },
   { id: "about", label: "About" },
+  { id: "lab", label: "Lab" },
 ] as const;
 
 const CONSULTATION_LABEL = "Book a consultation";
@@ -26,7 +27,8 @@ type HeaderProps = {
 export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const onLabPage = activeId === "lab" || pathname === "/lab" || pathname.startsWith("/lab/");
+  // Lab prototype pages keep the Lab link highlighted.
+  const onLabPage = pathname.startsWith("/lab/");
 
   function navItem(id: string, label: ReactNode, className?: string) {
     if (onNavigate) {
@@ -80,18 +82,12 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
       )}
       <nav className={menuOpen ? "desktop-nav open" : "desktop-nav"} aria-label="Main navigation">
         {navItems.map((item) =>
-          navItem(item.id, item.label, activeId === item.id ? "nav-active" : undefined),
+          navItem(
+            item.id,
+            item.label,
+            activeId === item.id || (item.id === "lab" && onLabPage) ? "nav-active" : undefined,
+          ),
         )}
-        {/* The Lab is its own page, not a homepage section. */}
-        <Button variant="nav" className={onLabPage ? "nav-active" : undefined} asChild>
-          <Link
-            to="/lab"
-            aria-current={onLabPage ? "page" : undefined}
-            onClick={() => setMenuOpen(false)}
-          >
-            Lab
-          </Link>
-        </Button>
       </nav>
       {onNavigate ? (
         <Button

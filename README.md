@@ -27,7 +27,7 @@ Environment variables (set in Vercel, see `.env.example`):
 
 ## Erun Lab
 
-`/lab` is a one-screen page with three working prototypes, one per service, all on sample data for a fictional company (Northwind Coastal Supply):
+The homepage has a Lab section (`/#lab`, after About) with three working prototypes, one per service, all on sample data for a fictional company (Northwind Coastal Supply). `/lab` redirects there. The prototypes:
 
 - `/lab/performance-dashboard`: KPIs, a six-month forecast and revenue mix.
 - `/lab/monthly-report`: a generated monthly report with written commentary (prints to PDF).

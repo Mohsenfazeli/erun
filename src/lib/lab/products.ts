@@ -93,7 +93,3 @@ export function getLabProduct(slug: LabSlug): LabProduct {
 export function labPath(slug: LabSlug) {
   return `/lab/${slug}` as const;
 }
-
-export const LAB_TITLE = "Erun Lab | Working Data, Automation & AI Prototypes";
-export const LAB_DESCRIPTION =
-  "Try three working prototypes from Erun Consulting Group: a performance dashboard, an automated monthly report and an AI HR assistant, built on sample data.";

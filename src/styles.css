@@ -381,12 +381,10 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
   .lab-stage-bar { font-size: 8px; padding: 14px 0 20px; }
 }
 
-/* ---------- Lab home: one screen, like the website hero ---------- */
+/* ---------- Homepage Lab section: the three prototype tiles ---------- */
+.lab-section .lab-products { margin-top: 48px; }
+@media (max-width: 700px) { .lab-section { justify-content: flex-start; }.lab-section .lab-products { margin-top: 26px; } }
 
-.lab-hero { position: relative; height: 100svh; min-height: 640px; padding: 102px 5.2% 96px; display: flex; flex-direction: column; justify-content: center; gap: clamp(28px, 5svh, 56px); overflow: hidden; }
-.lab-hero-text { position: relative; z-index: 1; }
-.lab-hero-text h1 { font-size: clamp(54px, 9svh, 88px); font-weight: 550; line-height: 1.1; margin: clamp(16px, 3svh, 28px) 0 clamp(12px, 2svh, 20px); letter-spacing: 0; }
-.lab-hero-text p { font-size: 16px; line-height: 1.8; color: var(--muted-foreground); margin: 0; max-width: 600px; }
 
 .lab-products { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
 .lab-product { display: block; color: inherit; text-decoration: none; }
@@ -401,15 +399,10 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
 
 /* Short laptop screens: drop the descriptions to keep everything on one screen. */
 @media (max-height: 760px) and (min-width: 701px) { .lab-product-copy { display: none; } }
-@media (min-width: 1500px) { .lab-hero-text p { font-size: 19px; max-width: 620px; } }
 @media (max-width: 1050px) { .lab-products { gap: 18px; }.lab-product-name { font-size: 16px; } }
 
 /* Phones: the three prototypes become compact rows so the page still fits one screen. */
 @media (max-width: 700px) {
-  .lab-hero { padding: 80px 8% 76px; min-height: 600px; gap: 26px; justify-content: center; }
-  .lab-hero-text h1 { font-size: 46px; margin: 18px 0 12px; }
-  .lab-hero-text p { font-size: 13px; }
-  .lab-hero .hero-grid { inset: 80px 0 60px 30%; background-size: 48px 48px; }
   .lab-products { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--border); }
   .lab-product { border-bottom: 1px solid var(--border); padding: 14px 0; }
   .lab-product .service-visual { display: none; }
@@ -417,10 +410,6 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
   .lab-product-name { font-size: 17px; }
   .lab-product .service-index { display: block; }
   .lab-product-copy { margin-top: 4px; font-size: 11px; padding-left: 22px; }
-  .lab-hero .hero-bottom { left: 8%; right: 8%; bottom: 21px; padding-top: 12px; }
-  .lab-hero .hero-bottom-note { font-size: 8px; }
-  .lab-hero .section-counter { font-size: 8px; }
-  .lab-hero .hero-bottom-note.lab-hide-mobile { display: none; }
 }
 
 /* ---------- Lab prototype previews (components/lab-visuals.tsx) ---------- */
@@ -507,7 +496,6 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
 
 /* Reduced motion: show the finished frame (no typing dots). */
 @media (prefers-reduced-motion: reduce) { .lv-typing { opacity: 0; } }
-.lab-hero .hero-bottom-note { display: inline-flex; align-items: center; gap: 9px; }
 
 /* Lab report printing (Download PDF) */
 @page { size: A4; margin: 14mm; }

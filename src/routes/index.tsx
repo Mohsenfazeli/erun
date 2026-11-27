@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClarityScene } from "@/components/clarity-scene";
 import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
+import { LabSection } from "@/components/lab/lab-section";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { servicePath } from "@/lib/services";
 import { scrollBehavior } from "@/lib/utils";
@@ -45,8 +46,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const sections = ["home", "expertise", "approach", "applications", "about", "contact"];
-const labels = ["Home", "Expertise", "Approach", "Applications", "About", "Contact"];
+const sections = ["home", "expertise", "approach", "applications", "about", "lab", "contact"];
+const labels = ["Home", "Expertise", "Approach", "Applications", "About", "Lab", "Contact"];
 const approachStages = [
   { title: "Discover", text: "Understand the business, its challenges, and objectives." },
   { title: "Design", text: "Define the right solution, methodology, and implementation strategy." },
@@ -214,7 +215,7 @@ function Index() {
             </Button>
             <span className="hero-bottom-note">Analytical thinking. Practical progress.</span>
             <span className="section-counter">
-              01 <span>/ 06</span>
+              01 <span>/ 07</span>
             </span>
           </div>
         </section>
@@ -308,7 +309,7 @@ function Index() {
           </ol>
           <div className="section-bottom">
             <span>GOOD SOLUTIONS BEGIN WITH THE RIGHT QUESTIONS.</span>
-            <span>03 / 06</span>
+            <span>03 / 07</span>
           </div>
         </section>
         <section id="applications" className="snap-section applications-section">
@@ -330,7 +331,7 @@ function Index() {
           </ul>
           <div className="section-bottom">
             <span>DIFFERENT SECTORS. THE SAME NEED FOR CLARITY.</span>
-            <span>04 / 06</span>
+            <span>04 / 07</span>
           </div>
         </section>
         <section id="about" className="snap-section about-section">
@@ -364,11 +365,12 @@ function Index() {
           </div>
           <div className="section-bottom">
             <span>BUSINESS FIRST. TECHNOLOGY WITH PURPOSE.</span>
-            <span>05 / 06</span>
+            <span>05 / 07</span>
           </div>
         </section>
+        <LabSection index={6} total={7} />
         <section id="contact" className="snap-section contact-section">
-          <div className="eyebrow">05 / START A CONVERSATION</div>
+          <div className="eyebrow">06 / START A CONVERSATION</div>
           <div className="contact-layout">
             <div>
               <h2>
