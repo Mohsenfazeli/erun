@@ -4,17 +4,28 @@ export const SITE_NAME = "Erun Consulting Group";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/erungroup";
 export const CONTACT_EMAIL = "contact@erungroup.ca";
 
-export const HOME_TITLE = "Erun Consulting Group | AI & Data Analytics Consulting in Vancouver";
+export const HOME_TITLE = "Erun Consulting Group | Economic Analytics, Automation & AI";
 export const HOME_DESCRIPTION =
-  "Erun Consulting Group provides data analytics, process automation, and AI implementation services to organizations in Vancouver and across British Columbia.";
+  "Vancouver-based economic consulting firm specializing in economic analytics, analytical automation and AI adoption.";
+/** Supporting statement under the tagline "Turning Complexity Into Clarity." */
+export const POSITIONING = "Economics, data and technology for better decisions.";
+/** The three practice areas, in order, as shown in the footer and metadata. */
+export const SERVICE_NAMES = [
+  "Economic Analytics",
+  "Analytical Automation",
+  "AI Adoption",
+] as const;
 
 // Existing brand mark, reused as the social preview and logo image.
 export const SOCIAL_IMAGE = { url: `${SITE_URL}/icon-512.png`, width: 512, height: 512 };
 
 const services = [
-  { name: "Data Analytics", description: "Insights that drive better decisions." },
-  { name: "Process Automation", description: "Smarter workflows. Less manual work." },
-  { name: "AI Implementation", description: "Practical AI. Real applications." },
+  { name: "Economic Analytics", description: "Economic insights that drive better decisions." },
+  { name: "Analytical Automation", description: "Streamlined analysis. Smarter workflows." },
+  {
+    name: "AI Adoption",
+    description: "Practical AI for research, analysis and decision-making.",
+  },
 ];
 
 export const areaServed = [
@@ -41,7 +52,7 @@ export const structuredData = {
       description: HOME_DESCRIPTION,
       slogan: "Turning Complexity Into Clarity.",
       email: CONTACT_EMAIL,
-      knowsAbout: services.map((service) => service.name),
+      knowsAbout: ["Economics", ...services.map((service) => service.name)],
       areaServed,
       makesOffer: services.map((service) => ({
         "@type": "Offer",

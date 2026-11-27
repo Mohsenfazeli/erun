@@ -1,11 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
-import { ServicePage } from "@/components/service-page";
-import { getService, serviceHead } from "@/lib/services";
-
-const service = getService("automation");
-
+// Earlier URL for this service; keep old links and search results working.
 export const Route = createFileRoute("/services/automation")({
-  head: () => serviceHead(service),
-  component: () => <ServicePage service={service} />,
+  beforeLoad: () => {
+    throw redirect({ to: "/services/analytical-automation", statusCode: 301 });
+  },
 });

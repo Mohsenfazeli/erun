@@ -1,6 +1,6 @@
 # Erun Consulting Group
 
-Website for Erun Consulting Group — data analytics, automation and AI implementation.
+Website for Erun Consulting Group — economic analytics, analytical automation and AI adoption.
 _Turning complexity into clarity._
 
 ## Development

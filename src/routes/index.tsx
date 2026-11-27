@@ -14,6 +14,7 @@ import {
   HOME_DESCRIPTION,
   HOME_TITLE,
   LINKEDIN_URL,
+  POSITIONING,
   SITE_NAME,
   SITE_URL,
   SOCIAL_IMAGE,
@@ -49,36 +50,45 @@ export const Route = createFileRoute("/")({
 const sections = ["home", "expertise", "approach", "applications", "about", "lab", "contact"];
 const labels = ["Home", "Expertise", "Approach", "Applications", "About", "Lab", "Contact"];
 const approachStages = [
-  { title: "Discover", text: "Understand the business, its challenges, and objectives." },
-  { title: "Design", text: "Define the right solution, methodology, and implementation strategy." },
-  { title: "Develop", text: "Build, test, and refine practical solutions." },
-  { title: "Deliver", text: "Implement, integrate, and support continuous improvement." },
+  {
+    title: "Discover",
+    text: "Understand the economic context, organizational challenges and decision-making needs.",
+  },
+  {
+    title: "Design",
+    text: "Define the analytical methodology, technology and implementation strategy.",
+  },
+  { title: "Develop", text: "Build, validate and refine models, tools and analytical solutions." },
+  {
+    title: "Deliver",
+    text: "Implement solutions and support their adoption and continuous improvement.",
+  },
 ];
 // Potential application areas, not past clients or partnerships.
 const applicationAreas = [
   {
-    title: "Business intelligence & operational performance",
-    text: "Consistent measures of how the organization is performing.",
+    title: "Market & Economic Intelligence",
+    text: "Market trends, economic conditions and industry performance.",
   },
   {
-    title: "Financial & economic analytics",
-    text: "Costs, pricing, forecasts, and the economic case for decisions.",
+    title: "Forecasting & Scenario Analysis",
+    text: "Demand forecasting, predictive models and economic simulations.",
   },
   {
-    title: "Transportation & logistics",
-    text: "Demand, capacity, scheduling, and service performance.",
+    title: "Pricing & Financial Economics",
+    text: "Cost analysis, pricing strategies and financial feasibility.",
   },
   {
-    title: "Retail & service operations",
-    text: "Customer demand, staffing, and service quality.",
+    title: "Policy & Program Evaluation",
+    text: "Impact assessment, performance measurement and evidence-based evaluation.",
   },
   {
-    title: "Knowledge & document management",
-    text: "Finding, organizing, and using what the organization already knows.",
+    title: "Labour & Workforce Economics",
+    text: "Labour markets, workforce planning and employment trends.",
   },
   {
-    title: "Business process optimization",
-    text: "Simpler, faster processes with fewer manual steps.",
+    title: "Regional & Sector Economics",
+    text: "Regional development, industry dynamics and spatial analysis.",
   },
 ];
 
@@ -198,9 +208,9 @@ function Index() {
               </span>
             </h1>
             <p className="hero-description">
-              Data Analytics. Automation.
+              Economic Analytics. Analytical Automation.
               <br />
-              AI Implementation.
+              AI Adoption.
             </p>
             <Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>
               Explore Our Expertise <ArrowUpRight />
@@ -213,7 +223,7 @@ function Index() {
             <Button variant="nav" className="scroll-cue" onClick={() => goTo(1)}>
               <ArrowDown /> SCROLL TO DISCOVER
             </Button>
-            <span className="hero-bottom-note">Analytical thinking. Practical progress.</span>
+            <span className="hero-bottom-note">{POSITIONING}</span>
             <span className="section-counter">
               01 <span>/ 07</span>
             </span>
@@ -225,27 +235,27 @@ function Index() {
             <h2>
               What We Do<span className="text-primary">.</span>
             </h2>
-            <p>Clarity in your data. Confidence in your next move.</p>
+            <p>Economic understanding. Analytical precision. Practical innovation.</p>
           </div>
           <div className="expertise-grid">
             {[
               {
-                title: "Data Analytics",
-                text: "Insights that drive better decisions.",
+                title: "Economic Analytics",
+                text: "Economic insights that drive better decisions.",
                 visual: <AnalyticsVisual />,
-                to: servicePath("data-analytics"),
+                to: servicePath("economic-analytics"),
               },
               {
-                title: "Automation",
-                text: "Smarter workflows. Less manual work.",
+                title: "Analytical Automation",
+                text: "Streamlined analysis. Smarter workflows.",
                 visual: <WorkflowVisual />,
-                to: servicePath("automation"),
+                to: servicePath("analytical-automation"),
               },
               {
-                title: "AI Implementation",
-                text: "Practical AI. Real applications.",
+                title: "AI Adoption",
+                text: "Practical AI for research, analysis and decision-making.",
                 visual: <AIVisual />,
-                to: servicePath("ai-implementation"),
+                to: servicePath("ai-adoption"),
               },
             ].map((service, i) => (
               <article className="expertise-item" key={service.title}>
@@ -314,11 +324,11 @@ function Index() {
         </section>
         <section id="applications" className="snap-section applications-section">
           <div className="section-heading">
-            <div className="eyebrow">03 / INDUSTRIES & APPLICATIONS</div>
+            <div className="eyebrow">03 / AREAS OF APPLICATION</div>
             <h2>
               Where It Applies<span className="text-primary">.</span>
             </h2>
-            <p>Areas where data, automation, and AI can make a practical difference.</p>
+            <p>Applying economics, analytics and technology to real-world challenges.</p>
           </div>
           <ul className="applications-grid">
             {applicationAreas.map((item, i) => (
@@ -344,8 +354,9 @@ function Index() {
                 Better Solutions<span className="text-primary">.</span>
               </h2>
               <p>
-                Erun brings together analytical thinking, business understanding, and technology to
-                help organizations work smarter.
+                Erun is a specialized consulting firm at the intersection of economics, data
+                analytics and technology. We help organizations understand complex challenges,
+                improve analytical capabilities and turn economic insights into practical decisions.
               </p>
               <Button variant="editorial" onClick={() => goToId("contact")}>
                 Let’s make progress <ArrowUpRight />
@@ -364,7 +375,7 @@ function Index() {
             </div>
           </div>
           <div className="section-bottom">
-            <span>BUSINESS FIRST. TECHNOLOGY WITH PURPOSE.</span>
+            <span>ECONOMICS FIRST. TECHNOLOGY WITH PURPOSE.</span>
             <span>05 / 07</span>
           </div>
         </section>
@@ -378,7 +389,7 @@ function Index() {
                 <br />
                 It Work Better<span className="text-primary">.</span>
               </h2>
-              <p>Have a challenge in mind? Let’s talk.</p>
+              <p>Have an economic, analytical or technology challenge in mind? Let’s talk.</p>
               <Button
                 variant="editorial"
                 onClick={() => formRef.current?.querySelector("input")?.focus()}
