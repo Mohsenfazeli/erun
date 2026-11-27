@@ -334,3 +334,188 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
 }
 @media (min-width: 1500px) { .service-hero h1 { font-size: 72px; }.service-hero-visual .service-visual { height: 400px; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* ===================================================================
+ * Erun Lab (/lab): one-screen Lab page and the three prototype pages.
+ * Colour aliases used inside the prototypes map onto the site tokens.
+ * =================================================================== */
+@theme inline {
+  --color-brand: var(--primary);
+  --color-brand-dark: oklch(0.475 0.165 262);
+  --color-brand-light: var(--accent);
+  --color-ink: var(--foreground);
+  --color-ink-2: var(--muted-foreground);
+  --color-ink-3: oklch(0.704 0.03 256);
+  --color-line: var(--border);
+  --color-canvas: var(--background);
+  --color-surface: var(--card);
+  --color-visual: var(--visual-surface);
+  --animate-fade-up: lab-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: lab-fade-in 0.35s ease-out both;
+}
+@keyframes lab-fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes lab-fade-in { from { opacity: 0; } to { opacity: 1; } }
+.thin-scroll { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+.lab-intro-meta > span, .lab-stage-bar > span > span:first-child { display: inline-flex; align-items: center; gap: 9px; }
+
+
+/* Compact intro used above each live product */
+.lab-intro { padding: 90px 0 56px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; }
+.lab-intro h1 { font-size: 58px; font-weight: 550; line-height: 1.15; margin: 25px 0 20px; letter-spacing: 0; }
+.lab-intro p { font-size: 16px; line-height: 1.8; color: var(--muted-foreground); margin: 0; max-width: 620px; }
+.lab-intro-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; font-size: 10px; font-weight: 650; color: var(--muted-foreground); text-transform: uppercase; }
+
+/* The live product area */
+.lab-stage { padding-bottom: 90px; }
+.lab-stage-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid var(--border); padding: 18px 0 26px; font-size: 10px; font-weight: 650; color: var(--muted-foreground); text-transform: uppercase; }
+.lab-stage-bar > span { display: inline-flex; align-items: center; gap: 9px; }
+
+@media (min-width: 1500px) { .lab-intro h1, .page-intro h1 { font-size: 72px; } }
+@media (max-width: 1050px) { .lab-intro h1 { font-size: 46px; } }
+@media (max-width: 700px) {
+  .lab-intro { grid-template-columns: 1fr; padding: 60px 0 36px; gap: 22px; }
+  .lab-intro h1 { font-size: 38px; margin: 20px 0 15px; }
+  .lab-intro p { font-size: 13px; }
+  .lab-intro-meta { align-items: flex-start; font-size: 8px; }
+  .lab-stage { padding-bottom: 56px; }
+  .lab-stage-bar { font-size: 8px; padding: 14px 0 20px; }
+}
+
+/* ---------- Lab home: one screen, like the website hero ---------- */
+
+.lab-hero { position: relative; height: 100svh; min-height: 640px; padding: 102px 5.2% 96px; display: flex; flex-direction: column; justify-content: center; gap: clamp(28px, 5svh, 56px); overflow: hidden; }
+.lab-hero-text { position: relative; z-index: 1; }
+.lab-hero-text h1 { font-size: clamp(54px, 9svh, 88px); font-weight: 550; line-height: 1.1; margin: clamp(16px, 3svh, 28px) 0 clamp(12px, 2svh, 20px); letter-spacing: 0; }
+.lab-hero-text p { font-size: 16px; line-height: 1.8; color: var(--muted-foreground); margin: 0; max-width: 600px; }
+
+.lab-products { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
+.lab-product { display: block; color: inherit; text-decoration: none; }
+.lab-product .service-visual { height: clamp(120px, 22svh, 230px); }
+.lab-product:hover .service-visual { transform: translateY(-6px); box-shadow: var(--visual-shadow); }
+.lab-product:focus-visible { outline: 1px solid var(--primary); outline-offset: 8px; }
+.lab-product-heading { display: flex; align-items: center; gap: 12px; margin-top: clamp(14px, 2.4svh, 22px); }
+.lab-product-name { flex: 1; font-size: 20px; font-weight: 600; transition: color 0.3s; }
+.lab-product:hover .lab-product-name { color: var(--primary); }
+.lab-product-copy { display: block; margin-top: 8px; font-size: 12px; line-height: 1.7; color: var(--muted-foreground); }
+.lab-product-pillar { color: var(--foreground); font-weight: 600; }
+
+/* Short laptop screens: drop the descriptions to keep everything on one screen. */
+@media (max-height: 760px) and (min-width: 701px) { .lab-product-copy { display: none; } }
+@media (min-width: 1500px) { .lab-hero-text p { font-size: 19px; max-width: 620px; } }
+@media (max-width: 1050px) { .lab-products { gap: 18px; }.lab-product-name { font-size: 16px; } }
+
+/* Phones: the three prototypes become compact rows so the page still fits one screen. */
+@media (max-width: 700px) {
+  .lab-hero { padding: 80px 8% 76px; min-height: 600px; gap: 26px; justify-content: center; }
+  .lab-hero-text h1 { font-size: 46px; margin: 18px 0 12px; }
+  .lab-hero-text p { font-size: 13px; }
+  .lab-hero .hero-grid { inset: 80px 0 60px 30%; background-size: 48px 48px; }
+  .lab-products { grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--border); }
+  .lab-product { border-bottom: 1px solid var(--border); padding: 14px 0; }
+  .lab-product .service-visual { display: none; }
+  .lab-product-heading { margin-top: 0; gap: 10px; }
+  .lab-product-name { font-size: 17px; }
+  .lab-product .service-index { display: block; }
+  .lab-product-copy { margin-top: 4px; font-size: 11px; padding-left: 22px; }
+  .lab-hero .hero-bottom { left: 8%; right: 8%; bottom: 21px; padding-top: 12px; }
+  .lab-hero .hero-bottom-note { font-size: 8px; }
+  .lab-hero .section-counter { font-size: 8px; }
+  .lab-hero .hero-bottom-note.lab-hide-mobile { display: none; }
+}
+
+/* ---------- Lab prototype previews (components/lab-visuals.tsx) ---------- */
+.lab-visual .lab-svg { position: absolute; left: 20px; right: 20px; top: 38px; bottom: 34px; width: calc(100% - 40px); height: calc(100% - 72px); overflow: visible; font-family: inherit; }
+.lv-seq, .lv-grow, .lv-flow, .lv-typing-dot { transform-box: fill-box; }
+.lv-card { fill: var(--card); stroke: var(--border); stroke-width: 1; }
+.lv-grid { stroke: var(--border); stroke-width: 1; }
+.lv-label { font-size: 6.5px; font-weight: 650; fill: var(--muted-foreground); letter-spacing: 0.04em; }
+.lv-value { font-size: 14px; font-weight: 600; fill: var(--foreground); }
+.lv-value-sm { font-size: 9px; font-weight: 600; fill: var(--foreground); }
+.lv-pill-up { fill: oklch(0.95 0.05 160); }
+.lv-pill-down { fill: oklch(0.95 0.04 50); }
+.lv-pill-text-up { font-size: 6px; font-weight: 700; fill: oklch(0.5 0.12 160); }
+.lv-pill-text-down { font-size: 6px; font-weight: 700; fill: oklch(0.55 0.15 45); }
+.lv-today { stroke: var(--muted-foreground); stroke-width: 0.8; stroke-dasharray: 2 2; opacity: 0.6; }
+.lv-actual { fill: none; stroke: var(--foreground); stroke-width: 1.6; stroke-linejoin: round; }
+.lv-forecast { fill: none; stroke: var(--primary); stroke-width: 1.8; stroke-dasharray: 4 3; }
+.lv-band { fill: var(--primary); fill-opacity: 0.12; }
+.lv-dot { fill: var(--primary); }
+.lv-ring { fill: none; stroke: var(--border); stroke-width: 9; }
+.lv-seg { fill: none; stroke-width: 9; }
+.lv-seg-1 { stroke: var(--primary); stroke-dasharray: 40 60; }
+.lv-seg-2 { stroke: var(--foreground); stroke-dasharray: 38 62; stroke-dashoffset: -40; }
+.lv-seg-3 { stroke: var(--chart-2); stroke-dasharray: 22 78; stroke-dashoffset: -78; }
+.lv-sheet-head { fill: var(--visual-surface); stroke: var(--border); }
+.lv-track { stroke: var(--primary); stroke-width: 1; opacity: 0.45; fill: none; }
+.lv-dashed { stroke-dasharray: 3 3; }
+.lv-flow { fill: var(--primary); }
+.lv-brand-fill { fill: var(--primary); }
+.lv-ink-fill { fill: var(--foreground); }
+.lv-line { fill: var(--muted-foreground); fill-opacity: 0.45; }
+.lv-bar { fill: var(--primary); }
+.lv-stamp { fill: var(--primary); }
+.lv-check { fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.lv-envelope { fill: none; stroke: var(--border); stroke-width: 1; }
+.lv-chat-user { font-size: 9px; font-weight: 500; fill: #fff; }
+.lv-chat { font-size: 9px; font-weight: 500; fill: var(--foreground); }
+.lv-avatar { font-size: 7.5px; font-weight: 800; fill: #fff; }
+.lv-cite { fill: var(--accent); stroke: oklch(0.548 0.184 262 / 0.3); stroke-width: 1; }
+.lv-cite-text { font-size: 7px; font-weight: 650; fill: var(--primary); }
+.lv-typing-dot { fill: var(--muted-foreground); }
+
+/* One 7s timeline shared by every preview: steps reveal in order, hold, then reset. */
+.lv-seq, .lv-grow, .lv-draw, .lv-seg, .lv-flow, .lv-typing { animation-duration: 7s; animation-iteration-count: infinite; animation-timing-function: ease-out; }
+.lv-s1 { animation-name: lv-s1; } .lv-s2 { animation-name: lv-s2; } .lv-s3 { animation-name: lv-s3; } .lv-s4 { animation-name: lv-s4; }
+.lv-s5 { animation-name: lv-s5; } .lv-s6 { animation-name: lv-s6; } .lv-s7 { animation-name: lv-s7; }
+@keyframes lv-s1 { 0%, 4% { opacity: 0; transform: translateY(5px); } 10%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s2 { 0%, 11% { opacity: 0; transform: translateY(5px); } 17%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s3 { 0%, 18% { opacity: 0; transform: translateY(5px); } 24%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s4 { 0%, 30% { opacity: 0; transform: translateY(5px); } 37%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s5 { 0%, 40% { opacity: 0; transform: translateY(5px); } 47%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s6 { 0%, 55% { opacity: 0; transform: scale(0.4); } 61%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes lv-s7 { 0%, 64% { opacity: 0; transform: translateX(-6px); } 71%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+/* Revenue line draws itself */
+.lv-draw { stroke-dasharray: 160; animation-name: lv-draw; }
+@keyframes lv-draw { 0%, 6% { stroke-dashoffset: 160; } 34%, 92% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+
+/* Donut segments fill in turn */
+.lv-seg-1 { animation-name: lv-seg1; } .lv-seg-2 { animation-name: lv-seg2; } .lv-seg-3 { animation-name: lv-seg3; }
+@keyframes lv-seg1 { 0%, 48% { stroke-dasharray: 0 100; } 58%, 92% { stroke-dasharray: 40 60; opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-seg2 { 0%, 54% { stroke-dasharray: 0 100; } 64%, 92% { stroke-dasharray: 38 62; opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-seg3 { 0%, 60% { stroke-dasharray: 0 100; } 70%, 92% { stroke-dasharray: 22 78; opacity: 1; } 100% { opacity: 0; } }
+
+/* Report chart bars grow */
+.lv-grow { transform-origin: 50% 100%; }
+.lv-g1 { animation-name: lv-g1; } .lv-g2 { animation-name: lv-g2; } .lv-g3 { animation-name: lv-g3; } .lv-g4 { animation-name: lv-g4; } .lv-g5 { animation-name: lv-g5; }
+@keyframes lv-g1 { 0%, 24% { transform: scaleY(0); } 31%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-g2 { 0%, 26% { transform: scaleY(0); } 33%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-g3 { 0%, 28% { transform: scaleY(0); } 35%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-g4 { 0%, 30% { transform: scaleY(0); } 37%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+@keyframes lv-g5 { 0%, 32% { transform: scaleY(0); } 39%, 92% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+
+/* Data flowing from the spreadsheet into the report */
+.lv-flow { animation-name: lv-flow; animation-duration: 1.6s; animation-timing-function: linear; }
+@keyframes lv-flow { from { transform: translateX(0); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } to { transform: translateX(38px); opacity: 0; } }
+
+/* Assistant: typing dots show briefly before the answer */
+.lv-typing { animation-name: lv-typing; }
+@keyframes lv-typing { 0%, 18% { opacity: 0; } 21%, 30% { opacity: 1; } 33%, 100% { opacity: 0; } }
+.lv-typing-dot { animation: lv-bounce 0.9s ease-in-out infinite; }
+.lv-t2 { animation-delay: 0.15s; } .lv-t3 { animation-delay: 0.3s; }
+@keyframes lv-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+
+/* Reduced motion: show the finished frame (no typing dots). */
+@media (prefers-reduced-motion: reduce) { .lv-typing { opacity: 0; } }
+.lab-hero .hero-bottom-note { display: inline-flex; align-items: center; gap: 9px; }
+
+/* Lab report printing (Download PDF) */
+@page { size: A4; margin: 14mm; }
+@media print {
+  .no-print, .site-header, .site-footer, .page-cta { display: none !important; }
+  body { background: white; }
+  .page-main { padding: 0 !important; }
+  .print-area { box-shadow: none !important; border: none !important; padding: 0 !important; max-width: none !important; }
+  .print-break { break-before: page; }
+  .avoid-break { break-inside: avoid; }
+}

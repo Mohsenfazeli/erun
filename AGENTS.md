@@ -5,3 +5,5 @@
 - "Book a consultation" always leads to the homepage contact form (`/#contact`); there is no calendar booking.
 - Load Three.js inside the visual component's browser effect and dispose all scene resources on unmount, keeping SSR browser-safe.
 - Contact enquiries go through the `sendEnquiry` server function (Resend API, key in `RESEND_API_KEY`); never imply an unsent enquiry was delivered, and never commit secrets.
+- The Lab lives at `/lab` (one screen, no scroll) with prototypes at `/lab/<slug>`; copy and slugs are in `src/lib/lab/products.ts`, and prototype pages share `LabProductPage`. All Lab data is sample data for a fictional company: label it as such and never present it as real figures.
+- The Lab HR Assistant goes through the `askLabAssistant` server function; Gemini is called from `src/lib/lab/assistant.server.ts` with `GEMINI_API_KEY`, and it must keep working offline (handbook quotes) when the key is missing or the call fails.

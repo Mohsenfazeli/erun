@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 
@@ -25,6 +25,8 @@ type HeaderProps = {
 
 export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const onLabPage = activeId === "lab" || pathname === "/lab" || pathname.startsWith("/lab/");
 
   function navItem(id: string, label: ReactNode, className?: string) {
     if (onNavigate) {
@@ -80,6 +82,16 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
         {navItems.map((item) =>
           navItem(item.id, item.label, activeId === item.id ? "nav-active" : undefined),
         )}
+        {/* The Lab is its own page, not a homepage section. */}
+        <Button variant="nav" className={onLabPage ? "nav-active" : undefined} asChild>
+          <Link
+            to="/lab"
+            aria-current={onLabPage ? "page" : undefined}
+            onClick={() => setMenuOpen(false)}
+          >
+            Lab
+          </Link>
+        </Button>
       </nav>
       {onNavigate ? (
         <Button

@@ -10,6 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LabIndexRouteImport } from './routes/lab.index'
+import { Route as LabHrAssistantRouteImport } from './routes/lab.hr-assistant'
+import { Route as LabMonthlyReportRouteImport } from './routes/lab.monthly-report'
+import { Route as LabPerformanceDashboardRouteImport } from './routes/lab.performance-dashboard'
 import { Route as ServicesAiImplementationRouteImport } from './routes/services.ai-implementation'
 import { Route as ServicesAutomationRouteImport } from './routes/services.automation'
 import { Route as ServicesDataAnalyticsRouteImport } from './routes/services.data-analytics'
@@ -17,6 +21,26 @@ import { Route as ServicesDataAnalyticsRouteImport } from './routes/services.dat
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabIndexRoute = LabIndexRouteImport.update({
+  id: '/lab/',
+  path: '/lab/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabHrAssistantRoute = LabHrAssistantRouteImport.update({
+  id: '/lab/hr-assistant',
+  path: '/lab/hr-assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabMonthlyReportRoute = LabMonthlyReportRouteImport.update({
+  id: '/lab/monthly-report',
+  path: '/lab/monthly-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LabPerformanceDashboardRoute = LabPerformanceDashboardRouteImport.update({
+  id: '/lab/performance-dashboard',
+  path: '/lab/performance-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesAiImplementationRoute =
@@ -38,49 +62,77 @@ const ServicesDataAnalyticsRoute = ServicesDataAnalyticsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/lab/hr-assistant': typeof LabHrAssistantRoute
+  '/lab/monthly-report': typeof LabMonthlyReportRoute
+  '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
   '/services/ai-implementation': typeof ServicesAiImplementationRoute
   '/services/automation': typeof ServicesAutomationRoute
   '/services/data-analytics': typeof ServicesDataAnalyticsRoute
+  '/lab/': typeof LabIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/lab/hr-assistant': typeof LabHrAssistantRoute
+  '/lab/monthly-report': typeof LabMonthlyReportRoute
+  '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
   '/services/ai-implementation': typeof ServicesAiImplementationRoute
   '/services/automation': typeof ServicesAutomationRoute
   '/services/data-analytics': typeof ServicesDataAnalyticsRoute
+  '/lab': typeof LabIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/lab/hr-assistant': typeof LabHrAssistantRoute
+  '/lab/monthly-report': typeof LabMonthlyReportRoute
+  '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
   '/services/ai-implementation': typeof ServicesAiImplementationRoute
   '/services/automation': typeof ServicesAutomationRoute
   '/services/data-analytics': typeof ServicesDataAnalyticsRoute
+  '/lab/': typeof LabIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/lab/hr-assistant'
+    | '/lab/monthly-report'
+    | '/lab/performance-dashboard'
     | '/services/ai-implementation'
     | '/services/automation'
     | '/services/data-analytics'
+    | '/lab/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/lab/hr-assistant'
+    | '/lab/monthly-report'
+    | '/lab/performance-dashboard'
     | '/services/ai-implementation'
     | '/services/automation'
     | '/services/data-analytics'
+    | '/lab'
   id:
     | '__root__'
     | '/'
+    | '/lab/hr-assistant'
+    | '/lab/monthly-report'
+    | '/lab/performance-dashboard'
     | '/services/ai-implementation'
     | '/services/automation'
     | '/services/data-analytics'
+    | '/lab/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LabHrAssistantRoute: typeof LabHrAssistantRoute
+  LabMonthlyReportRoute: typeof LabMonthlyReportRoute
+  LabPerformanceDashboardRoute: typeof LabPerformanceDashboardRoute
   ServicesAiImplementationRoute: typeof ServicesAiImplementationRoute
   ServicesAutomationRoute: typeof ServicesAutomationRoute
   ServicesDataAnalyticsRoute: typeof ServicesDataAnalyticsRoute
+  LabIndexRoute: typeof LabIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -90,6 +142,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/': {
+      id: '/lab/'
+      path: '/lab'
+      fullPath: '/lab/'
+      preLoaderRoute: typeof LabIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/hr-assistant': {
+      id: '/lab/hr-assistant'
+      path: '/lab/hr-assistant'
+      fullPath: '/lab/hr-assistant'
+      preLoaderRoute: typeof LabHrAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/monthly-report': {
+      id: '/lab/monthly-report'
+      path: '/lab/monthly-report'
+      fullPath: '/lab/monthly-report'
+      preLoaderRoute: typeof LabMonthlyReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lab/performance-dashboard': {
+      id: '/lab/performance-dashboard'
+      path: '/lab/performance-dashboard'
+      fullPath: '/lab/performance-dashboard'
+      preLoaderRoute: typeof LabPerformanceDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/ai-implementation': {
@@ -118,9 +198,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LabHrAssistantRoute: LabHrAssistantRoute,
+  LabMonthlyReportRoute: LabMonthlyReportRoute,
+  LabPerformanceDashboardRoute: LabPerformanceDashboardRoute,
   ServicesAiImplementationRoute: ServicesAiImplementationRoute,
   ServicesAutomationRoute: ServicesAutomationRoute,
   ServicesDataAnalyticsRoute: ServicesDataAnalyticsRoute,
+  LabIndexRoute: LabIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
