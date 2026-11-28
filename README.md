@@ -1,7 +1,7 @@
 # Erun Consulting Group
 
-Website for Erun Consulting Group (Victoria, BC) — Turning Complexity into Better Decisions: analytics, automation and AI adoption at the intersection of economics and technology.
-_Turning Complexity into Better Decisions._
+Website for Erun Consulting Group (Victoria, BC) — Turning Complexity into Clarity: analytics, automation and AI adoption at the intersection of economics and technology.
+_Turning Complexity into Clarity._
 
 ## Development
 
