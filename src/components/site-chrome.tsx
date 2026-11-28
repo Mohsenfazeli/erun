@@ -137,7 +137,8 @@ export function SiteFooter({ className, onBackToTop }: FooterProps) {
         ))}
       </span>
       <span className="footer-legal">
-        © {new Date().getFullYear()} {SITE_NAME} · <Link to="/privacy">Privacy Policy</Link>
+        {/* Privacy Policy link hidden for now; the page still exists at /privacy. */}©{" "}
+        {new Date().getFullYear()} {SITE_NAME}
       </span>
       <Button variant="nav" size="icon" aria-label="Back to top" onClick={backToTop}>
         <ArrowRight className="back-top-icon" />

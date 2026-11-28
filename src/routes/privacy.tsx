@@ -8,13 +8,16 @@ import { BOOKING_PATH, CONTACT_EMAIL, pageHead, SITE_NAME } from "@/lib/site";
 const LAST_UPDATED = "November 27, 2026";
 
 export const Route = createFileRoute("/privacy")({
-  head: () =>
-    pageHead({
+  // Hidden for now: not linked from the site, not in the sitemap, and kept out of search results.
+  head: () => {
+    const head = pageHead({
       title: `Privacy Policy | ${SITE_NAME}`,
       description:
         "How Erun Consulting Group collects, uses and protects personal information sent through erungroup.ca.",
       path: "/privacy",
-    }),
+    });
+    return { ...head, meta: [...head.meta, { name: "robots", content: "noindex" }] };
+  },
   component: PrivacyPage,
 });
 
