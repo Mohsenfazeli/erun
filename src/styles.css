@@ -556,15 +556,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .approach-section { background: var(--card); }
 .approach-step .stage-title { margin-top: 30px; }
 
-/* About: "At a glance" panel in place of the outline graphic. */
+/* About: two columns, text and the intersection diagram. */
 .about-section { background: var(--card); }
 .about-content > div > .cta-primary { margin-top: 4px; }
-.glance-panel { border: 1px solid var(--border); background: var(--background); padding: 34px 36px 14px; max-width: 520px; justify-self: end; width: 100%; box-sizing: border-box; }
-.glance-panel h3 { margin: 0 0 18px; font-size: 13px; font-weight: 650; color: var(--primary); }
-.glance-panel dl { margin: 0; }
-.glance-panel dl > div { border-top: 1px solid var(--border); padding: 16px 0 18px; }
-.glance-panel dt { font-size: 12px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 6px; }
-.glance-panel dd { margin: 0; font-size: 17px; font-weight: 550; line-height: 1.45; color: var(--foreground); }
 
 /* Lab: a dark navy band (the heading colour) with light text and the light brand blue. */
 .lab-section { background: var(--foreground); color: var(--on-dark); }
@@ -639,8 +633,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   .expertise-link > p, .applications-grid p, .approach-step .stage-copy { font-size: 13px; }
   .approach-step .stage-title { margin-top: 0; }
   .about-content p { font-size: 14px; }
-  .glance-panel { justify-self: stretch; padding: 26px 22px 6px; }
-  .glance-panel dd { font-size: 15px; }
   /* Lab list: no empty screen-height gap below it. */
   .lab-section { min-height: auto; padding-bottom: 72px; }
   .lab-section .lab-products, .lab-section .lab-product { border-color: oklch(1 0 0 / 0.16); }
@@ -710,9 +702,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 @media (max-width: 1200px) { .contact-section { padding-bottom: 150px; } }
 @media (max-width: 700px) { .contact-section { padding-bottom: 240px; } }
 
-/* Areas of Focus removed: About takes the off-white surface so sections still alternate. */
+/* About takes the off-white surface so sections still alternate. */
 .about-section { background: var(--background); }
-.glance-panel { background: var(--card); }
 
 /* Company name beside the logo in the header. */
 .brand-mark { gap: 12px; }
@@ -778,3 +769,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 /* Homepage cards: slightly smaller illustrations so each card's text fits on the same screen. */
 .expertise-grid .service-visual { height: clamp(150px, 21svh, 200px); }
 @media (max-width: 700px) { .expertise-grid .service-visual { height: 170px; } }
+
+/* Who We Are: three-circle intersection diagram (src/components/intersection-diagram.tsx). */
+.about-venn { margin: 0; justify-self: end; width: 100%; max-width: 460px; }
+.about-venn svg { display: block; width: 100%; height: auto; overflow: visible; font-family: inherit; }
+.venn-circle { stroke-width: 1.5; fill-opacity: 0.07; animation: venn-settle 1.4s cubic-bezier(0.22, 1, 0.36, 1) both; transform-box: fill-box; transform-origin: center; }
+.venn-economics { fill: var(--primary); stroke: var(--primary); }
+.venn-analytics { fill: var(--chart-2); stroke: var(--chart-2); animation-delay: 0.15s; }
+.venn-technology { fill: var(--foreground); stroke: var(--foreground); stroke-opacity: 0.55; animation-delay: 0.3s; }
+.venn-label { font-size: 17px; font-weight: 600; fill: var(--foreground); }
+.venn-core { fill: var(--primary); }
+.venn-core-label { font-size: 17px; font-weight: 700; fill: #fff; }
+.about-venn figcaption { margin-top: 14px; text-align: center; font-size: 13px; color: var(--muted-foreground); }
+@keyframes venn-settle { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: none; } }
+@media (max-width: 700px) { .about-venn { justify-self: center; max-width: 340px; margin-top: 0; }.about-content > div > p:last-of-type { margin-bottom: 0; } }

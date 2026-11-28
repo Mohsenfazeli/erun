@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/contact-form";
 import { AnalyticsVisual, ReportingVisual, ResearchVisual } from "@/components/service-visuals";
+import { IntersectionDiagram } from "@/components/intersection-diagram";
 import { LabSection } from "@/components/lab/lab-section";
 import { ParticleWave } from "@/components/particle-wave";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
@@ -70,15 +71,6 @@ const serviceCards = [
     to: servicePath("ai-adoption-in-economics"),
   },
 ];
-// About panel: facts supplied by the firm.
-const atAGlance = [
-  { label: "Location", value: "British Columbia, Canada" },
-  { label: "Expertise", value: "Economics, research and data analytics" },
-  { label: "Approach", value: "Advanced technology, automation and AI" },
-  { label: "Works with", value: "Python, R, Power BI and modern AI tools" },
-  { label: "Serving", value: "Organizations across Canada" },
-];
-
 function Index() {
   const [active, setActive] = useState(0);
   const [stage, setStage] = useState(0);
@@ -243,31 +235,20 @@ function Index() {
                 Who We Are<span className="text-primary">.</span>
               </h2>
               <p>
-                Erun Consulting Group is an independent economic research and analytics consultancy
-                based in British Columbia, Canada.
+                Erun Consulting Group is an independent consultancy based in Victoria, British
+                Columbia, specializing in economic research and advanced analytics.
               </p>
               <p>
-                We bring together economics, data science and modern technology to address complex
-                economic and business questions. Our approach integrates advanced analytical
-                methods, automation and artificial intelligence into the research process, enabling
-                more efficient analysis and accessible insights.
+                We work at the intersection of economics, analytics and technology to help
+                organizations understand complex questions and make informed decisions.
               </p>
               <p>
-                We believe the future of economic research lies in combining sound methodology with
-                intelligent technology.
+                Our mission is to modernize how economic research and analysis are conducted by
+                integrating advanced technology, automation and artificial intelligence with sound
+                economic methodology.
               </p>
             </div>
-            <aside className="glance-panel" aria-labelledby="glance-title">
-              <h3 id="glance-title">At a glance</h3>
-              <dl>
-                {atAGlance.map((item) => (
-                  <div key={item.label}>
-                    <dt>{item.label}</dt>
-                    <dd>{item.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
+            <IntersectionDiagram />
           </div>
         </section>
         <LabSection />
