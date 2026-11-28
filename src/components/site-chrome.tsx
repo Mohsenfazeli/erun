@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 
@@ -14,7 +14,7 @@ const navItems = [
   { id: "expertise", label: "Expertise" },
   { id: "approach", label: "Approach" },
   { id: "about", label: "About" },
-  { id: "lab", label: "Lab" },
+  // "Lab" is hidden while the homepage Lab section is off.
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -30,9 +30,6 @@ type HeaderProps = {
 export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = useRouterState({ select: (state) => state.location.pathname });
-  // Lab prototype pages keep the Lab link highlighted.
-  const onLabPage = pathname.startsWith("/lab/");
 
   // Solid header once the page scrolls, so content never shows through behind the logo.
   useEffect(() => {
@@ -89,11 +86,7 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
       )}
       <nav className={menuOpen ? "desktop-nav open" : "desktop-nav"} aria-label="Main navigation">
         {navItems.map((item) =>
-          navItem(
-            item.id,
-            item.label,
-            activeId === item.id || (item.id === "lab" && onLabPage) ? "nav-active" : undefined,
-          ),
+          navItem(item.id, item.label, activeId === item.id ? "nav-active" : undefined),
         )}
       </nav>
       <Button
