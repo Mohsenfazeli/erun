@@ -148,9 +148,6 @@ function Index() {
         <section id="home" className="hero-section snap-section">
           <ParticleWave />
           <div className="hero-content">
-            <div className="eyebrow hero-eyebrow">
-              <span className="small-rule" /> {SITE_NAME}
-            </div>
             <h1>
               {HEADLINE.line1} <br />
               <span className="clarity-word">{HEADLINE.accent}.</span>
