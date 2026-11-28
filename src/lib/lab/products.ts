@@ -1,12 +1,11 @@
-// The three Erun Lab prototypes, one per service. Copy is general: sample data
+// The three Lab prototypes, one per service. Copy is general: sample data
 // for a fictional company, no client names or verified results.
 
 export type LabSlug = "performance-dashboard" | "monthly-report" | "hr-assistant";
 
 export interface LabProduct {
   slug: LabSlug;
-  number: string;
-  pillar: "Data Analytics" | "Automation" | "AI Implementation";
+  pillar: "Analytics" | "Automation" | "AI Adoption";
   name: string;
   /** One line for the Lab tiles. */
   short: string;
@@ -24,10 +23,9 @@ export interface LabProduct {
 export const LAB_PRODUCTS: LabProduct[] = [
   {
     slug: "performance-dashboard",
-    number: "01",
-    pillar: "Data Analytics",
+    pillar: "Analytics",
     name: "Performance Dashboard",
-    short: "Live KPIs, a six-month forecast and where revenue comes from.",
+    short: "Live KPIs, a six-month forecast and a breakdown of where revenue comes from.",
     tagline:
       "See how the business is performing and where it is heading, in one view. Filter by region and time range, and read the forecast.",
     description:
@@ -43,7 +41,6 @@ export const LAB_PRODUCTS: LabProduct[] = [
   },
   {
     slug: "monthly-report",
-    number: "02",
     pillar: "Automation",
     name: "Automated Monthly Report",
     short: "A board-ready report, calculated and written in seconds.",
@@ -64,10 +61,9 @@ export const LAB_PRODUCTS: LabProduct[] = [
   },
   {
     slug: "hr-assistant",
-    number: "03",
-    pillar: "AI Implementation",
+    pillar: "AI Adoption",
     name: "HR Assistant",
-    short: "An AI assistant trained on the company's own policies.",
+    short: "An AI assistant that answers only from the company's own policies and cites them.",
     tagline:
       "Ask a question in plain language. The assistant answers only from the company's policy documents and shows exactly where each answer comes from.",
     description:
@@ -78,7 +74,7 @@ export const LAB_PRODUCTS: LabProduct[] = [
       "An AI assistant grounded in your own documents, citing the exact section for every answer.",
     value: "Instant, consistent answers for staff and fewer routine requests for HR.",
     yourData:
-      "Trained on your handbooks, policies or procedures, with guardrails set for your organization.",
+      "Answers only from your own handbooks, policies or procedures, with guardrails set for your organization.",
     cta: "Let’s put AI to work on your documents",
     stage: "Try it: ask a question about company policy",
   },

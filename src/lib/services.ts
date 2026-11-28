@@ -76,7 +76,11 @@ export const services: Service[] = [
       "Scenario and simulation tools",
       "Evidence-based recommendations",
     ],
-    outcomes: ["Deeper insights", "More reliable forecasts", "Better-informed decisions"],
+    outcomes: [
+      "Clear explanations of what drives your results",
+      "Forecasts with honest ranges of uncertainty",
+      "Evidence you can stand behind in a briefing or board meeting",
+    ],
     ctaTitle: "Let’s talk about your question",
   },
   {
@@ -129,7 +133,11 @@ export const services: Service[] = [
       "Indicator monitoring and alerts",
       "Documentation and handover for your team",
     ],
-    outcomes: ["Efficient workflows", "Consistent, reproducible results", "Less manual effort"],
+    outcomes: [
+      "Reports that refresh when new data is released",
+      "Results you can reproduce and audit",
+      "Hours of manual work returned to your team",
+    ],
     ctaTitle: "Let’s simplify your workflow",
   },
   {
@@ -182,7 +190,11 @@ export const services: Service[] = [
       "Knowledge management tools",
       "Responsible AI guidelines and evaluation",
     ],
-    outcomes: ["More productive research", "Accessible knowledge", "Reliable, responsible AI"],
+    outcomes: [
+      "Faster answers from your own documents, with sources",
+      "Institutional knowledge that stays when people move on",
+      "AI use you can explain and defend",
+    ],
     ctaTitle: "Let’s explore where AI can help",
   },
 ];

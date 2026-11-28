@@ -5,49 +5,32 @@
  * All motion is CSS; with reduced motion the final frame is shown.
  */
 
-function Frame({
-  top,
-  bottom,
-  children,
-}: {
-  top: string;
-  bottom: [string, string, string];
-  children: React.ReactNode;
-}) {
+function Frame({ children }: { children: React.ReactNode }) {
   return (
     <div className="service-visual lab-visual" aria-hidden="true">
       <div className="visual-topline">
-        <span>{top}</span>
         <span className="live-dot" />
       </div>
       {children}
-      <div className="visual-bottomline">
-        <span>{bottom[0]}</span>
-        <span>{bottom[1]}</span>
-        <span className="text-primary">{bottom[2]} ↗</span>
-      </div>
     </div>
   );
 }
 
 export function DashboardVisual() {
   const kpis = [
-    { x: 0, label: "REVENUE", value: "$4.59M", delta: "+11.7%" },
-    { x: 116, label: "ORDERS", value: "34.1k", delta: "+9.5%" },
-    { x: 232, label: "MARGIN", value: "45.6%", delta: "−0.1" },
+    { x: 0, value: 50 },
+    { x: 116, value: 40 },
+    { x: 232, value: 44 },
   ];
   return (
-    <Frame top="DASHBOARD / LIVE" bottom={["KPIs", "FORECAST", "INSIGHT"]}>
+    <Frame>
       <svg className="lab-svg" viewBox="0 0 340 152" preserveAspectRatio="xMidYMid meet">
         {kpis.map((k, i) => (
-          <g key={k.label} className={`lv-seq lv-s${i + 1}`}>
+          <g key={k.x} className={`lv-seq lv-s${i + 1}`}>
             <rect x={k.x} y="0" width="108" height="40" className="lv-card" />
-            <text x={k.x + 8} y="12" className="lv-label">
-              {k.label}
-            </text>
-            <text x={k.x + 8} y="31" className="lv-value">
-              {k.value}
-            </text>
+            {/* Shapes stand in for the KPI label and value. */}
+            <rect x={k.x + 8} y="9" width="26" height="3" className="lv-line" />
+            <rect x={k.x + 8} y="22" width={k.value} height="9" className="lv-value-bar" />
             <rect
               x={k.x + 72}
               y="22"
@@ -55,22 +38,12 @@ export function DashboardVisual() {
               height="11"
               className={i === 2 ? "lv-pill-down" : "lv-pill-up"}
             />
-            <text
-              x={k.x + 86.5}
-              y="30"
-              textAnchor="middle"
-              className={i === 2 ? "lv-pill-text-down" : "lv-pill-text-up"}
-            >
-              {k.delta}
-            </text>
           </g>
         ))}
 
         {/* Revenue chart with forecast */}
         <rect x="0" y="48" width="220" height="104" className="lv-card" />
-        <text x="8" y="60" className="lv-label">
-          REVENUE + 6-MONTH FORECAST
-        </text>
+        <rect x="8" y="56" width="70" height="3" className="lv-line" />
         {[80, 100, 120, 140].map((y) => (
           <line key={y} x1="8" x2="212" y1={y} y2={y} className="lv-grid" />
         ))}
@@ -88,21 +61,13 @@ export function DashboardVisual() {
 
         {/* Channel mix donut */}
         <rect x="232" y="48" width="108" height="104" className="lv-card" />
-        <text x="240" y="60" className="lv-label">
-          BY CHANNEL
-        </text>
+        <rect x="240" y="56" width="40" height="3" className="lv-line" />
         <g transform="translate(286 106) rotate(-90)">
           <circle r="26" className="lv-ring" />
           <circle r="26" className="lv-seg lv-seg-1" pathLength="100" />
           <circle r="26" className="lv-seg lv-seg-2" pathLength="100" />
           <circle r="26" className="lv-seg lv-seg-3" pathLength="100" />
         </g>
-        <text x="286" y="104" textAnchor="middle" className="lv-label">
-          TOTAL
-        </text>
-        <text x="286" y="115" textAnchor="middle" className="lv-value-sm">
-          $4.6M
-        </text>
       </svg>
     </Frame>
   );
@@ -110,7 +75,7 @@ export function DashboardVisual() {
 
 export function ReportVisual() {
   return (
-    <Frame top="REPORT / AUTOMATED" bottom={["DATA", "COMMENTARY", "PDF"]}>
+    <Frame>
       <svg className="lab-svg" viewBox="0 0 340 152" preserveAspectRatio="xMidYMid meet">
         {/* Spreadsheet source */}
         <g>
@@ -122,9 +87,6 @@ export function ReportVisual() {
           {[26, 47].map((x) => (
             <line key={x} x1={x} x2={x} y1="46" y2="104" className="lv-grid" />
           ))}
-          <text x="37" y="118" textAnchor="middle" className="lv-label">
-            SALES.XLSX
-          </text>
         </g>
 
         {/* Flow into the report */}
@@ -134,12 +96,8 @@ export function ReportVisual() {
         {/* The report page writing itself */}
         <rect x="118" y="0" width="112" height="152" className="lv-card lv-page" />
         <rect x="118" y="0" width="112" height="3" className="lv-brand-fill" />
-        <text x="128" y="16" className="lv-label">
-          MONTHLY REPORT
-        </text>
-        <text x="128" y="29" className="lv-value-sm">
-          October 2026
-        </text>
+        <rect x="128" y="12" width="44" height="3" className="lv-line" />
+        <rect x="128" y="22" width="60" height="6" className="lv-value-bar" />
         <rect x="128" y="38" width="92" height="3" className="lv-line lv-seq lv-s1" />
         <rect x="128" y="45" width="84" height="3" className="lv-line lv-seq lv-s2" />
         <rect x="128" y="52" width="62" height="3" className="lv-line lv-seq lv-s3" />
@@ -173,9 +131,6 @@ export function ReportVisual() {
           <line x1="236" x2="262" y1="75" y2="75" className="lv-track" />
           <rect x="268" y="56" width="58" height="40" className="lv-card" />
           <path d="M268 56 L297 79 L326 56" className="lv-envelope" />
-          <text x="297" y="110" textAnchor="middle" className="lv-label">
-            PDF SENT
-          </text>
         </g>
       </svg>
     </Frame>
@@ -184,21 +139,16 @@ export function ReportVisual() {
 
 export function AssistantVisual() {
   return (
-    <Frame top="ASSISTANT / GROUNDED" bottom={["QUESTION", "HANDBOOK", "ANSWER"]}>
+    <Frame>
       <svg className="lab-svg" viewBox="0 0 340 152" preserveAspectRatio="xMidYMid meet">
         {/* Employee question */}
         <g className="lv-seq lv-s1">
           <rect x="142" y="4" width="186" height="26" className="lv-ink-fill" />
-          <text x="153" y="21" className="lv-chat-user">
-            How much vacation after 4 years?
-          </text>
+          <rect x="153" y="15.5" width="150" height="3" className="lv-line-light" />
         </g>
 
         {/* Assistant avatar */}
         <rect x="12" y="46" width="22" height="22" className="lv-brand-fill lv-seq lv-s2" />
-        <text x="23" y="61" textAnchor="middle" className="lv-avatar lv-seq lv-s2">
-          HR
-        </text>
 
         {/* Typing dots, then the answer */}
         <g className="lv-typing">
@@ -208,20 +158,14 @@ export function AssistantVisual() {
         </g>
         <g className="lv-seq lv-s4">
           <rect x="42" y="44" width="224" height="46" className="lv-card" />
-          <text x="53" y="62" className="lv-chat">
-            You get 20 days of paid vacation a year
-          </text>
-          <text x="53" y="76" className="lv-chat">
-            after three years of service.
-          </text>
+          <rect x="53" y="57" width="190" height="3" className="lv-line" />
+          <rect x="53" y="71" width="130" height="3" className="lv-line" />
         </g>
 
         {/* Citation from the handbook */}
         <g className="lv-seq lv-s5">
           <rect x="42" y="98" width="128" height="18" className="lv-cite" />
-          <text x="51" y="110" className="lv-cite-text">
-            HB-2.1 · Employee Handbook
-          </text>
+          <rect x="51" y="105.5" width="100" height="3" className="lv-cite-line" />
         </g>
 
         {/* Handbook source */}

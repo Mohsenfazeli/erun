@@ -10,7 +10,7 @@ const product = getLabProduct("performance-dashboard");
 export const Route = createFileRoute("/lab/performance-dashboard")({
   head: () =>
     pageHead({
-      title: `${product.name} Prototype | Erun Lab`,
+      title: `${product.name} Prototype | Erun Consulting Group`,
       description: product.description,
       path: labPath(product.slug),
     }),

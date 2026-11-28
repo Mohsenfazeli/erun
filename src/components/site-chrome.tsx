@@ -1,18 +1,20 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { CONTACT_EMAIL, SERVICE_NAMES } from "@/lib/site";
+import { BOOKING_PATH, CONTACT_EMAIL, SERVICE_NAMES, SITE_NAME } from "@/lib/site";
 import { scrollBehavior } from "@/lib/utils";
 
 // Homepage sections the main navigation points to. The homepage scrolls to them in
-// place; every other page links back to them with /#id.
+// place; every other page links back to them with /#id. The services section keeps
+// the id "expertise" so existing links still work.
 const navItems = [
-  { id: "expertise", label: "Expertise" },
+  { id: "expertise", label: "Services" },
   { id: "approach", label: "Approach" },
   { id: "about", label: "About" },
   { id: "lab", label: "Lab" },
+  { id: "contact", label: "Contact" },
 ] as const;
 
 const CONSULTATION_LABEL = "Book a consultation";
@@ -26,9 +28,18 @@ type HeaderProps = {
 
 export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   // Lab prototype pages keep the Lab link highlighted.
   const onLabPage = pathname.startsWith("/lab/");
+
+  // Solid header once the page scrolls, so content never shows through behind the logo.
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 8);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
 
   function navItem(id: string, label: ReactNode, className?: string) {
     if (onNavigate) {
@@ -55,19 +66,14 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
     );
   }
 
-  const cta = (
-    <>
-      {CONSULTATION_LABEL} <ArrowUpRight />
-    </>
-  );
-
+  const classes = scrolled || menuOpen ? "site-header is-scrolled" : "site-header";
   return (
-    <header className="site-header">
+    <header className={classes}>
       {onNavigate ? (
         <a
           href="#home"
           className="wordmark brand-mark"
-          aria-label="Erun home"
+          aria-label={`${SITE_NAME} home`}
           onClick={(event) => {
             event.preventDefault();
             onNavigate("home");
@@ -76,7 +82,7 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
           <BrandImage />
         </a>
       ) : (
-        <Link to="/" className="wordmark brand-mark" aria-label="Erun home">
+        <Link to="/" className="wordmark brand-mark" aria-label={`${SITE_NAME} home`}>
           <BrandImage />
         </Link>
       )}
@@ -89,21 +95,11 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
           ),
         )}
       </nav>
-      {onNavigate ? (
-        <Button
-          variant="editorial"
-          className="header-contact"
-          onClick={() => onNavigate("contact")}
-        >
-          {cta}
-        </Button>
-      ) : (
-        <Button variant="editorial" className="header-contact" asChild>
-          <Link to="/" hash="contact">
-            {cta}
-          </Link>
-        </Button>
-      )}
+      <Button variant="editorial" className="header-contact" asChild>
+        <Link to={BOOKING_PATH}>
+          {CONSULTATION_LABEL} <ArrowUpRight />
+        </Link>
+      </Button>
       <Button
         variant="ghost"
         size="icon"
@@ -119,7 +115,7 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
 }
 
 function BrandImage() {
-  return <img src="/brand/erun-mark-160.png" alt="Erun Group" width={160} height={159} />;
+  return <img src="/brand/erun-mark-160.png" alt={SITE_NAME} width={160} height={159} />;
 }
 
 type FooterProps = {
@@ -133,10 +129,13 @@ export function SiteFooter({ className, onBackToTop }: FooterProps) {
   return (
     <footer className={className ? `site-footer ${className}` : "site-footer"}>
       <Link to="/" className="wordmark">
-        erun<span>.</span>
+        {SITE_NAME}
+        <span>.</span>
       </Link>
       <span>{SERVICE_NAMES.join(" · ")}</span>
-      <span>© {new Date().getFullYear()} Erun Group</span>
+      <span className="footer-legal">
+        © {new Date().getFullYear()} {SITE_NAME} · <Link to="/privacy">Privacy Policy</Link>
+      </span>
       <Button variant="nav" size="icon" aria-label="Back to top" onClick={backToTop}>
         <ArrowRight className="back-top-icon" />
       </Button>
@@ -144,10 +143,10 @@ export function SiteFooter({ className, onBackToTop }: FooterProps) {
   );
 }
 
-/** Closing call to action for inner pages: leads to the homepage contact form. */
+/** Closing call to action for inner pages: book a call, or send a message. */
 export function ConsultationCta({
   title = "Let’s talk about your challenge",
-  text = "Tell us what you are working on. We will reply by email to arrange a conversation.",
+  text = "Book a call directly, or send a message and we’ll reply by email.",
 }: {
   title?: string;
   text?: string;
@@ -155,7 +154,7 @@ export function ConsultationCta({
   return (
     <section className="page-cta" aria-labelledby="page-cta-title">
       <div className="eyebrow">
-        <span className="small-rule" /> START A CONVERSATION
+        <span className="small-rule" /> Start a conversation
       </div>
       <h2 id="page-cta-title">
         {title}
@@ -163,11 +162,8 @@ export function ConsultationCta({
       </h2>
       <p>{text}</p>
       <div className="page-cta-actions">
-        <Button variant="editorial" asChild>
-          <Link to="/" hash="contact">
-            {CONSULTATION_LABEL} <ArrowUpRight />
-          </Link>
-        </Button>
+        <ConsultationLink />
+        <SendMessageLink />
         <a href={`mailto:${CONTACT_EMAIL}`} className="page-cta-email">
           {CONTACT_EMAIL}
         </a>
@@ -197,13 +193,22 @@ export function PageShell({
   );
 }
 
-/** The standard "Book a consultation" link to the homepage contact form. */
+/** Primary call to action: "Book a consultation", to the booking calendar. */
 export function ConsultationLink({ className }: { className?: string }) {
   return (
-    <Button variant="editorial" className={className} asChild>
-      <Link to="/" hash="contact">
+    <Button variant="default" className={["cta-primary", className].join(" ").trim()} asChild>
+      <Link to={BOOKING_PATH}>
         {CONSULTATION_LABEL} <ArrowUpRight />
       </Link>
     </Button>
+  );
+}
+
+/** Secondary call to action: a text link to the homepage contact form. */
+export function SendMessageLink({ label = "or send a message" }: { label?: string }) {
+  return (
+    <Link to="/" hash="contact" className="cta-secondary">
+      {label}
+    </Link>
   );
 }
