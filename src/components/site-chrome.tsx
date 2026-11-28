@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { servicePath, services } from "@/lib/services";
-import { BOOKING_PATH, CONTACT_EMAIL, SITE_NAME } from "@/lib/site";
+import { CONTACT_EMAIL, SITE_NAME } from "@/lib/site";
 import { scrollBehavior } from "@/lib/utils";
 
 // Homepage sections the main navigation points to. The homepage scrolls to them in
@@ -18,7 +18,7 @@ const navItems = [
   { id: "contact", label: "Contact" },
 ] as const;
 
-const CONSULTATION_LABEL = "Book a consultation";
+const CONTACT_LABEL = "Discuss a Project";
 
 type HeaderProps = {
   /** Homepage only: scroll to a section instead of following a link. */
@@ -96,11 +96,6 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
           ),
         )}
       </nav>
-      <Button variant="editorial" className="header-contact" asChild>
-        <Link to={BOOKING_PATH}>
-          {CONSULTATION_LABEL} <ArrowUpRight />
-        </Link>
-      </Button>
       <Button
         variant="ghost"
         size="icon"
@@ -151,15 +146,15 @@ export function SiteFooter({ className, onBackToTop }: FooterProps) {
   );
 }
 
-/** Closing call to action for inner pages: book a call, or send a message. */
+/** Closing call to action for inner pages: a button to the contact form. */
 export function ConsultationCta({
   title = "Let’s talk about your challenge",
-  text = "Book a call directly, or send a message and we’ll reply by email.",
+  text = "Send us a message and we’ll reply by email.",
   buttonLabel,
 }: {
   title?: string;
   text?: string;
-  /** Label of the booking button; "Book a consultation" by default. */
+  /** Label of the button; "Discuss a Project" by default. */
   buttonLabel?: string;
 }) {
   return (
@@ -174,7 +169,6 @@ export function ConsultationCta({
       <p>{text}</p>
       <div className="page-cta-actions">
         <ConsultationLink label={buttonLabel} />
-        <SendMessageLink />
         <a href={`mailto:${CONTACT_EMAIL}`} className="page-cta-email">
           {CONTACT_EMAIL}
         </a>
@@ -204,7 +198,7 @@ export function PageShell({
   );
 }
 
-/** Primary call to action, to the booking calendar: "Book a consultation" unless relabelled. */
+/** Primary call to action, to the homepage contact form: "Discuss a Project" unless relabelled. */
 export function ConsultationLink({
   className,
   label,
@@ -214,8 +208,8 @@ export function ConsultationLink({
 }) {
   return (
     <Button variant="default" className={["cta-primary", className].join(" ").trim()} asChild>
-      <Link to={BOOKING_PATH}>
-        {label ?? CONSULTATION_LABEL} <ArrowUpRight />
+      <Link to="/" hash="contact">
+        {label ?? CONTACT_LABEL} <ArrowUpRight />
       </Link>
     </Button>
   );

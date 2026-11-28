@@ -21,7 +21,7 @@ export const SERVICE_NAMES = [
   "Intelligent Reporting",
 ] as const;
 
-/** Booking page that every "Book a consultation" button leads to. */
+/** Booking page (Cal.com). Not linked from the navigation; the contact form is the main call to action. */
 export const BOOKING_PATH = "/book";
 /**
  * Cal.com event link, for example https://cal.com/your-name/intro-call. Read at build time

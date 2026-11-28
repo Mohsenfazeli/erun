@@ -14,7 +14,7 @@ export function LabProductPage({ slug, children }: { slug: LabSlug; children: Re
       cta={
         <ConsultationCta
           title={p.cta}
-          text="We build these on your own data and systems. Book a call directly, or send a message and we’ll reply by email."
+          text="We build these on your own data and systems. Send us a message and we’ll reply by email."
         />
       }
     >
