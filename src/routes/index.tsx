@@ -176,7 +176,7 @@ function Index() {
         <section id="expertise" className="snap-section expertise-section">
           <div className="section-heading">
             <h2>
-              Economics, Applied<span className="text-primary">.</span>
+              What We Do<span className="text-primary">.</span>
             </h2>
             <p>
               From understanding economic trends to developing intelligent analytical systems, we
@@ -206,9 +206,7 @@ function Index() {
         <section id="approach" className="snap-section approach-section">
           <div className="section-heading">
             <h2>
-              Modern Methods.
-              <br />
-              Meaningful Insights<span className="text-primary">.</span>
+              How We Work<span className="text-primary">.</span>
             </h2>
             <p>
               We combine established economic principles with modern technology to make research
@@ -248,9 +246,7 @@ function Index() {
           <div className="about-content">
             <div>
               <h2>
-                Economic Thinking.
-                <br />
-                Modern Execution<span className="text-primary">.</span>
+                Who We Are<span className="text-primary">.</span>
               </h2>
               <p>
                 Erun Consulting Group is an independent economic research and analytics consultancy
@@ -285,9 +281,7 @@ function Index() {
           <div className="contact-layout">
             <div>
               <h2>
-                Let’s Move
-                <br />
-                Forward<span className="text-primary">.</span>
+                Let’s Talk<span className="text-primary">.</span>
               </h2>
               <p>
                 Have an economic question, a complex dataset or a research challenge? Let’s explore

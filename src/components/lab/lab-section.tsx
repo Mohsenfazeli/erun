@@ -11,13 +11,13 @@ const visuals: Record<LabSlug, () => ReactNode> = {
   "hr-assistant": () => <AssistantVisual />,
 };
 
-/** Homepage section after About: "Ideas into Practice." and the three Lab prototypes, on a dark band. */
+/** Homepage section after About: "What We’re Building." and the three Lab prototypes, on a dark band. */
 export function LabSection() {
   return (
     <section id="lab" className="snap-section lab-section">
       <div className="section-heading">
         <h2>
-          Ideas into <span className="lab-accent">Practice</span>.
+          What We’re <span className="lab-accent">Building</span>.
         </h2>
         <p>
           Explore how economic thinking and modern technology come together through interactive
