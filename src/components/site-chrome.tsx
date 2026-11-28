@@ -111,7 +111,13 @@ export function SiteHeader({ onNavigate, activeId }: HeaderProps) {
 }
 
 function BrandImage() {
-  return <img src="/brand/erun-mark-160.png" alt={SITE_NAME} width={160} height={159} />;
+  // The link around it carries the accessible name, so the image itself is decorative.
+  return (
+    <>
+      <img src="/brand/erun-mark-160.png" alt="" width={160} height={159} />
+      <span className="brand-name">{SITE_NAME}</span>
+    </>
+  );
 }
 
 type FooterProps = {
