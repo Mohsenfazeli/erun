@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -141,10 +140,8 @@ export function ContactForm({ returnPath = "/" }: { returnPath?: "/" | "/book" }
           Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
         </p>
       )}
-      <p className="form-note form-privacy">
-        We use your details only to reply to your message. See our{" "}
-        <Link to="/privacy">Privacy Policy</Link>.
-      </p>
+      {/* Privacy Policy link hidden for now; the page still exists at /privacy. */}
+      <p className="form-note form-privacy">We use your details only to reply to your message.</p>
     </form>
   );
 }
