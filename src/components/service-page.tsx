@@ -2,12 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check } from "lucide-react";
 import type { ReactNode } from "react";
 
-import {
-  ConsultationCta,
-  ConsultationLink,
-  PageShell,
-  SendMessageLink,
-} from "@/components/site-chrome";
+import { ConsultationCta, ConsultationLink, PageShell } from "@/components/site-chrome";
 import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
 
 import { servicePath, services, type Service, type ServiceSlug } from "@/lib/services";
@@ -44,7 +39,6 @@ export function ServicePage({ service }: { service: Service }) {
           <p>{service.intro}</p>
           <div className="service-hero-actions">
             <ConsultationLink label={DISCUSS_LABEL} />
-            <SendMessageLink />
           </div>
         </div>
         <div className="service-hero-visual">{visuals[service.slug]()}</div>

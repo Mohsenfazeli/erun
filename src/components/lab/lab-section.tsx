@@ -16,7 +16,6 @@ export function LabSection() {
   return (
     <section id="lab" className="snap-section lab-section">
       <div className="section-heading">
-        <div className="eyebrow">Erun Lab</div>
         <h2>
           Ideas into <span className="lab-accent">Practice</span>.
         </h2>

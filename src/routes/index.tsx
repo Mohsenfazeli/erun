@@ -6,7 +6,7 @@ import { ContactForm } from "@/components/contact-form";
 import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
 import { LabSection } from "@/components/lab/lab-section";
 import { ParticleWave } from "@/components/particle-wave";
-import { ConsultationLink, SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { servicePath } from "@/lib/services";
 import { scrollBehavior } from "@/lib/utils";
 import {
@@ -199,7 +199,6 @@ function Index() {
         </section>
         <section id="expertise" className="snap-section expertise-section">
           <div className="section-heading">
-            <div className="eyebrow">Our Expertise</div>
             <h2>
               Economics, Applied<span className="text-primary">.</span>
             </h2>
@@ -227,15 +226,9 @@ function Index() {
               </article>
             ))}
           </div>
-          <div className="section-bottom">
-            <Button variant="nav" onClick={() => goTo(2)}>
-              Our approach <ArrowDown />
-            </Button>
-          </div>
         </section>
         <section id="approach" className="snap-section approach-section">
           <div className="section-heading">
-            <div className="eyebrow">Our Approach</div>
             <h2>
               Modern Methods.
               <br />
@@ -277,7 +270,6 @@ function Index() {
         </section>
         <section id="applications" className="snap-section applications-section">
           <div className="section-heading">
-            <div className="eyebrow">Areas of Focus</div>
             <h2>
               Understanding What
               <br />
@@ -298,7 +290,6 @@ function Index() {
           </ul>
         </section>
         <section id="about" className="snap-section about-section">
-          <div className="eyebrow">About Erun</div>
           <div className="about-content">
             <div>
               <h2>
@@ -320,7 +311,6 @@ function Index() {
                 We believe the future of economic research lies in combining sound methodology with
                 intelligent technology.
               </p>
-              <ConsultationLink />
             </div>
             <aside className="glance-panel" aria-labelledby="glance-title">
               <h3 id="glance-title">At a glance</h3>
@@ -337,7 +327,6 @@ function Index() {
         </section>
         <LabSection />
         <section id="contact" className="snap-section contact-section">
-          <div className="eyebrow">Start a Conversation</div>
           <div className="contact-layout">
             <div>
               <h2>
@@ -349,7 +338,6 @@ function Index() {
                 Have an economic question, a complex dataset or a research challenge? Let’s explore
                 how we can help.
               </p>
-              <ConsultationLink label="Discuss a Project" />
               <div className="linkedin-link">
                 <Button variant="nav" asChild>
                   <a
