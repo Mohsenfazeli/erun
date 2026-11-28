@@ -1,35 +1,34 @@
 import { useEffect, useRef } from "react";
 
 /*
- * Hero visual: a field of small blue dots forming a flowing data landscape. Drawn on a canvas
- * (sharp on high-density screens), with every dot placed by sine and cosine wave functions:
+ * Hero visual: a data landscape of small blue dots. A grid of points on a wave surface is
+ * projected in true perspective (nearer points larger and stronger), coloured by height, with:
  *
- * - a main wave surface seen in gentle perspective (near dots larger and stronger),
- * - a lighter ribbon of dots flowing above it, for depth,
- * - a few dispersed dots drifting on closed loops.
+ * - a soft highlight that sweeps across the surface, like a scan through the data,
+ * - two marker points riding the surface with a slow pulse, like highlighted observations,
+ * - a gentle lift under the mouse pointer (devices with a fine pointer only).
  *
  * Every moving term uses a whole multiple of the loop phase, so the motion repeats seamlessly
- * every LOOP_SECONDS with no visible reset. Colours come from CSS custom properties on
- * .particle-wave. It draws one still frame for reduced motion and pauses when the hero is off
- * screen or the tab is hidden. Dot counts scale with the drawing size and device.
+ * every LOOP_SECONDS. Colours come from CSS custom properties on .particle-wave. It draws one
+ * still frame for reduced motion (no pointer effect) and pauses off screen or in a hidden tab.
  */
 
-const LOOP_SECONDS = 32;
-const FRAME_MS = 1000 / 30; // Slow motion: 30 fps is smooth and halves the work.
+const LOOP_SECONDS = 36;
+const FRAME_MS = 1000 / 45;
 const TAU = Math.PI * 2;
 
-type Palette = { strong: string; medium: string; light: string };
+type Rgb = [number, number, number];
 
-// Height of the main surface at (u across, v depth) for loop phase p. Roughly -1 … 1.
-function surface(u: number, v: number, p: number) {
-  // A slow swell that makes regions gently expand and contract.
-  const swell = 1 + 0.28 * Math.sin(TAU * (0.5 * u - 0.3 * v) + p);
-  return (
-    swell *
-    (0.55 * Math.sin(TAU * (1.05 * u + 0.35 * v) + p) +
-      0.3 * Math.sin(TAU * (0.6 * u - 0.85 * v) - 2 * p + 1.1) +
-      0.15 * Math.cos(TAU * (1.9 * u + 0.55 * v) + 3 * p + 0.5))
-  );
+function hexToRgb(value: string, fallback: Rgb): Rgb {
+  const m = /^#?([0-9a-f]{6})$/i.exec(value.trim());
+  if (!m) return fallback;
+  const n = parseInt(m[1]!, 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+
+function mix(a: Rgb, b: Rgb, t: number): string {
+  const k = Math.min(1, Math.max(0, t));
+  return `rgb(${Math.round(a[0] + (b[0] - a[0]) * k)},${Math.round(a[1] + (b[1] - a[1]) * k)},${Math.round(a[2] + (b[2] - a[2]) * k)})`;
 }
 
 function smoothstep(edge0: number, edge1: number, x: number) {
@@ -37,39 +36,25 @@ function smoothstep(edge0: number, edge1: number, x: number) {
   return t * t * (3 - 2 * t);
 }
 
-// Deterministic pseudo-random numbers, so dispersed dots sit in the same places every visit.
-function seeded(seed: number) {
-  let s = seed;
-  return () => {
-    s = (s * 1664525 + 1013904223) % 4294967296;
-    return s / 4294967296;
-  };
+// Surface height at (x across, -1.6 … 1.6; z depth, 0 far … 1 near) for loop phase p. About -1 … 1.
+function height(x: number, z: number, p: number) {
+  const swell = 1 + 0.25 * Math.sin(0.9 * x - 1.3 * z + p);
+  return (
+    swell *
+    (0.5 * Math.sin(1.7 * x + 2.1 * z + p) +
+      0.3 * Math.sin(2.9 * x - 1.6 * z - 2 * p + 0.8) +
+      0.2 * Math.cos(4.3 * x + 3.7 * z + 3 * p + 0.3))
+  );
 }
 
-type Drifter = {
-  x: number;
-  y: number;
-  rx: number;
-  ry: number;
-  k1: number;
-  k2: number;
-  phase: number;
-  r: number;
-};
+const X_SPAN = 1.6;
+const AMPLITUDE = 0.3;
 
-function makeDrifters(count: number): Drifter[] {
-  const rand = seeded(7);
-  return Array.from({ length: count }, () => ({
-    x: 0.12 + rand() * 0.86,
-    y: 0.08 + rand() * 0.84,
-    rx: 0.01 + rand() * 0.025,
-    ry: 0.01 + rand() * 0.03,
-    k1: 1 + Math.floor(rand() * 2),
-    k2: 1 + Math.floor(rand() * 2),
-    phase: rand() * TAU,
-    r: 0.6 + rand() * 0.9,
-  }));
-}
+// Marker points riding the surface: grid position and pulse offset.
+const markers = [
+  { x: 0.55, z: 0.62, offset: 0 },
+  { x: -0.15, z: 0.84, offset: 0.5 },
+];
 
 export function ParticleWave() {
   const host = useRef<HTMLDivElement>(null);
@@ -82,97 +67,132 @@ export function ParticleWave() {
     if (!element || !canvas || !ctx) return;
 
     let width = 0;
-    let height = 0;
+    let height_ = 0;
     let stacked = false;
     let cols = 0;
     let rows = 0;
-    let drifters: Drifter[] = [];
     let frame = 0;
     let last = 0;
     let visible = true;
     const start = performance.now();
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const styles = getComputedStyle(element);
-    const color = (name: string, fallback: string) =>
-      styles.getPropertyValue(name).trim() || fallback;
-    const palette: Palette = {
-      strong: color("--wave-strong", "#2f69da"),
-      medium: color("--wave-medium", "#6b9aef"),
-      light: color("--wave-light", "#a8c5f5"),
-    };
+    const finePointer = window.matchMedia("(pointer: fine)");
 
-    // Fade toward the text on the left and softly at the other edges.
-    function edgeFade(x: number, y: number) {
-      const fx = x / width;
-      const fy = y / height;
+    const styles = getComputedStyle(element);
+    const strong = hexToRgb(styles.getPropertyValue("--wave-strong"), [47, 105, 218]);
+    const medium = hexToRgb(styles.getPropertyValue("--wave-medium"), [107, 154, 239]);
+    const light = hexToRgb(styles.getPropertyValue("--wave-light"), [168, 197, 245]);
+    // Five colour steps from trough (light) to crest (strong), so dots can be drawn in batches.
+    const palette = [0, 0.25, 0.5, 0.75, 1].map((t) =>
+      t < 0.5 ? mix(light, medium, t * 2) : mix(medium, strong, (t - 0.5) * 2),
+    );
+
+    // Pointer, eased toward its target so the lift follows smoothly.
+    const pointer = { x: 0, y: 0, tx: 0, ty: 0, strength: 0, target: 0 };
+
+    function project(x: number, z: number, y: number) {
+      const depth = 1 + 2.4 * (1 - z); // 1 near … 3.4 far
+      const scale = 1 / depth;
+      const sx = width * 0.55 + x * width * 0.42 * scale;
+      const sy = height_ * 0.14 + (1 - y / 0.95) * height_ * 0.7 * scale;
+      return { sx, sy, scale };
+    }
+
+    function edgeFade(sx: number, sy: number) {
+      const fx = sx / width;
+      const fy = sy / height_;
       // Side by side with the text: a long fade on the left. Stacked: short fades only.
-      const leftFade = stacked ? 0.12 : 0.38;
+      const leftFade = stacked ? 0.1 : 0.36;
       return (
-        smoothstep(0.02, leftFade, fx) *
-        smoothstep(1, 0.93, fx) *
-        smoothstep(0, 0.1, fy) *
+        smoothstep(0.0, leftFade, fx) *
+        smoothstep(1, 0.94, fx) *
+        smoothstep(0.02, 0.12, fy) *
         smoothstep(1, 0.9, fy)
       );
     }
 
-    function dot(x: number, y: number, r: number, alpha: number) {
-      if (alpha < 0.02) return;
-      ctx!.globalAlpha = alpha;
-      ctx!.beginPath();
-      ctx!.arc(x, y, r, 0, TAU);
-      ctx!.fill();
-    }
-
     function draw(seconds: number) {
-      if (!width || !height) return;
-      const p = (TAU * (seconds % LOOP_SECONDS)) / LOOP_SECONDS;
-      const scale = Math.min(1.25, Math.max(0.75, width / 820));
-      ctx!.clearRect(0, 0, width, height);
+      if (!width || !height_) return;
+      const t = (seconds % LOOP_SECONDS) / LOOP_SECONDS;
+      const p = TAU * t;
+      // The scan crosses the surface once per loop, entering and leaving off screen.
+      const sweep = -X_SPAN - 0.6 + t * (2 * X_SPAN + 1.2);
+      const dotScale = Math.min(1.25, Math.max(0.8, width / 820));
 
-      // Lighter ribbon in the back, flowing across the upper part.
-      const ribbonDots = Math.round(cols * 1.6);
-      ctx!.fillStyle = palette.light;
-      for (let i = 0; i <= ribbonDots; i++) {
-        const u = i / ribbonDots;
-        for (let k = 0; k < 4; k++) {
-          const spread = 0.022 * (1 + 0.6 * Math.sin(TAU * 1.3 * u - p + k));
-          const y =
-            height *
-            (0.3 -
-              0.12 * u +
-              0.07 * Math.sin(TAU * (0.9 * u) + 2 * p + 0.4) +
-              0.025 * Math.cos(TAU * 2.2 * u - p) +
-              (k - 1.5) * spread);
-          const x = width * (0.04 + 0.94 * u);
-          dot(x, y, (0.7 + 0.25 * k) * scale, 0.55 * edgeFade(x, y));
-        }
-      }
+      pointer.x += (pointer.tx - pointer.x) * 0.12;
+      pointer.y += (pointer.ty - pointer.y) * 0.12;
+      pointer.strength += (pointer.target - pointer.strength) * 0.08;
+      const lift = pointer.strength;
+      const liftRadius = Math.max(90, width * 0.16);
 
-      // Main surface, back rows first so nearer dots draw on top.
+      ctx!.clearRect(0, 0, width, height_);
+      const batches: number[][] = palette.map(() => []);
+
+      // Far rows first, so nearer dots draw on top.
       for (let j = 0; j < rows; j++) {
-        const v = j / (rows - 1);
-        const perspective = 0.62 + 0.38 * v;
-        ctx!.fillStyle = v < 0.34 ? palette.light : v < 0.67 ? palette.medium : palette.strong;
+        // More rows toward the front, so spacing looks even after perspective.
+        const z = 1 - (1 - j / (rows - 1)) ** 1.45;
         for (let i = 0; i < cols; i++) {
-          const u = i / (cols - 1);
-          const h = surface(u, v, p);
-          const x = width * (0.5 + (u - 0.5) * (0.82 + 0.2 * v));
-          const y =
-            height * (0.34 + 0.5 * Math.pow(v, 1.15) - 0.1 * u) - h * height * 0.085 * perspective;
-          // Peaks catch more "light": stronger and slightly larger.
-          const lift = 0.62 + 0.38 * (h + 1) * 0.5;
-          const r = (0.65 + 1.25 * v) * (0.85 + 0.25 * lift) * scale;
-          const alpha = (0.3 + 0.7 * v) * lift * edgeFade(x, y);
-          dot(x, y, r, alpha);
+          const x = -X_SPAN + (2 * X_SPAN * i) / (cols - 1);
+          const h = height(x, z, p);
+          const projected = project(x, z, h * AMPLITUDE);
+          const { sx, scale } = projected;
+          let sy = projected.sy;
+          const fade = edgeFade(sx, sy);
+          if (fade < 0.02) continue;
+
+          const scan = Math.exp(-((x - sweep) ** 2) / 0.05);
+          let boost = 0.6 * scan;
+          if (lift > 0.01) {
+            const d = Math.hypot(sx - pointer.x, sy - pointer.y);
+            if (d < liftRadius) {
+              const k = lift * (1 - d / liftRadius) ** 2;
+              sy -= k * 26 * scale * 2;
+              boost += 0.7 * k;
+            }
+          }
+
+          const level = Math.min(1, (h + 1) / 2 + 0.25 * boost);
+          const alpha =
+            Math.min(1, (0.18 + 0.75 * scale * 1.6) * (0.55 + 0.45 * level) + 0.35 * boost) * fade;
+          const r = (0.55 + 1.9 * scale) * (0.85 + 0.3 * level + 0.35 * boost) * dotScale;
+          batches[Math.min(4, Math.round(level * 4))]!.push(sx, sy, r, alpha);
         }
       }
 
-      // Dispersed dots on slow closed loops.
-      ctx!.fillStyle = palette.medium;
-      for (const d of drifters) {
-        const x = width * (d.x + d.rx * Math.sin(d.k1 * p + d.phase));
-        const y = height * (d.y + d.ry * Math.cos(d.k2 * p + d.phase));
-        dot(x, y, d.r * scale, 0.45 * edgeFade(x, y));
+      batches.forEach((batch, b) => {
+        ctx!.fillStyle = palette[b]!;
+        for (let k = 0; k < batch.length; k += 4) {
+          ctx!.globalAlpha = batch[k + 3]!;
+          ctx!.beginPath();
+          ctx!.arc(batch[k]!, batch[k + 1]!, batch[k + 2]!, 0, TAU);
+          ctx!.fill();
+        }
+      });
+
+      // Marker points with a slow pulse (eight pulses per loop).
+      for (const m of markers) {
+        const h = height(m.x, m.z, p);
+        const { sx, sy, scale } = project(m.x, m.z, h * AMPLITUDE);
+        const fade = edgeFade(sx, sy);
+        if (fade < 0.05) continue;
+        const pulse = (t * 8 + m.offset) % 1;
+        ctx!.strokeStyle = palette[4]!;
+        ctx!.lineWidth = 1.2;
+        ctx!.globalAlpha = (1 - pulse) * 0.7 * fade;
+        ctx!.beginPath();
+        ctx!.arc(sx, sy, (6 + 26 * pulse) * scale * 1.6 * dotScale, 0, TAU);
+        ctx!.stroke();
+        ctx!.globalAlpha = 0.95 * fade;
+        ctx!.fillStyle = palette[4]!;
+        ctx!.beginPath();
+        ctx!.arc(sx, sy, 4.8 * scale * 1.6 * dotScale, 0, TAU);
+        ctx!.fill();
+        ctx!.globalAlpha = fade;
+        ctx!.fillStyle = "#fff";
+        ctx!.beginPath();
+        ctx!.arc(sx, sy, 1.8 * scale * 1.6 * dotScale, 0, TAU);
+        ctx!.fill();
       }
       ctx!.globalAlpha = 1;
     }
@@ -198,20 +218,38 @@ export function ParticleWave() {
     function resize() {
       const box = element!.getBoundingClientRect();
       width = Math.round(box.width);
-      height = Math.round(box.height);
+      height_ = Math.round(box.height);
       // The stylesheet sets the wave in normal flow (below the text) on narrow screens.
       stacked = getComputedStyle(element!).position !== "absolute";
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas!.width = Math.round(width * dpr);
-      canvas!.height = Math.round(height * dpr);
+      canvas!.height = Math.round(height_ * dpr);
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
       // Density follows the drawing size; fewer dots on small or low-power devices.
       const lowPower = (navigator.hardwareConcurrency || 8) <= 4 ? 0.8 : 1;
-      cols = Math.round(Math.min(84, Math.max(30, (width / 11) * lowPower)));
-      rows = Math.round(Math.min(32, Math.max(14, (height / 20) * lowPower)));
-      drifters = makeDrifters(Math.round(Math.min(70, width / 12)));
-      // Still frame: the current pose, or a balanced mid-loop pose for reduced motion.
-      draw(reduceMotion.matches ? LOOP_SECONDS * 0.3 : (performance.now() - start) / 1000);
+      cols = Math.round(Math.min(78, Math.max(34, (width / 11) * lowPower)));
+      rows = Math.round(Math.min(34, Math.max(16, (height_ / 17) * lowPower)));
+      // Still frame: the current pose, or a balanced pose for reduced motion.
+      draw(reduceMotion.matches ? LOOP_SECONDS * 0.42 : (performance.now() - start) / 1000);
+    }
+
+    // The canvas ignores the pointer (so buttons stay clickable); track it on the window.
+    function onPointerMove(event: PointerEvent) {
+      if (!finePointer.matches || reduceMotion.matches) return;
+      const box = element!.getBoundingClientRect();
+      const x = event.clientX - box.left;
+      const y = event.clientY - box.top;
+      const inside = x >= 0 && y >= 0 && x <= box.width && y <= box.height;
+      pointer.tx = x;
+      pointer.ty = y;
+      if (inside && pointer.target === 0) {
+        pointer.x = x;
+        pointer.y = y;
+      }
+      pointer.target = inside ? 1 : 0;
+    }
+    function onPointerLeave() {
+      pointer.target = 0;
     }
 
     const resizeObserver = new ResizeObserver(resize);
@@ -222,6 +260,8 @@ export function ParticleWave() {
     });
     viewObserver.observe(element);
     document.addEventListener("visibilitychange", update);
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.documentElement.addEventListener("pointerleave", onPointerLeave);
     function motionChanged() {
       resize();
       update();
@@ -235,6 +275,8 @@ export function ParticleWave() {
       resizeObserver.disconnect();
       viewObserver.disconnect();
       document.removeEventListener("visibilitychange", update);
+      window.removeEventListener("pointermove", onPointerMove);
+      document.documentElement.removeEventListener("pointerleave", onPointerLeave);
       reduceMotion.removeEventListener("change", motionChanged);
     };
   }, []);
