@@ -235,9 +235,6 @@ function Index() {
               </li>
             ))}
           </ol>
-          <p className="approach-statement">
-            Technology enhances our analysis. Economic reasoning guides it.
-          </p>
         </section>
         <section id="about" className="snap-section about-section">
           <div className="about-content">
