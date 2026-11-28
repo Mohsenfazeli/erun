@@ -1,7 +1,7 @@
 # Erun Consulting Group
 
-Website for Erun Consulting Group (Victoria, BC) — Turning Complexity into Clarity: analytics, automation and AI adoption at the intersection of economics and technology.
-_Turning Complexity into Clarity._
+Website for Erun Consulting Group, an economic research and analytics consultancy in British Columbia — Economics in Motion: analytics, automation and AI adoption at the intersection of economics and technology.
+_Economics in Motion._
 
 ## Development
 

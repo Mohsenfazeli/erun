@@ -10,7 +10,7 @@ export const Route = createFileRoute("/book")({
     pageHead({
       title: `Book a Consultation | ${SITE_NAME}`,
       description:
-        "Book a short intro call with Erun Consulting Group about economic analytics, workflow automation or practical AI adoption.",
+        "Book a short intro call with Erun Consulting Group about economic research, advanced analytics or intelligent reporting.",
       path: BOOKING_PATH,
     }),
   component: BookPage,

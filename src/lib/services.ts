@@ -1,6 +1,7 @@
 import { areaServed, organizationId, pageHead, SITE_NAME, SITE_URL } from "@/lib/site";
 
-// Content for the three service pages. Keep claims general and factual: no client
+// Content for the three areas of expertise (service pages). URLs keep their earlier slugs so
+// existing links and indexed pages still work. Keep claims general and factual: no client
 // names, statistics or results that have not been verified.
 
 // Earlier slugs (data-analytics, automation, ai-implementation, analytical-automation,
@@ -10,7 +11,7 @@ export type ServiceSlug =
 
 export type Service = {
   slug: ServiceSlug;
-  /** Short name, as on the homepage cards. */
+  /** Short name, as on the homepage cards and in the footer. */
   name: string;
   /** Name used for the page title and structured data. */
   serviceType: string;
@@ -19,183 +20,185 @@ export type Service = {
   headline: string;
   intro: string;
   capabilities: { title: string; text: string }[];
+  /** One sentence above the applications list. */
+  applicationsIntro: string;
   applications: string[];
   deliverables: string[];
-  outcomes: string[];
+  /** Closing call to action; the title gets a blue full stop. */
   ctaTitle: string;
+  ctaText: string;
 };
 
 export const services: Service[] = [
   {
     slug: "economic-analytics",
-    name: "Analytics",
-    serviceType: "Economic Analytics Consulting",
-    title: "Analytics: Economic Modelling & Forecasting | Erun Consulting Group",
+    name: "Economic Research",
+    serviceType: "Economic Research Consulting",
+    title: "Economic Research & Consulting | Erun",
     description:
-      "Economic modelling, forecasting, market analysis and scenario analysis for organizations in British Columbia and across Canada.",
-    headline: "Understand markets. Anticipate change.",
+      "Economic research that helps organizations understand markets, evaluate policies and examine what drives economic and business outcomes.",
+    headline: "Understanding the Forces That Shape Economies.",
     intro:
-      "We combine economic reasoning with modern data science to uncover insights, understand markets and anticipate what comes next.",
+      "We conduct economic research to understand markets, evaluate policies and examine the factors driving economic and business outcomes.",
     capabilities: [
       {
-        title: "Economic modelling",
-        text: "Econometric and statistical models that explain what drives results.",
+        title: "Economic Research",
+        text: "Evidence-based research into economic conditions, trends and emerging challenges.",
       },
       {
-        title: "Forecasting",
-        text: "Forecasts of demand, prices and key indicators, with clear ranges of uncertainty.",
+        title: "Market Analysis",
+        text: "Examination of market structures, supply, demand, competition and pricing.",
       },
       {
-        title: "Market analysis",
-        text: "Supply and demand, competition and the forces shaping industry performance.",
+        title: "Policy Evaluation",
+        text: "Assessment of the economic implications and effectiveness of policies and regulations.",
       },
       {
-        title: "Data visualization",
-        text: "Dashboards and charts that make trends and indicators easy to follow.",
+        title: "Economic Impact Assessment",
+        text: "Evaluation of the potential impacts of projects, programs and economic changes.",
       },
       {
-        title: "Scenario analysis",
-        text: "Test how outcomes change under different assumptions, policies or market conditions.",
+        title: "Industry Research",
+        text: "Analysis of industry performance, market developments and structural changes.",
       },
       {
-        title: "Impact assessment",
-        text: "Estimate the effects of a policy, project or program, including cost-benefit analysis.",
+        title: "Regional Economics",
+        text: "Examination of regional growth, demographic trends and spatial economic patterns.",
       },
     ],
+    applicationsIntro:
+      "Our research supports organizations in understanding changing markets, evaluating economic opportunities and making evidence-informed decisions.",
     applications: [
-      "Forecasting demand, revenue or budgets under different scenarios",
-      "Understanding market dynamics, pricing and competition",
-      "Measuring productivity and performance over time",
-      "Assessing the impact of a policy, project or program",
-      "Monitoring labour market and regional conditions",
+      "Market and industry assessments",
+      "Economic impact studies",
+      "Regulatory and policy analysis",
+      "Labour market research",
+      "Cost-benefit analysis",
+      "Regional economic assessments",
     ],
     deliverables: [
-      "Economic, statistical and forecasting models",
-      "Interactive dashboards",
-      "Research and analytical reports",
-      "Scenario and simulation tools",
+      "Economic research reports",
+      "Market and industry studies",
+      "Policy assessments",
+      "Economic models",
       "Evidence-based recommendations",
     ],
-    outcomes: [
-      "Clear explanations of what drives your results",
-      "Forecasts with honest ranges of uncertainty",
-      "Evidence you can stand behind in a briefing or board meeting",
-    ],
-    ctaTitle: "Let’s talk about your question",
+    ctaTitle: "Better Understanding Begins with Better Research",
+    ctaText: "Let’s discuss the economic questions that matter to your organization.",
   },
   {
     slug: "economic-workflow-automation",
-    name: "Automation",
-    serviceType: "Analytical Workflow Automation",
-    title: "Automation: Analytical Workflows & Reporting | Erun Consulting Group",
+    name: "Advanced Analytics",
+    serviceType: "Economic Modelling and Advanced Analytics",
+    title: "Economic Modelling, Forecasting & Data Analytics | Erun",
     description:
-      "Data pipelines, automated reporting, indicator monitoring and data validation that streamline research and analytical workflows.",
-    headline: "Less manual work. More time for analysis.",
+      "Econometric modelling, forecasting, scenario analysis, data visualization and spatial analytics that uncover patterns, explain relationships and anticipate change.",
+    headline: "Beyond the Numbers.",
     intro:
-      "We simplify complex research and reporting workflows, so teams spend less time preparing data and more time understanding it.",
+      "We combine economic reasoning, statistical methods and advanced technology to uncover patterns, understand relationships and anticipate change.",
     capabilities: [
       {
-        title: "Data pipelines",
-        text: "Collect, clean and combine data from statistical agencies and internal sources.",
+        title: "Econometric Modelling",
+        text: "Quantitative models that explain relationships and identify the drivers of economic outcomes.",
       },
       {
-        title: "Automated reporting",
-        text: "Recurring reports and briefings, produced consistently and ready for review.",
+        title: "Forecasting",
+        text: "Predictive analysis of economic indicators, demand, market trends and future conditions.",
       },
       {
-        title: "Indicator monitoring",
-        text: "Track key indicators as new data is released, and flag meaningful changes.",
+        title: "Scenario Analysis",
+        text: "Exploration of alternative outcomes under changing assumptions and conditions.",
       },
       {
-        title: "Data validation",
-        text: "Checks that catch errors, gaps and revisions before they reach the analysis.",
+        title: "Data Visualization",
+        text: "Interactive visualizations that make complex information accessible and meaningful.",
       },
       {
-        title: "Streamlined analytical workflows",
-        text: "Estimation, testing and forecasting routines that run the same way every time.",
+        title: "Performance Measurement",
+        text: "Development of indicators and analytical frameworks to evaluate performance over time.",
       },
       {
-        title: "Research automation",
-        text: "Less time gathering and formatting information, more time interpreting it.",
+        title: "Spatial Analytics",
+        text: "Geographic analysis of economic activity, regional patterns and market dynamics.",
       },
     ],
+    applicationsIntro:
+      "We develop analytical solutions that move beyond descriptive statistics to explain what is happening, why it matters and what may happen next.",
     applications: [
-      "Refreshing indicators when new data is published",
-      "Producing monthly or quarterly reports automatically",
-      "Updating forecasts and models on a regular schedule",
-      "Validating survey, administrative and market data",
-      "Monitoring prices, wages or market conditions",
+      "Economic and demand forecasting",
+      "Pricing and revenue modelling",
+      "Interactive analytical dashboards",
+      "Statistical and predictive modelling",
+      "Scenario simulation",
+      "Geographic and regional analysis",
     ],
     deliverables: [
-      "Automated reporting systems",
-      "Data pipelines and processing tools",
-      "Automated statistical and forecasting workflows",
-      "Indicator monitoring and alerts",
-      "Documentation and handover for your team",
+      "Statistical and economic models",
+      "Interactive dashboards",
+      "Forecasting systems",
+      "Simulation tools",
+      "Analytical frameworks",
     ],
-    outcomes: [
-      "Reports that refresh when new data is released",
-      "Results you can reproduce and audit",
-      "Hours of manual work returned to your team",
-    ],
-    ctaTitle: "Let’s simplify your workflow",
+    ctaTitle: "See More in Your Data",
+    ctaText:
+      "Explore how advanced analytics can bring clarity to your organization’s complex questions.",
   },
   {
     slug: "ai-adoption-in-economics",
-    name: "AI Adoption",
-    serviceType: "AI Adoption Consulting",
-    title: "AI Adoption for Research & Analysis | Erun Consulting Group",
+    name: "Intelligent Reporting",
+    serviceType: "Automated Economic Reporting",
+    title: "Automated Economic Reporting & AI | Erun",
     description:
-      "Practical AI integration into research, knowledge management, analytical workflows and decision-making, with an emphasis on responsible use.",
-    headline: "Practical AI for research and decisions.",
+      "Automated reporting, economic monitoring, data integration and AI-assisted research that deliver timely, consistent and reproducible economic insights.",
+    headline: "Beyond the Static Report.",
     intro:
-      "We help organizations integrate AI into research, analysis and decision-making, with attention to accuracy, transparency and responsible use.",
+      "We integrate automation, advanced analytics and artificial intelligence into research and reporting workflows to deliver timely, consistent and reproducible economic insights.",
     capabilities: [
       {
-        title: "Research assistants",
-        text: "AI assistants that search, summarize and cite research, reports and data.",
+        title: "Automated Reporting",
+        text: "Generation of recurring analytical and economic reports through reproducible workflows.",
       },
       {
-        title: "Knowledge management",
-        text: "Make reports, studies and institutional knowledge easy to find and use.",
+        title: "Economic Monitoring",
+        text: "Continuous tracking of economic indicators, market developments and emerging trends.",
       },
       {
-        title: "AI in analytical workflows",
-        text: "Add steps such as extraction or classification to existing analysis, with people reviewing the results.",
+        title: "Data Integration",
+        text: "Streamlined collection, validation and transformation of data from multiple sources.",
       },
       {
-        title: "Decision support",
-        text: "Bring relevant evidence, figures and context together when decisions are made.",
+        title: "AI-Assisted Research",
+        text: "Intelligent tools that support information retrieval, research synthesis and analysis.",
       },
       {
-        title: "Information retrieval",
-        text: "Find relevant statistics, policies and research quickly, with sources attached.",
+        title: "Dynamic Reporting",
+        text: "Interactive reports that adapt to selected parameters, updated data and changing analytical needs.",
       },
       {
-        title: "Responsible AI",
-        text: "Clear rules, testing and checks for accuracy, privacy and appropriate use.",
+        title: "Analytical Automation",
+        text: "Automated modelling, forecasting and data processing workflows.",
       },
     ],
+    applicationsIntro:
+      "We develop intelligent analytical systems that reduce repetitive work and enable organizations to focus on understanding results.",
     applications: [
-      "Searching and summarizing research, reports and policy documents",
-      "Answering staff questions from internal knowledge",
-      "Extracting key figures from statistical releases and documents",
-      "Drafting first versions of routine briefings",
-      "Testing AI outputs for accuracy before wider use",
+      "Automated economic reports",
+      "Economic indicator monitoring systems",
+      "AI-assisted research tools",
+      "On-demand analytical assessments",
+      "Automated data processing and validation",
+      "Dynamic forecasting and reporting systems",
     ],
     deliverables: [
-      "AI adoption roadmaps",
-      "Research and knowledge assistants",
-      "Proof-of-concept applications",
-      "Knowledge management tools",
-      "Responsible AI guidelines and evaluation",
+      "Automated reporting systems",
+      "Economic monitoring platforms",
+      "AI-assisted research applications",
+      "Reproducible analytical workflows",
+      "Dynamic research reports",
     ],
-    outcomes: [
-      "Faster answers from your own documents, with sources",
-      "Institutional knowledge that stays when people move on",
-      "AI use you can explain and defend",
-    ],
-    ctaTitle: "Let’s explore where AI can help",
+    ctaTitle: "Less Routine. More Insight",
+    ctaText:
+      "Discover how intelligent reporting can advance the way your organization conducts research and analysis.",
   },
 ];
 

@@ -3,14 +3,15 @@ import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { BOOKING_PATH, CONTACT_EMAIL, SERVICE_NAMES, SITE_NAME } from "@/lib/site";
+import { servicePath, services } from "@/lib/services";
+import { BOOKING_PATH, CONTACT_EMAIL, SITE_NAME } from "@/lib/site";
 import { scrollBehavior } from "@/lib/utils";
 
 // Homepage sections the main navigation points to. The homepage scrolls to them in
 // place; every other page links back to them with /#id. The services section keeps
 // the id "expertise" so existing links still work.
 const navItems = [
-  { id: "expertise", label: "Services" },
+  { id: "expertise", label: "Expertise" },
   { id: "approach", label: "Approach" },
   { id: "about", label: "About" },
   { id: "lab", label: "Lab" },
@@ -132,7 +133,14 @@ export function SiteFooter({ className, onBackToTop }: FooterProps) {
         {SITE_NAME}
         <span>.</span>
       </Link>
-      <span>{SERVICE_NAMES.join(" · ")}</span>
+      <span className="footer-services">
+        {services.map((service, i) => (
+          <span key={service.slug}>
+            {i > 0 && " · "}
+            <Link to={servicePath(service.slug)}>{service.name}</Link>
+          </span>
+        ))}
+      </span>
       <span className="footer-legal">
         © {new Date().getFullYear()} {SITE_NAME} · <Link to="/privacy">Privacy Policy</Link>
       </span>
@@ -147,9 +155,12 @@ export function SiteFooter({ className, onBackToTop }: FooterProps) {
 export function ConsultationCta({
   title = "Let’s talk about your challenge",
   text = "Book a call directly, or send a message and we’ll reply by email.",
+  buttonLabel,
 }: {
   title?: string;
   text?: string;
+  /** Label of the booking button; "Book a consultation" by default. */
+  buttonLabel?: string;
 }) {
   return (
     <section className="page-cta" aria-labelledby="page-cta-title">
@@ -162,7 +173,7 @@ export function ConsultationCta({
       </h2>
       <p>{text}</p>
       <div className="page-cta-actions">
-        <ConsultationLink />
+        <ConsultationLink label={buttonLabel} />
         <SendMessageLink />
         <a href={`mailto:${CONTACT_EMAIL}`} className="page-cta-email">
           {CONTACT_EMAIL}
@@ -193,12 +204,18 @@ export function PageShell({
   );
 }
 
-/** Primary call to action: "Book a consultation", to the booking calendar. */
-export function ConsultationLink({ className }: { className?: string }) {
+/** Primary call to action, to the booking calendar: "Book a consultation" unless relabelled. */
+export function ConsultationLink({
+  className,
+  label,
+}: {
+  className?: string;
+  label?: string | undefined;
+}) {
   return (
     <Button variant="default" className={["cta-primary", className].join(" ").trim()} asChild>
       <Link to={BOOKING_PATH}>
-        {CONSULTATION_LABEL} <ArrowUpRight />
+        {label ?? CONSULTATION_LABEL} <ArrowUpRight />
       </Link>
     </Button>
   );

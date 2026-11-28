@@ -15,7 +15,6 @@ import {
   HOME_TITLE,
   LINKEDIN_URL,
   pageHead,
-  SERVICE_NAMES,
   SITE_NAME,
   structuredData,
 } from "@/lib/site";
@@ -32,23 +31,23 @@ export const Route = createFileRoute("/")({
 });
 
 const sections = ["home", "expertise", "approach", "applications", "about", "lab", "contact"];
-const labels = ["Home", "Services", "Approach", "Areas of Focus", "About", "Lab", "Contact"];
+const labels = ["Home", "Expertise", "Approach", "Areas of Focus", "About", "Lab", "Contact"];
 const approachStages = [
   {
-    title: "Discover",
-    text: "We pin down the question, the decision it informs and what a useful answer looks like.",
+    title: "Understand",
+    text: "Define the question, understand the context and establish clear analytical objectives.",
   },
   {
-    title: "Design",
-    text: "We choose the methods, data sources and tools that fit the question and your team’s capacity.",
+    title: "Analyze",
+    text: "Apply economic reasoning, statistical methods and advanced analytical techniques.",
   },
   {
-    title: "Develop",
-    text: "We build and test the model, pipeline or assistant, and check the results against real data.",
+    title: "Integrate",
+    text: "Incorporate automation and AI where they improve the analytical process.",
   },
   {
     title: "Deliver",
-    text: "You get a working tool, clear documentation and a handover, so your team can run it independently.",
+    text: "Translate findings into clear insights, practical tools and informed recommendations.",
   },
 ];
 // Potential economic application areas, not past clients or partnerships. Six, to
@@ -56,53 +55,54 @@ const approachStages = [
 const applicationAreas = [
   {
     title: "Markets & Industries",
-    text: "Market dynamics, competition, pricing and industry performance.",
+    text: "Market dynamics, pricing, competition and industry performance.",
   },
   {
     title: "Labour & Workforce",
-    text: "Employment trends, wages, productivity and workforce planning.",
+    text: "Employment, wages, productivity and workforce trends.",
   },
   {
-    title: "Regional & Urban Development",
-    text: "Regional growth, housing, land use and spatial analysis.",
+    title: "Regional & Urban Economics",
+    text: "Regional development, housing, demographics and spatial analysis.",
   },
   {
     title: "Policy & Regulation",
-    text: "Policy evaluation, regulatory impacts and cost-benefit analysis.",
+    text: "Policy evaluation, regulatory impacts and economic assessments.",
   },
   {
     title: "Transportation & Mobility",
-    text: "Travel demand, pricing, accessibility and market performance.",
+    text: "Travel demand, accessibility, pricing and transportation markets.",
   },
   {
-    title: "Forecasting & Intelligence",
-    text: "Economic trends, predictive modelling and scenario analysis.",
+    title: "Business & Financial Economics",
+    text: "Cost structures, financial performance and resource allocation.",
   },
 ];
 const serviceCards = [
   {
-    title: "Analytics",
-    text: "Models, forecasts and impact assessments that explain what drives your numbers and what is likely to happen next.",
+    title: "Economic Research",
+    text: "Understand economic conditions, market dynamics and the forces shaping industries and communities.",
     visual: <AnalyticsVisual />,
     to: servicePath("economic-analytics"),
   },
   {
-    title: "Automation",
-    text: "Data pipelines and recurring reports that update themselves when new data is released.",
+    title: "Advanced Analytics",
+    text: "Turn complex data into meaningful insights through statistical modelling, forecasting and visualization.",
     visual: <WorkflowVisual />,
     to: servicePath("economic-workflow-automation"),
   },
   {
-    title: "AI Adoption",
-    text: "Research and knowledge assistants that answer from your own documents and show their sources.",
+    title: "Intelligent Reporting",
+    text: "Deliver timely, consistent economic insights through automated reporting and AI-assisted analytical workflows.",
     visual: <AIVisual />,
     to: servicePath("ai-adoption-in-economics"),
   },
 ];
 // About panel: facts supplied by the firm.
 const atAGlance = [
-  { label: "Based in", value: "Victoria, British Columbia" },
-  { label: "Services", value: SERVICE_NAMES.join(" · ") },
+  { label: "Location", value: "British Columbia, Canada" },
+  { label: "Expertise", value: "Economics, research and data analytics" },
+  { label: "Approach", value: "Advanced technology, automation and AI" },
   { label: "Works with", value: "Python, R, Power BI and modern AI tools" },
   { label: "Serving", value: "Organizations across Canada" },
 ];
@@ -181,16 +181,15 @@ function Index() {
             </div>
             <h1>
               {HEADLINE.line1} <br />
-              {HEADLINE.line2} <span className="clarity-word">{HEADLINE.accent}</span>
-              <span className="headline-period">.</span>
+              <span className="clarity-word">{HEADLINE.accent}.</span>
             </h1>
             <p className="hero-description">
-              We combine economics, advanced analytics, automation and AI to help organizations make
-              informed decisions and solve complex challenges.
+              A new approach to economic analysis and research, powered by advanced technology,
+              automation and artificial intelligence.
             </p>
             <div className="hero-actions">
               <Button variant="default" className="cta-primary" onClick={() => goTo(1)}>
-                Explore Our Services <ArrowDown />
+                Explore Our Expertise <ArrowDown />
               </Button>
               <Button variant="editorial" className="explore-button" onClick={() => goTo(4)}>
                 Learn About Erun <ArrowDown />
@@ -202,11 +201,11 @@ function Index() {
           <div className="section-heading">
             <div className="eyebrow">Our Expertise</div>
             <h2>
-              What We Do<span className="text-primary">.</span>
+              Economics, Applied<span className="text-primary">.</span>
             </h2>
             <p>
-              Three services that build on each other: answer the question, automate the work, and
-              use AI where it genuinely helps.
+              From understanding economic trends to developing intelligent analytical systems, we
+              bring modern methods to complex questions.
             </p>
           </div>
           <div className="expertise-grid">
@@ -238,11 +237,14 @@ function Index() {
           <div className="section-heading">
             <div className="eyebrow">Our Approach</div>
             <h2>
-              From Question
+              Modern Methods.
               <br />
-              to Impact<span className="text-primary">.</span>
+              Meaningful Insights<span className="text-primary">.</span>
             </h2>
-            <p>Every project starts with the decision you need to make, not with the tools.</p>
+            <p>
+              We combine established economic principles with modern technology to make research
+              more efficient, reproducible and informative.
+            </p>
           </div>
           <ol className="approach-track">
             {approachStages.map((item, i) => (
@@ -269,14 +271,22 @@ function Index() {
               </li>
             ))}
           </ol>
+          <p className="approach-statement">
+            Technology enhances our analysis. Economic reasoning guides it.
+          </p>
         </section>
         <section id="applications" className="snap-section applications-section">
           <div className="section-heading">
             <div className="eyebrow">Areas of Focus</div>
             <h2>
-              Areas of Focus<span className="text-primary">.</span>
+              Understanding What
+              <br />
+              Drives Change<span className="text-primary">.</span>
             </h2>
-            <p>Where we apply economics and data most often.</p>
+            <p>
+              We apply economic research and analytical methods across industries, markets and
+              complex systems.
+            </p>
           </div>
           <ul className="applications-grid">
             {applicationAreas.map((item) => (
@@ -288,19 +298,27 @@ function Index() {
           </ul>
         </section>
         <section id="about" className="snap-section about-section">
-          <div className="eyebrow">About {SITE_NAME}</div>
+          <div className="eyebrow">About Erun</div>
           <div className="about-content">
             <div>
               <h2>
-                Where Economics
+                Economic Thinking.
                 <br />
-                Meets Technology<span className="text-primary">.</span>
+                Modern Execution<span className="text-primary">.</span>
               </h2>
               <p>
-                Erun Consulting Group is an economics and data consultancy based in Victoria,
-                British Columbia. We combine economic training with hands-on technical work: we
-                build the models, dashboards, pipelines and AI tools ourselves, and explain the
-                results in plain language. We work with organizations across Canada.
+                Erun Consulting Group is an independent economic research and analytics consultancy
+                based in British Columbia, Canada.
+              </p>
+              <p>
+                We bring together economics, data science and modern technology to address complex
+                economic and business questions. Our approach integrates advanced analytical
+                methods, automation and artificial intelligence into the research process, enabling
+                more efficient analysis and accessible insights.
+              </p>
+              <p>
+                We believe the future of economic research lies in combining sound methodology with
+                intelligent technology.
               </p>
               <ConsultationLink />
             </div>
@@ -323,15 +341,15 @@ function Index() {
           <div className="contact-layout">
             <div>
               <h2>
-                Let’s Build
+                Let’s Move
                 <br />
-                What’s Next<span className="text-primary">.</span>
+                Forward<span className="text-primary">.</span>
               </h2>
               <p>
-                Tell us what you’re working on. Book a short call, or send a message and we’ll reply
-                by email.
+                Have an economic question, a complex dataset or a research challenge? Let’s explore
+                how we can help.
               </p>
-              <ConsultationLink />
+              <ConsultationLink label="Discuss a Project" />
               <div className="linkedin-link">
                 <Button variant="nav" asChild>
                   <a
