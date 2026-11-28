@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowUpRight, Linkedin } from "lucide-react";
+import { ArrowDown, ArrowUpRight, ChartLine, Linkedin, Target, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/contact-form";
-import { EconomicFlow } from "@/components/economic-flow";
 import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
 import { LabSection } from "@/components/lab/lab-section";
+import { ParticleWave } from "@/components/particle-wave";
 import { ConsultationLink, SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { servicePath } from "@/lib/services";
 import { scrollBehavior } from "@/lib/utils";
@@ -14,7 +14,6 @@ import {
   HOME_DESCRIPTION,
   HOME_TITLE,
   LINKEDIN_URL,
-  LOCATION,
   pageHead,
   SERVICE_NAMES,
   SITE_NAME,
@@ -100,6 +99,24 @@ const serviceCards = [
     to: servicePath("ai-adoption-in-economics"),
   },
 ];
+// The row under the hero.
+const valueProps = [
+  {
+    title: "Economic Insight",
+    text: "Understand markets, trends and opportunities.",
+    Icon: ChartLine,
+  },
+  {
+    title: "Intelligent Solutions",
+    text: "Combine analytics, automation and AI for greater impact.",
+    Icon: Workflow,
+  },
+  {
+    title: "Real Outcomes",
+    text: "Practical, data-driven solutions designed around your objectives.",
+    Icon: Target,
+  },
+];
 // About panel: facts supplied by the firm.
 const atAGlance = [
   { label: "Based in", value: "Victoria, British Columbia" },
@@ -175,31 +192,39 @@ function Index() {
       </aside>
       <main>
         <section id="home" className="hero-section snap-section">
-          <EconomicFlow />
+          <ParticleWave />
           <div className="hero-content">
-            <div className="eyebrow">
-              <span className="small-rule" /> {SITE_NAME} · {LOCATION}
+            <div className="eyebrow hero-eyebrow">
+              <span className="small-rule" /> {SITE_NAME}
             </div>
             <h1>
-              {HEADLINE.line1}
-              <br />
-              {HEADLINE.line2} <span className="clarity-word">{HEADLINE.accent}</span>
-              <span className="headline-period">.</span>
+              {HEADLINE.line1} <br />
+              <span className="clarity-word">{HEADLINE.accent}.</span>
             </h1>
             <p className="hero-description">
-              We help public agencies, non-profits and businesses answer economic questions with
-              solid evidence, then automate the analysis so the answers stay current.
+              We combine economics, advanced analytics, automation and AI to help organizations make
+              informed decisions and solve complex challenges.
             </p>
             <div className="hero-actions">
-              <ConsultationLink />
-              <Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>
-                See our services <ArrowDown />
+              <Button variant="default" className="cta-primary" onClick={() => goTo(1)}>
+                Explore Our Services <ArrowDown />
+              </Button>
+              <Button variant="editorial" className="explore-button" onClick={() => goTo(4)}>
+                Learn About Erun <ArrowDown />
               </Button>
             </div>
           </div>
-          <div className="hero-bottom">
-            <span className="hero-bottom-note">{SERVICE_NAMES.join(" · ")}</span>
-          </div>
+          <ul className="hero-values" aria-label="What we offer">
+            {valueProps.map(({ title, text, Icon }) => (
+              <li key={title}>
+                <Icon className="hero-value-icon" aria-hidden="true" strokeWidth={1.5} />
+                <div>
+                  <h2>{title}</h2>
+                  <p>{text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </section>
         <section id="expertise" className="snap-section expertise-section">
           <div className="section-heading">
