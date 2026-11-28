@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ArrowDown, ArrowUpRight, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/contact-form";
-import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
+import { AnalyticsVisual, ReportingVisual, ResearchVisual } from "@/components/service-visuals";
 import { LabSection } from "@/components/lab/lab-section";
 import { ParticleWave } from "@/components/particle-wave";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
@@ -54,19 +54,19 @@ const serviceCards = [
   {
     title: "Economic Research",
     text: "Understand economic conditions, market dynamics and the forces shaping industries and communities.",
-    visual: <AnalyticsVisual />,
+    visual: <ResearchVisual />,
     to: servicePath("economic-analytics"),
   },
   {
     title: "Advanced Analytics",
     text: "Turn complex data into meaningful insights through statistical modelling, forecasting and visualization.",
-    visual: <WorkflowVisual />,
+    visual: <AnalyticsVisual />,
     to: servicePath("economic-workflow-automation"),
   },
   {
     title: "Intelligent Reporting",
     text: "Deliver timely, consistent economic insights through automated reporting and AI-assisted analytical workflows.",
-    visual: <AIVisual />,
+    visual: <ReportingVisual />,
     to: servicePath("ai-adoption-in-economics"),
   },
 ];

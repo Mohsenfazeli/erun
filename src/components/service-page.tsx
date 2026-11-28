@@ -3,16 +3,16 @@ import { ArrowUpRight, Check } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { ConsultationCta, ConsultationLink, PageShell } from "@/components/site-chrome";
-import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
+import { AnalyticsVisual, ReportingVisual, ResearchVisual } from "@/components/service-visuals";
 
 import { servicePath, services, type Service, type ServiceSlug } from "@/lib/services";
 
 const DISCUSS_LABEL = "Discuss a Project";
 
 const visuals: Record<ServiceSlug, () => ReactNode> = {
-  "economic-analytics": () => <AnalyticsVisual />,
-  "economic-workflow-automation": () => <WorkflowVisual />,
-  "ai-adoption-in-economics": () => <AIVisual />,
+  "economic-analytics": () => <ResearchVisual />,
+  "economic-workflow-automation": () => <AnalyticsVisual />,
+  "ai-adoption-in-economics": () => <ReportingVisual />,
 };
 
 export function ServicePage({ service }: { service: Service }) {

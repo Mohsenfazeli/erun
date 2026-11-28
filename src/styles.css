@@ -719,3 +719,63 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .brand-mark { gap: 12px; }
 .brand-mark .brand-name { font-size: 17px; font-weight: 700; line-height: 1.2; color: var(--foreground); white-space: nowrap; }
 @media (max-width: 700px) { .brand-mark { gap: 10px; }.brand-mark .brand-name { font-size: 15px; } }
+
+/* ===================================================================
+ * Expertise illustrations (src/components/service-visuals.tsx).
+ * One 8s timeline. The resting state is the finished picture; keyframes start from hidden.
+ * =================================================================== */
+.sv-svg { position: absolute; left: 20px; right: 20px; top: 30px; bottom: 14px; width: calc(100% - 40px); height: calc(100% - 44px); overflow: visible; }
+.sv-svg * { transform-box: fill-box; }
+.sv-axis { fill: none; stroke: var(--muted-foreground); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.55; }
+.sv-grid { stroke: var(--border); stroke-width: 1; }
+.sv-supply { fill: none; stroke: var(--chart-2); stroke-width: 2.6; stroke-linecap: round; }
+.sv-demand { fill: none; stroke: var(--primary); stroke-width: 2.6; stroke-linecap: round; }
+.sv-demand-shift { fill: none; stroke: var(--primary); stroke-width: 2; stroke-dasharray: 5 5; stroke-linecap: round; opacity: 0.55; }
+.sv-guide { fill: none; stroke: var(--muted-foreground); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.6; }
+.sv-arrow { fill: none; stroke: var(--primary); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.sv-point { fill: var(--primary); }
+.sv-point-new { fill: var(--card); stroke: var(--primary); stroke-width: 2; }
+.sv-today { stroke: var(--muted-foreground); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0.6; }
+.sv-series { fill: none; stroke: var(--foreground); stroke-width: 1.6; stroke-linejoin: round; opacity: 0.85; }
+.sv-obs { fill: var(--foreground); }
+.sv-fit { fill: none; stroke: var(--chart-2); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.sv-band { fill: var(--primary); fill-opacity: 0.12; }
+.sv-forecast { fill: none; stroke: var(--primary); stroke-width: 2.2; stroke-dasharray: 6 4; stroke-linecap: round; }
+.sv-card { fill: var(--card); stroke: var(--border); stroke-width: 1; }
+.sv-line { fill: var(--muted-foreground); fill-opacity: 0.35; }
+.sv-title { fill: var(--foreground); fill-opacity: 0.8; }
+.sv-brand, .sv-bar, .sv-badge, .sv-packet { fill: var(--primary); }
+.sv-link { fill: none; stroke: var(--border); stroke-width: 1.2; }
+.sv-check { fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.sv-refresh-arc { fill: none; stroke: var(--primary); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Timeline */
+.sv-draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.sv-draw, .sv-seq, .sv-pop, .sv-each, .sv-grow { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-out; }
+.sv-d1 { animation-name: sv-d1; } .sv-d2 { animation-name: sv-d2; } .sv-d3 { animation-name: sv-d3; }
+@keyframes sv-d1 { 0%, 3% { stroke-dashoffset: 1; } 18%, 92% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes sv-d2 { 0%, 16% { stroke-dashoffset: 1; } 30%, 92% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes sv-d3 { 0%, 34% { stroke-dashoffset: 1; } 48%, 92% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+.sv-seq.sv-s1 { animation-name: sv-s1; } .sv-seq.sv-s2 { animation-name: sv-s2; } .sv-seq.sv-s3 { animation-name: sv-s3; } .sv-seq.sv-s4 { animation-name: sv-s4; } .sv-seq.sv-s5 { animation-name: sv-s5; }
+@keyframes sv-s1 { 0%, 6% { opacity: 0; } 12%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes sv-s2 { 0%, 14% { opacity: 0; } 20%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes sv-s3 { 0%, 32% { opacity: 0; } 40%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes sv-s4 { 0%, 50% { opacity: 0; } 58%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes sv-s5 { 0%, 64% { opacity: 0; } 72%, 92% { opacity: 1; } 100% { opacity: 0; } }
+.sv-pop { transform-origin: center; }
+.sv-pop.sv-s3 { animation-name: sv-p3; } .sv-pop.sv-s4 { animation-name: sv-p4; } .sv-pop.sv-s5 { animation-name: sv-p5; }
+@keyframes sv-p3 { 0%, 32% { opacity: 0; transform: scale(0.2); } 40%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes sv-p4 { 0%, 50% { opacity: 0; transform: scale(0.2); } 58%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes sv-p5 { 0%, 66% { opacity: 0; transform: scale(0.2); } 74%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+/* Items with their own start (inline animation-delay) on the same 8s cycle. */
+.sv-each { animation-name: sv-each; transform-origin: center; }
+@keyframes sv-each { 0% { opacity: 0; transform: scale(0.2); } 5%, 90% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+.sv-grow { animation-name: sv-grow; transform-origin: 50% 100%; }
+@keyframes sv-grow { 0% { transform: scaleY(0); } 8%, 90% { transform: scaleY(1); opacity: 1; } 100% { opacity: 0; } }
+.sv-refresh { transform-box: view-box; transform-origin: 296px 96px; animation: sv-spin 6s linear infinite; }
+@keyframes sv-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .sv-packet { display: none; } }
+
+/* Homepage cards: slightly smaller illustrations so each card's text fits on the same screen. */
+.expertise-grid .service-visual { height: clamp(150px, 21svh, 200px); }
+@media (max-width: 700px) { .expertise-grid .service-visual { height: 170px; } }
