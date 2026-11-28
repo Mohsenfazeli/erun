@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowDown, ArrowUpRight, ChartLine, Linkedin, Target, Workflow } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/contact-form";
 import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
@@ -99,24 +99,6 @@ const serviceCards = [
     to: servicePath("ai-adoption-in-economics"),
   },
 ];
-// The row under the hero.
-const valueProps = [
-  {
-    title: "Economic Insight",
-    text: "Understand markets, trends and opportunities.",
-    Icon: ChartLine,
-  },
-  {
-    title: "Intelligent Solutions",
-    text: "Combine analytics, automation and AI for greater impact.",
-    Icon: Workflow,
-  },
-  {
-    title: "Real Outcomes",
-    text: "Practical, data-driven solutions designed around your objectives.",
-    Icon: Target,
-  },
-];
 // About panel: facts supplied by the firm.
 const atAGlance = [
   { label: "Based in", value: "Victoria, British Columbia" },
@@ -199,7 +181,8 @@ function Index() {
             </div>
             <h1>
               {HEADLINE.line1} <br />
-              <span className="clarity-word">{HEADLINE.accent}.</span>
+              {HEADLINE.line2} <span className="clarity-word">{HEADLINE.accent}</span>
+              <span className="headline-period">.</span>
             </h1>
             <p className="hero-description">
               We combine economics, advanced analytics, automation and AI to help organizations make
@@ -214,17 +197,6 @@ function Index() {
               </Button>
             </div>
           </div>
-          <ul className="hero-values" aria-label="What we offer">
-            {valueProps.map(({ title, text, Icon }) => (
-              <li key={title}>
-                <Icon className="hero-value-icon" aria-hidden="true" strokeWidth={1.5} />
-                <div>
-                  <h2>{title}</h2>
-                  <p>{text}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
         </section>
         <section id="expertise" className="snap-section expertise-section">
           <div className="section-heading">

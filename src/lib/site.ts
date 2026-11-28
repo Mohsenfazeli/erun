@@ -5,10 +5,10 @@ export const LINKEDIN_URL = "https://www.linkedin.com/company/erungroup";
 export const CONTACT_EMAIL = "contact@erungroup.ca";
 export const LOCATION = "Victoria, BC";
 
-/** The hero headline, kept in one place: line 1, then line 2 in the brand blue. */
-export const HEADLINE = { line1: "Turning Complexity into", accent: "Better Decisions" } as const;
-/** The headline as one sentence: "Turning Complexity into Better Decisions." */
-export const TAGLINE = `${HEADLINE.line1} ${HEADLINE.accent}.`;
+/** The hero headline, kept in one place: line 1, then line 2 with the accent word in blue. */
+export const HEADLINE = { line1: "Turning Complexity", line2: "into", accent: "Clarity" } as const;
+/** The headline as one sentence: "Turning Complexity into Clarity." */
+export const TAGLINE = `${HEADLINE.line1} ${HEADLINE.line2} ${HEADLINE.accent}.`;
 export const HOME_TITLE = `${SITE_NAME} | Economic Analytics, Automation & AI | ${LOCATION}`;
 export const HOME_DESCRIPTION =
   "Erun Consulting Group is an economics and data consultancy in Victoria, BC, offering economic analytics, workflow automation and practical AI adoption.";
