@@ -30,8 +30,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const sections = ["home", "expertise", "approach", "applications", "about", "lab", "contact"];
-const labels = ["Home", "Expertise", "Approach", "Areas of Focus", "About", "Lab", "Contact"];
+const sections = ["home", "expertise", "approach", "about", "lab", "contact"];
+const labels = ["Home", "Expertise", "Approach", "About", "Lab", "Contact"];
 const approachStages = [
   {
     title: "Understand",
@@ -48,34 +48,6 @@ const approachStages = [
   {
     title: "Deliver",
     text: "Translate findings into clear insights, practical tools and informed recommendations.",
-  },
-];
-// Potential economic application areas, not past clients or partnerships. Six, to
-// keep the existing three-column grid even.
-const applicationAreas = [
-  {
-    title: "Markets & Industries",
-    text: "Market dynamics, pricing, competition and industry performance.",
-  },
-  {
-    title: "Labour & Workforce",
-    text: "Employment, wages, productivity and workforce trends.",
-  },
-  {
-    title: "Regional & Urban Economics",
-    text: "Regional development, housing, demographics and spatial analysis.",
-  },
-  {
-    title: "Policy & Regulation",
-    text: "Policy evaluation, regulatory impacts and economic assessments.",
-  },
-  {
-    title: "Transportation & Mobility",
-    text: "Travel demand, accessibility, pricing and transportation markets.",
-  },
-  {
-    title: "Business & Financial Economics",
-    text: "Cost structures, financial performance and resource allocation.",
   },
 ];
 const serviceCards = [
@@ -188,10 +160,14 @@ function Index() {
               automation and artificial intelligence.
             </p>
             <div className="hero-actions">
-              <Button variant="default" className="cta-primary" onClick={() => goTo(1)}>
+              <Button variant="default" className="cta-primary" onClick={() => goToId("expertise")}>
                 Explore Our Expertise <ArrowDown />
               </Button>
-              <Button variant="editorial" className="explore-button" onClick={() => goTo(4)}>
+              <Button
+                variant="editorial"
+                className="explore-button"
+                onClick={() => goToId("about")}
+              >
                 Learn About Erun <ArrowDown />
               </Button>
             </div>
@@ -267,27 +243,6 @@ function Index() {
           <p className="approach-statement">
             Technology enhances our analysis. Economic reasoning guides it.
           </p>
-        </section>
-        <section id="applications" className="snap-section applications-section">
-          <div className="section-heading">
-            <h2>
-              Understanding What
-              <br />
-              Drives Change<span className="text-primary">.</span>
-            </h2>
-            <p>
-              We apply economic research and analytical methods across industries, markets and
-              complex systems.
-            </p>
-          </div>
-          <ul className="applications-grid">
-            {applicationAreas.map((item) => (
-              <li key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </li>
-            ))}
-          </ul>
         </section>
         <section id="about" className="snap-section about-section">
           <div className="about-content">
