@@ -3,17 +3,35 @@ export const SITE_URL = "https://www.erungroup.ca";
 export const SITE_NAME = "Erun Consulting Group";
 export const LINKEDIN_URL = "https://www.linkedin.com/company/erungroup";
 export const CONTACT_EMAIL = "contact@erungroup.ca";
+export const LOCATION = "Victoria, BC";
 
-/** Erun's official tagline and central brand statement. */
-export const TAGLINE = "Modernizing Economics.";
-export const HOME_TITLE = "Erun Consulting Group | Modernizing Economics";
+/** The hero headline, kept in one place: line 1, then line 2 with the accent word. */
+export const HEADLINE = { line1: "Turning Complexity", line2: "into", accent: "Clarity" } as const;
+/** The headline as one sentence: "Turning Complexity into Clarity." */
+export const TAGLINE = `${HEADLINE.line1} ${HEADLINE.line2} ${HEADLINE.accent}.`;
+export const HOME_TITLE = `${SITE_NAME} | Economic Analytics, Automation & AI | ${LOCATION}`;
 export const HOME_DESCRIPTION =
-  "Erun Consulting Group combines economics, analytics, automation and AI to help organizations uncover insights, improve analytical workflows and make better decisions.";
-/** The three practice areas, in order, as shown in the footer and metadata. */
+  "Erun Consulting Group is an economics and data consultancy in Victoria, BC, offering economic analytics, workflow automation and practical AI adoption.";
+/** The three services, in order, as shown in the footer and metadata. */
 export const SERVICE_NAMES = ["Analytics", "Automation", "AI Adoption"] as const;
 
-// Existing brand mark, reused as the social preview and logo image.
-export const SOCIAL_IMAGE = { url: `${SITE_URL}/icon-512.png`, width: 512, height: 512 };
+/** Booking page that every "Book a consultation" button leads to. */
+export const BOOKING_PATH = "/book";
+/**
+ * Cal.com event link, for example https://cal.com/your-name/intro-call. Read at build time
+ * from VITE_BOOKING_URL; empty means online booking is not set up yet.
+ */
+export const BOOKING_URL = String(import.meta.env["VITE_BOOKING_URL"] ?? "").trim();
+
+/** Default share image for every page (public/og-image.png). */
+export const SOCIAL_IMAGE = {
+  url: `${SITE_URL}/og-image.png`,
+  width: 1200,
+  height: 630,
+  alt: `${SITE_NAME}: ${TAGLINE} Analytics, Automation and AI Adoption in ${LOCATION}.`,
+};
+/** Square brand mark, used as the logo in structured data. */
+export const LOGO_URL = `${SITE_URL}/icon-512.png`;
 
 const services = [
   {
@@ -30,14 +48,14 @@ const services = [
   },
 ];
 
-export const areaServed = [
-  {
-    "@type": "City",
-    name: "Vancouver",
-    containedInPlace: { "@type": "AdministrativeArea", name: "British Columbia" },
-  },
-  { "@type": "AdministrativeArea", name: "British Columbia" },
-];
+export const areaServed = { "@type": "Country", name: "Canada" };
+
+export const address = {
+  "@type": "PostalAddress",
+  addressLocality: "Victoria",
+  addressRegion: "BC",
+  addressCountry: "CA",
+};
 
 export const organizationId = `${SITE_URL}/#organization`;
 
@@ -48,12 +66,13 @@ export const structuredData = {
       "@type": "Organization",
       "@id": organizationId,
       name: SITE_NAME,
-      alternateName: "Erun Group",
       url: `${SITE_URL}/`,
-      logo: SOCIAL_IMAGE.url,
+      logo: LOGO_URL,
+      image: SOCIAL_IMAGE.url,
       description: HOME_DESCRIPTION,
       slogan: TAGLINE,
       email: CONTACT_EMAIL,
+      address,
       knowsAbout: [
         "Economics",
         "Econometrics",
@@ -78,7 +97,7 @@ export const structuredData = {
   ],
 };
 
-/** Head tags for an inner page: title, description, social cards, canonical and JSON-LD. */
+/** Head tags for a page: title, description, social cards, canonical and JSON-LD. */
 export function pageHead({
   title,
   description,
@@ -100,14 +119,17 @@ export function pageHead({
       { property: "og:type", content: "website" },
       { property: "og:url", content: url },
       { property: "og:locale", content: "en_CA" },
+      { property: "og:site_name", content: SITE_NAME },
       { property: "og:image", content: SOCIAL_IMAGE.url },
+      { property: "og:image:type", content: "image/png" },
       { property: "og:image:width", content: String(SOCIAL_IMAGE.width) },
       { property: "og:image:height", content: String(SOCIAL_IMAGE.height) },
-      { property: "og:image:alt", content: `${SITE_NAME} logo` },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:image:alt", content: SOCIAL_IMAGE.alt },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
       { name: "twitter:image", content: SOCIAL_IMAGE.url },
+      { name: "twitter:image:alt", content: SOCIAL_IMAGE.alt },
     ],
     links: [{ rel: "canonical", href: url }],
     scripts: jsonLd ? [{ type: "application/ld+json", children: JSON.stringify(jsonLd) }] : [],

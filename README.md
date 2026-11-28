@@ -1,7 +1,7 @@
 # Erun Consulting Group
 
-Website for Erun Consulting Group — Modernizing Economics: analytics, automation and AI adoption at the intersection of economics and technology.
-_Modernizing Economics._
+Website for Erun Consulting Group (Victoria, BC) — Turning Complexity into Clarity: analytics, automation and AI adoption at the intersection of economics and technology.
+_Turning Complexity into Clarity._
 
 ## Development
 

@@ -13,6 +13,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { PageShell } from "@/components/site-chrome";
 import { Button } from "@/components/ui/button";
+import { HOME_DESCRIPTION, SITE_NAME, SOCIAL_IMAGE } from "@/lib/site";
 
 import appCss from "../styles.css?url";
 
@@ -21,7 +22,7 @@ function NotFoundComponent() {
     <PageShell cta={null}>
       <section className="page-intro not-found">
         <div className="eyebrow">
-          <span className="small-rule" /> 404 / PAGE NOT FOUND
+          <span className="small-rule" /> Page not found
         </div>
         <h1>
           This page doesn’t exist<span className="text-primary">.</span>
@@ -77,21 +78,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Erun Group" },
-      { name: "description", content: "Economic consulting: analytics, automation and AI." },
-      { name: "author", content: "Erun Consulting Group" },
-      { property: "og:title", content: "Erun Group" },
-      { property: "og:description", content: "Modernizing Economics." },
-      { property: "og:site_name", content: "Erun Consulting Group" },
-      { name: "application-name", content: "Erun Group" },
-      { name: "apple-mobile-web-app-title", content: "Erun Group" },
+      { title: SITE_NAME },
+      { name: "description", content: HOME_DESCRIPTION },
+      { name: "author", content: SITE_NAME },
+      { property: "og:title", content: SITE_NAME },
+      { property: "og:description", content: HOME_DESCRIPTION },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:image", content: SOCIAL_IMAGE.url },
+      { property: "og:image:width", content: String(SOCIAL_IMAGE.width) },
+      { property: "og:image:height", content: String(SOCIAL_IMAGE.height) },
+      { property: "og:image:alt", content: SOCIAL_IMAGE.alt },
+      { name: "application-name", content: SITE_NAME },
+      { name: "apple-mobile-web-app-title", content: SITE_NAME },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: SOCIAL_IMAGE.url },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;450;500;550;600;650;700;750;800&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;450;500;550;600;650;700;750;800&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,

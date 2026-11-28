@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ApiContactRouteImport } from './routes/api.contact'
 import { Route as LabIndexRouteImport } from './routes/lab.index'
 import { Route as LabHrAssistantRouteImport } from './routes/lab.hr-assistant'
 import { Route as LabMonthlyReportRouteImport } from './routes/lab.monthly-report'
@@ -26,6 +29,21 @@ import { Route as ServicesEconomicWorkflowAutomationRouteImport } from './routes
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabIndexRoute = LabIndexRouteImport.update({
@@ -96,6 +114,9 @@ const ServicesEconomicWorkflowAutomationRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
+  '/privacy': typeof PrivacyRoute
+  '/api/contact': typeof ApiContactRoute
   '/lab/hr-assistant': typeof LabHrAssistantRoute
   '/lab/monthly-report': typeof LabMonthlyReportRoute
   '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
@@ -111,6 +132,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
+  '/privacy': typeof PrivacyRoute
+  '/api/contact': typeof ApiContactRoute
   '/lab/hr-assistant': typeof LabHrAssistantRoute
   '/lab/monthly-report': typeof LabMonthlyReportRoute
   '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
@@ -127,6 +151,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/book': typeof BookRoute
+  '/privacy': typeof PrivacyRoute
+  '/api/contact': typeof ApiContactRoute
   '/lab/hr-assistant': typeof LabHrAssistantRoute
   '/lab/monthly-report': typeof LabMonthlyReportRoute
   '/lab/performance-dashboard': typeof LabPerformanceDashboardRoute
@@ -144,6 +171,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/book'
+    | '/privacy'
+    | '/api/contact'
     | '/lab/hr-assistant'
     | '/lab/monthly-report'
     | '/lab/performance-dashboard'
@@ -159,6 +189,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/book'
+    | '/privacy'
+    | '/api/contact'
     | '/lab/hr-assistant'
     | '/lab/monthly-report'
     | '/lab/performance-dashboard'
@@ -174,6 +207,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/book'
+    | '/privacy'
+    | '/api/contact'
     | '/lab/hr-assistant'
     | '/lab/monthly-report'
     | '/lab/performance-dashboard'
@@ -190,6 +226,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookRoute: typeof BookRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ApiContactRoute: typeof ApiContactRoute
   LabHrAssistantRoute: typeof LabHrAssistantRoute
   LabMonthlyReportRoute: typeof LabMonthlyReportRoute
   LabPerformanceDashboardRoute: typeof LabPerformanceDashboardRoute
@@ -211,6 +250,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lab/': {
@@ -302,6 +362,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookRoute: BookRoute,
+  PrivacyRoute: PrivacyRoute,
+  ApiContactRoute: ApiContactRoute,
   LabHrAssistantRoute: LabHrAssistantRoute,
   LabMonthlyReportRoute: LabMonthlyReportRoute,
   LabPerformanceDashboardRoute: LabPerformanceDashboardRoute,

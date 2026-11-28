@@ -14,14 +14,14 @@ export function LabProductPage({ slug, children }: { slug: LabSlug; children: Re
       cta={
         <ConsultationCta
           title={p.cta}
-          text="We build these on your own data and systems. Tell us what you are working on and we will reply by email to arrange a conversation."
+          text="We build these on your own data and systems. Book a call directly, or send a message and we’ll reply by email."
         />
       }
     >
       <section className="lab-intro">
         <div>
           <div className="eyebrow">
-            <span className="small-rule" /> LAB / {p.number} {p.pillar.toUpperCase()}
+            <span className="small-rule" /> The Lab / {p.pillar}
           </div>
           <h1>
             {p.name}
@@ -29,27 +29,24 @@ export function LabProductPage({ slug, children }: { slug: LabSlug; children: Re
           </h1>
           <p>{p.tagline}</p>
         </div>
-        <div className="lab-intro-meta">
-          <span>
-            <span className="live-dot" /> LIVE PROTOTYPE
-          </span>
-          <span>SAMPLE DATA · FICTIONAL COMPANY</span>
-        </div>
+        <p className="lab-intro-meta">
+          <span className="live-dot" aria-hidden="true" /> Live prototype · Sample data · fictional
+          company
+        </p>
       </section>
 
       <section className="lab-stage" aria-label={`${p.name} prototype`}>
         <div className="lab-stage-bar no-print">
           <span>
-            <span className="live-dot" /> {p.stage.toUpperCase()}
+            <span className="live-dot" aria-hidden="true" /> {p.stage}
           </span>
-          <span>LAB / {p.number}</span>
         </div>
         {children}
       </section>
 
       <section className="service-block no-print" aria-labelledby="usecase-title">
         <div className="service-block-label">
-          <span className="eyebrow">THE USE CASE</span>
+          <span className="eyebrow">The use case</span>
           <h2 id="usecase-title">Why it matters</h2>
         </div>
         <ol className="capability-list">
@@ -58,9 +55,8 @@ export function LabProductPage({ slug, children }: { slug: LabSlug; children: Re
             { title: "What it does", text: p.solution },
             { title: "Business value", text: p.value },
             { title: "Built on your data", text: p.yourData },
-          ].map((item, i) => (
+          ].map((item) => (
             <li key={item.title}>
-              <span className="service-index">0{i + 1}</span>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </li>
@@ -69,7 +65,7 @@ export function LabProductPage({ slug, children }: { slug: LabSlug; children: Re
       </section>
 
       <nav className="other-services no-print" aria-label="Other Lab prototypes">
-        <span className="eyebrow">MORE FROM THE LAB</span>
+        <span className="eyebrow">More from the Lab</span>
         {LAB_PRODUCTS.filter((item) => item.slug !== slug).map((item) => (
           <Link key={item.slug} to={labPath(item.slug)}>
             {item.name} <ArrowUpRight size={18} />

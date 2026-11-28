@@ -495,7 +495,7 @@ export function AutomatedReport() {
               <footer className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5 text-[10.5px] text-ink-3">
                 <span className="flex items-center gap-2">
                   <ErunMark size={16} /> Prepared automatically by{" "}
-                  <Wordmark className="text-[12px]" /> Lab
+                  <Wordmark className="text-[12px]" />
                 </span>
                 <span>
                   Method: year-over-year compares the same month; 3-year trend is the annualised

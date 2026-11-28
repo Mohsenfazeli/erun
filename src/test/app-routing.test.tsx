@@ -14,6 +14,11 @@ describe("App routing", () => {
     "/services/economic-analytics",
     "/services/economic-workflow-automation",
     "/services/ai-adoption-in-economics",
+    "/book",
+    "/privacy",
+    "/lab/performance-dashboard",
+    "/lab/monthly-report",
+    "/lab/hr-assistant",
     // Earlier service URLs, kept as permanent redirects.
     "/services/data-analytics",
     "/services/automation",

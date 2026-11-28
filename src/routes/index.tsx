@@ -1,64 +1,55 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { ArrowDown, ArrowUpRight, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ContactForm } from "@/components/contact-form";
 import { EconomicFlow } from "@/components/economic-flow";
 import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-visuals";
 import { LabSection } from "@/components/lab/lab-section";
-import { SiteFooter, SiteHeader } from "@/components/site-chrome";
+import { ConsultationLink, SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { servicePath } from "@/lib/services";
 import { scrollBehavior } from "@/lib/utils";
-import { sendEnquiry } from "@/lib/contact.functions";
 import {
-  CONTACT_EMAIL,
+  HEADLINE,
   HOME_DESCRIPTION,
   HOME_TITLE,
   LINKEDIN_URL,
+  LOCATION,
+  pageHead,
   SERVICE_NAMES,
   SITE_NAME,
-  SITE_URL,
-  SOCIAL_IMAGE,
   structuredData,
 } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: HOME_TITLE },
-      { name: "description", content: HOME_DESCRIPTION },
-      { property: "og:title", content: HOME_TITLE },
-      { property: "og:description", content: HOME_DESCRIPTION },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: `${SITE_URL}/` },
-      { property: "og:locale", content: "en_CA" },
-      { property: "og:image", content: SOCIAL_IMAGE.url },
-      { property: "og:image:width", content: String(SOCIAL_IMAGE.width) },
-      { property: "og:image:height", content: String(SOCIAL_IMAGE.height) },
-      { property: "og:image:alt", content: `${SITE_NAME} logo` },
-      // Square logo image, so the small summary card fits better than the large one.
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: HOME_TITLE },
-      { name: "twitter:description", content: HOME_DESCRIPTION },
-      { name: "twitter:image", content: SOCIAL_IMAGE.url },
-    ],
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(structuredData) }],
-  }),
+  head: () =>
+    pageHead({
+      title: HOME_TITLE,
+      description: HOME_DESCRIPTION,
+      path: "/",
+      jsonLd: structuredData,
+    }),
   component: Index,
 });
 
 const sections = ["home", "expertise", "approach", "applications", "about", "lab", "contact"];
-const labels = ["Home", "Expertise", "Approach", "Applications", "About", "Lab", "Contact"];
+const labels = ["Home", "Services", "Approach", "Areas of Focus", "About", "Lab", "Contact"];
 const approachStages = [
   {
     title: "Discover",
-    text: "Understand your objectives, challenges and the decisions that matter.",
+    text: "We pin down the question, the decision it informs and what a useful answer looks like.",
   },
-  { title: "Design", text: "Define the right methodology, data and technology for your needs." },
-  { title: "Develop", text: "Build, validate and refine reliable analytical solutions." },
+  {
+    title: "Design",
+    text: "We choose the methods, data sources and tools that fit the question and your team’s capacity.",
+  },
+  {
+    title: "Develop",
+    text: "We build and test the model, pipeline or assistant, and check the results against real data.",
+  },
   {
     title: "Deliver",
-    text: "Implement solutions that create lasting value and support better decisions.",
+    text: "You get a working tool, clear documentation and a handover, so your team can run it independently.",
   },
 ];
 // Potential economic application areas, not past clients or partnerships. Six, to
@@ -89,13 +80,37 @@ const applicationAreas = [
     text: "Economic trends, predictive modelling and scenario analysis.",
   },
 ];
+const serviceCards = [
+  {
+    title: "Analytics",
+    text: "Models, forecasts and impact assessments that explain what drives your numbers and what is likely to happen next.",
+    visual: <AnalyticsVisual />,
+    to: servicePath("economic-analytics"),
+  },
+  {
+    title: "Automation",
+    text: "Data pipelines and recurring reports that update themselves when new data is released.",
+    visual: <WorkflowVisual />,
+    to: servicePath("economic-workflow-automation"),
+  },
+  {
+    title: "AI Adoption",
+    text: "Research and knowledge assistants that answer from your own documents and show their sources.",
+    visual: <AIVisual />,
+    to: servicePath("ai-adoption-in-economics"),
+  },
+];
+// About panel: facts supplied by the firm.
+const atAGlance = [
+  { label: "Based in", value: "Victoria, British Columbia" },
+  { label: "Services", value: SERVICE_NAMES.join(" · ") },
+  { label: "Works with", value: "Python, R, Power BI and modern AI tools" },
+  { label: "Serving", value: "Organizations across Canada" },
+];
 
 function Index() {
   const [active, setActive] = useState(0);
   const [stage, setStage] = useState(0);
-  const [contactStatus, setContactStatus] = useState("");
-  const [sending, setSending] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -139,35 +154,6 @@ function Index() {
   function goToId(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: scrollBehavior() });
   }
-  async function submitEnquiry(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    const field = (name: string) => String(data.get(name) ?? "");
-    setSending(true);
-    setContactStatus("Sending your message…");
-    const failed = `Sorry, your message could not be sent. Please email ${CONTACT_EMAIL} instead.`;
-    try {
-      const result = await sendEnquiry({
-        data: {
-          name: field("name"),
-          email: field("email"),
-          message: field("message"),
-          website: field("website"),
-        },
-      });
-      if (result.ok) {
-        form.reset();
-        setContactStatus("Thank you. Your message has been sent.");
-      } else {
-        setContactStatus(failed);
-      }
-    } catch {
-      setContactStatus(failed);
-    } finally {
-      setSending(false);
-    }
-  }
   return (
     <div className="erun-site">
       <SiteHeader onNavigate={goToId} activeId={sections[active]} />
@@ -192,80 +178,60 @@ function Index() {
           <EconomicFlow />
           <div className="hero-content">
             <div className="eyebrow">
-              <span className="small-rule" /> ERUN GROUP
+              <span className="small-rule" /> {SITE_NAME} · {LOCATION}
             </div>
             <h1>
-              Modernizing
+              {HEADLINE.line1}
               <br />
-              <span className="clarity-word">
-                Economics<span className="headline-period">.</span>
-              </span>
+              {HEADLINE.line2} <span className="clarity-word">{HEADLINE.accent}</span>
+              <span className="headline-period">.</span>
             </h1>
             <p className="hero-description">
-              We combine economics and technology to deliver deeper insights, streamline analytical
-              processes and enable better decisions.
+              We help public agencies, non-profits and businesses answer economic questions with
+              solid evidence, then automate the analysis so the answers stay current.
             </p>
-            <Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>
-              Explore Our Expertise <ArrowUpRight />
-            </Button>
-          </div>
-          <div className="scene-caption">
-            <span className="live-dot" /> ECONOMICS, CONNECTED.
+            <div className="hero-actions">
+              <ConsultationLink />
+              <Button variant="editorial" className="explore-button" onClick={() => goTo(1)}>
+                See our services <ArrowDown />
+              </Button>
+            </div>
           </div>
           <div className="hero-bottom">
-            <Button variant="nav" className="scroll-cue" onClick={() => goTo(1)}>
-              <ArrowDown /> SCROLL TO DISCOVER
-            </Button>
             <span className="hero-bottom-note">{SERVICE_NAMES.join(" · ")}</span>
-            <span className="section-counter">
-              01 <span>/ 07</span>
-            </span>
           </div>
         </section>
         <section id="expertise" className="snap-section expertise-section">
           <div className="section-heading">
-            <div className="eyebrow">01 / OUR EXPERTISE</div>
+            <div className="eyebrow">Our Expertise</div>
             <h2>
               What We Do<span className="text-primary">.</span>
             </h2>
-            <p>Three capabilities at the intersection of economics and technology.</p>
+            <p>
+              Three services that build on each other: answer the question, automate the work, and
+              use AI where it genuinely helps.
+            </p>
           </div>
           <div className="expertise-grid">
-            {[
-              {
-                title: "Analytics",
-                text: "Understand markets, uncover insights and anticipate change.",
-                visual: <AnalyticsVisual />,
-                to: servicePath("economic-analytics"),
-              },
-              {
-                title: "Automation",
-                text: "Simplify complex workflows and improve analytical efficiency.",
-                visual: <WorkflowVisual />,
-                to: servicePath("economic-workflow-automation"),
-              },
-              {
-                title: "AI Adoption",
-                text: "Integrate AI into research, analysis and decision-making.",
-                visual: <AIVisual />,
-                to: servicePath("ai-adoption-in-economics"),
-              },
-            ].map((service, i) => (
+            {serviceCards.map((service, i) => (
               <article className="expertise-item" key={service.title}>
-                <Link to={service.to} className="expertise-link">
+                <Link
+                  to={service.to}
+                  className="expertise-link"
+                  aria-labelledby={`service-card-${i}`}
+                  aria-describedby={`service-card-${i}-text`}
+                >
                   {service.visual}
                   <div className="service-heading">
-                    <span className="service-index">0{i + 1}</span>
-                    <h3>{service.title}</h3>
-                    <ArrowUpRight size={20} />
+                    <h3 id={`service-card-${i}`}>{service.title}</h3>
+                    <ArrowUpRight size={20} aria-hidden="true" />
                   </div>
-                  <p>{service.text}</p>
+                  <p id={`service-card-${i}-text`}>{service.text}</p>
                 </Link>
               </article>
             ))}
           </div>
           <div className="section-bottom">
-            <span>THREE CAPABILITIES. ONE DISCIPLINE.</span>
             <Button variant="nav" onClick={() => goTo(2)}>
               Our approach <ArrowDown />
             </Button>
@@ -273,13 +239,13 @@ function Index() {
         </section>
         <section id="approach" className="snap-section approach-section">
           <div className="section-heading">
-            <div className="eyebrow">02 / OUR APPROACH</div>
+            <div className="eyebrow">Our Approach</div>
             <h2>
               From Question
               <br />
               to Impact<span className="text-primary">.</span>
             </h2>
-            <p>A structured approach combining economic expertise with modern technology.</p>
+            <p>Every project starts with the decision you need to make, not with the tools.</p>
           </div>
           <ol className="approach-track">
             {approachStages.map((item, i) => (
@@ -300,42 +266,32 @@ function Index() {
                   onClick={() => setStage(i)}
                 >
                   <span className="step-node" aria-hidden="true" />
-                  <span className="stage-number">0{i + 1}</span>
                   <span className="stage-title">{item.title}</span>
                   <span className="stage-copy">{item.text}</span>
                 </button>
               </li>
             ))}
           </ol>
-          <div className="section-bottom">
-            <span>GOOD SOLUTIONS BEGIN WITH THE RIGHT QUESTIONS.</span>
-            <span>03 / 07</span>
-          </div>
         </section>
         <section id="applications" className="snap-section applications-section">
           <div className="section-heading">
-            <div className="eyebrow">03 / AREAS OF FOCUS</div>
+            <div className="eyebrow">Areas of Focus</div>
             <h2>
               Areas of Focus<span className="text-primary">.</span>
             </h2>
-            <p>Applying economics and technology to real-world challenges.</p>
+            <p>Where we apply economics and data most often.</p>
           </div>
           <ul className="applications-grid">
-            {applicationAreas.map((item, i) => (
+            {applicationAreas.map((item) => (
               <li key={item.title}>
-                <span className="area-index">0{i + 1}</span>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
               </li>
             ))}
           </ul>
-          <div className="section-bottom">
-            <span>MANY SECTORS. ONE ECONOMIC LENS.</span>
-            <span>04 / 07</span>
-          </div>
         </section>
         <section id="about" className="snap-section about-section">
-          <div className="eyebrow">04 / ABOUT ERUN</div>
+          <div className="eyebrow">About {SITE_NAME}</div>
           <div className="about-content">
             <div>
               <h2>
@@ -344,34 +300,29 @@ function Index() {
                 Meets Technology<span className="text-primary">.</span>
               </h2>
               <p>
-                Erun is a specialized consulting firm combining the rigour of economics with the
-                power of modern technology. Through analytics, automation and AI, we help
-                organizations solve complex challenges and make better-informed decisions.
+                Erun Consulting Group is an economics and data consultancy based in Victoria,
+                British Columbia. We combine economic training with hands-on technical work: we
+                build the models, dashboards, pipelines and AI tools ourselves, and explain the
+                results in plain language. We work with organizations across Canada.
               </p>
-              <Button variant="editorial" onClick={() => goToId("contact")}>
-                Let’s make progress <ArrowUpRight />
-              </Button>
+              <ConsultationLink />
             </div>
-            <div
-              className="architecture-art"
-              role="img"
-              aria-label="Interconnected architectural frames forming one coherent structure"
-            >
-              {Array.from({ length: 6 }, (_, i) => (
-                <div key={i} className={`architecture-frame frame-${i}`} />
-              ))}
-              <div className="architecture-baseline" />
-              <span>THINKING IN SYSTEMS.</span>
-            </div>
-          </div>
-          <div className="section-bottom">
-            <span>ECONOMICS FIRST. TECHNOLOGY WITH PURPOSE.</span>
-            <span>05 / 07</span>
+            <aside className="glance-panel" aria-labelledby="glance-title">
+              <h3 id="glance-title">At a glance</h3>
+              <dl>
+                {atAGlance.map((item) => (
+                  <div key={item.label}>
+                    <dt>{item.label}</dt>
+                    <dd>{item.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </aside>
           </div>
         </section>
-        <LabSection index={6} total={7} />
+        <LabSection />
         <section id="contact" className="snap-section contact-section">
-          <div className="eyebrow">06 / START A CONVERSATION</div>
+          <div className="eyebrow">Start a Conversation</div>
           <div className="contact-layout">
             <div>
               <h2>
@@ -379,13 +330,11 @@ function Index() {
                 <br />
                 What’s Next<span className="text-primary">.</span>
               </h2>
-              <p>Tell us what you’re working on. Together, we can find a smarter way forward.</p>
-              <Button
-                variant="editorial"
-                onClick={() => formRef.current?.querySelector("input")?.focus()}
-              >
-                Get in Touch <ArrowUpRight />
-              </Button>
+              <p>
+                Tell us what you’re working on. Book a short call, or send a message and we’ll reply
+                by email.
+              </p>
+              <ConsultationLink />
               <div className="linkedin-link">
                 <Button variant="nav" asChild>
                   <a
@@ -399,47 +348,7 @@ function Index() {
                 </Button>
               </div>
             </div>
-            <form ref={formRef} onSubmit={submitEnquiry} className="contact-form">
-              <label>
-                Full name
-                <input required name="name" autoComplete="name" placeholder="Alex Morgan" />
-              </label>
-              <label>
-                Email address
-                <input
-                  required
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  placeholder="alex@company.com"
-                />
-              </label>
-              <label>
-                How can we help?
-                <textarea
-                  required
-                  name="message"
-                  rows={3}
-                  placeholder="Tell us about your project or objectives…"
-                />
-              </label>
-              <div className="form-trap" aria-hidden="true">
-                <label>
-                  Website
-                  <input name="website" tabIndex={-1} autoComplete="off" />
-                </label>
-              </div>
-              <Button variant="default" type="submit" className="enquiry-button" disabled={sending}>
-                Send message <ArrowUpRight />
-              </Button>
-              <p className="form-note" role="status">
-                {contactStatus || (
-                  <>
-                    Prefer email? <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-                  </>
-                )}
-              </p>
-            </form>
+            <ContactForm />
           </div>
           <SiteFooter onBackToTop={() => goTo(0)} />
         </section>

@@ -87,7 +87,7 @@
   --secondary: oklch(0.955 0.008 250);
   --secondary-foreground: var(--foreground);
   --muted: oklch(0.955 0.008 250);
-  --muted-foreground: oklch(0.584 0.027 254);
+  --muted-foreground: oklch(0.5 0.03 256); /* #586475: 5.7:1 on the page background (was oklch(0.584 0.027 254), #717d8c, 4.0:1) */
   --accent: oklch(0.933 0.018 255);
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.577 0.245 27.325);
@@ -218,7 +218,7 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
 .progress-label { display: none; position: absolute; right: 30px; font-size: 10px; }.progress-dot:hover .progress-label { display: block; }
 .section-heading h2, .about-content h2, .contact-layout h2 { font-size: 58px; font-weight: 550; line-height: 1.2; margin: 25px 0 20px; letter-spacing: 0; }
 .section-heading p { font-size: 14px; color: var(--muted-foreground); }
-.expertise-section { background: var(--card); }
+.expertise-section { background: var(--background); }
 .expertise-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px; margin-top: 48px; }
 .service-visual { height: 245px; background: var(--visual-surface); position: relative; overflow: hidden; transition: transform 0.5s, box-shadow 0.5s; }
 .expertise-item:hover .service-visual { transform: translateY(-6px); box-shadow: var(--visual-shadow); }
@@ -233,14 +233,14 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
 .input-stack { display: flex; flex-direction: column; gap: 9px; }.input-stack span { height: 15px; width: 31px; background: var(--card); border: 1px solid var(--border); }.intelligence-lines { height: 1px; background: var(--primary); width: 28px; opacity: 0.5; }.intelligence-core { width: 75px; height: 75px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 12px; border: 1px solid var(--primary); transform: rotate(45deg); }.intelligence-core span { background: var(--primary); opacity: 0.5; animation: intelligence 3s infinite alternate; }.intelligence-core span:nth-child(2) { animation-delay: 0.7s; }.intelligence-core span:nth-child(3) { animation-delay: 1.4s; }.output-sheet { width: 40px; height: 58px; background: var(--card); border: 1px solid var(--border); padding: 6px; color: var(--primary); display: flex; flex-direction: column; gap: 5px; }.output-sheet i { width: 23px; height: 1px; background: var(--border); }
 .about-section { background: var(--card); }.about-content { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 60px; }.about-content p { max-width: 420px; font-size: 16px; line-height: 1.9; color: var(--muted-foreground); margin: 25px 0 32px; }.about-content button { font-size: 12px; padding: 0 0 10px; gap: 40px; }
 .architecture-art { position: relative; height: 390px; perspective: 900px; }.architecture-frame { position: absolute; width: 175px; height: 230px; border: 1px solid var(--primary); left: 30%; top: 65px; transform: rotateY(-35deg) rotateX(15deg); animation: architecture-drift 7s ease-in-out infinite alternate; }.frame-1 { left: 35%; top: 51px; opacity: 0.8; animation-delay: -1s; }.frame-2 { left: 40%; top: 37px; opacity: 0.6; animation-delay: -2s; }.frame-3 { left: 45%; top: 23px; opacity: 0.4; animation-delay: -3s; }.frame-4 { left: 25%; top: 79px; opacity: 0.6; animation-delay: -4s; }.frame-5 { left: 20%; top: 93px; opacity: 0.4; animation-delay: -5s; }.architecture-baseline { position: absolute; bottom: 60px; left: 10%; right: 0; height: 1px; background: var(--border); }.architecture-art > span { position: absolute; bottom: 30px; left: 30%; font-size: 8px; color: var(--muted-foreground); }
-.contact-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 90px; margin-top: 20px; }.contact-layout h2 { font-size: 54px; }.contact-layout p { color: var(--muted-foreground); font-size: 14px; margin: 25px 0; }.contact-layout > div > button { padding: 0 0 10px; font-size: 12px; gap: 40px; }.linkedin-link { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }.linkedin-link a { font-size: 11px; padding: 0; }.contact-form { padding-top: 30px; }.contact-form label { display: flex; flex-direction: column; gap: 12px; font-size: 11px; color: var(--foreground); margin-bottom: 27px; }.contact-form input, .contact-form textarea { outline: none; width: 100%; padding: 0 0 15px; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; background: transparent; font-family: inherit; font-size: 13px; color: var(--foreground); resize: vertical; }.contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary); }.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted-foreground); opacity: 0.7; }.enquiry-button { width: 100%; justify-content: space-between; border-radius: 0; height: 46px; font-size: 12px; padding: 0 18px; }.contact-form .form-note { font-size: 10px; margin: 12px 0; line-height: 1.6; }.form-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }.form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }.site-footer { position: absolute; bottom: 30px; left: 5.2%; right: 5.2%; display: flex; align-items: center; gap: 28px; border-top: 1px solid var(--border); padding-top: 25px; }.site-footer .wordmark { font-size: 30px; }.site-footer > span { font-size: 9px; color: var(--muted-foreground); }.site-footer > span:nth-of-type(2) { margin-left: auto; }.back-top-icon { transform: rotate(-90deg); }
+.contact-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 90px; margin-top: 20px; }.contact-layout h2 { font-size: 54px; }.contact-layout p { color: var(--muted-foreground); font-size: 14px; margin: 25px 0; }.contact-layout > div > button { padding: 0 0 10px; font-size: 12px; gap: 40px; }.linkedin-link { margin-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }.linkedin-link a { font-size: 11px; padding: 0; }.contact-form { padding-top: 30px; }.contact-form label { display: flex; flex-direction: column; gap: 12px; font-size: 11px; color: var(--foreground); margin-bottom: 27px; }.contact-form input, .contact-form textarea { outline: none; width: 100%; padding: 0 0 15px; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; background: transparent; font-family: inherit; font-size: 13px; color: var(--foreground); resize: vertical; }.contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary); }.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted-foreground); opacity: 1; }.enquiry-button { width: 100%; justify-content: space-between; border-radius: 0; height: 46px; font-size: 12px; padding: 0 18px; }.contact-form .form-note { font-size: 10px; margin: 12px 0; line-height: 1.6; }.form-note a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }.form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }.site-footer { position: absolute; bottom: 30px; left: 5.2%; right: 5.2%; display: flex; align-items: center; gap: 28px; border-top: 1px solid var(--border); padding-top: 25px; }.site-footer .wordmark { font-size: 30px; }.site-footer > span { font-size: 9px; color: var(--muted-foreground); }.site-footer > span:nth-of-type(2) { margin-left: auto; }.back-top-icon { transform: rotate(-90deg); }
 /* Inner pages: same header and footer as the homepage, with content in normal flow. */
 .page-site { min-height: 100svh; display: flex; flex-direction: column; }
 .page-main { flex: 1; padding: 102px 8.2% 0 5.2%; }
 .page-intro { padding: 110px 0 90px; max-width: 760px; }
 .page-intro h1 { font-size: 58px; line-height: 1.15; margin: 25px 0 20px; }
 .page-intro p { font-size: 16px; line-height: 1.8; color: var(--muted-foreground); margin: 0 0 32px; max-width: 560px; }
-.page-intro > a, .page-cta-actions > a:first-child { font-size: 12px; height: 42px; padding: 0 0 10px; gap: 32px; }
+.page-intro > a { font-size: 12px; height: 42px; padding: 0 0 10px; gap: 32px; }
 .not-found { min-height: calc(100svh - 300px); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
 .page-cta { border-top: 1px solid var(--border); padding: 80px 0 90px; }
 .page-cta h2 { font-size: 46px; font-weight: 550; line-height: 1.2; margin: 25px 0 18px; }
@@ -362,7 +362,7 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
   --color-brand-light: var(--accent);
   --color-ink: var(--foreground);
   --color-ink-2: var(--muted-foreground);
-  --color-ink-3: oklch(0.704 0.03 256);
+  --color-ink-3: oklch(0.53 0.03 256); /* #616d7d, 5.3:1 on white (was oklch(0.704 0.03 256), #94a1b3, 2.6:1) */
   --color-line: var(--border);
   --color-canvas: var(--background);
   --color-surface: var(--card);
@@ -523,4 +523,157 @@ h1 { font-size: 88px; line-height: 1.12; font-weight: 550; margin: 30px 0 24px; 
   .print-area { box-shadow: none !important; border: none !important; padding: 0 !important; max-width: none !important; }
   .print-break { break-before: page; }
   .avoid-break { break-inside: avoid; }
+}
+
+/* ===================================================================
+ * Site update (Nov 2026): readable labels, contrast, section rhythm, booking, privacy.
+ * Placed last so these rules win over the matching rules above.
+ * =================================================================== */
+:root {
+  --on-dark: oklch(1 0 0);
+  --on-dark-muted: oklch(0.82 0.025 256); /* #bac5d5, 8.8:1 on the navy band */
+  --error: oklch(0.5 0.19 27);
+}
+
+/* Visible keyboard focus everywhere. */
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.contact-form input:focus-visible, .contact-form textarea:focus-visible { box-shadow: 0 1px 0 var(--primary); }
+
+/* Header: solid once the page scrolls; five links. */
+.site-header { transition: background-color 0.25s, box-shadow 0.25s; }
+.site-header.is-scrolled { background: var(--background); backdrop-filter: none; box-shadow: 0 1px 0 var(--border); }
+.desktop-nav > * { font-size: 13px; font-weight: 550; }
+.header-contact { font-size: 13px; }
+
+/* Calls to action: filled primary, underlined text secondary. */
+.cta-primary { border-radius: 0; height: 46px; padding: 0 20px; font-size: 13px; font-weight: 600; gap: 18px; }
+.cta-secondary { font-size: 13px; font-weight: 550; color: var(--foreground); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--border); }
+.cta-secondary:hover { color: var(--primary); text-decoration-color: currentColor; }
+.hero-actions, .service-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 32px; }
+.hero-content a { pointer-events: auto; }
+.explore-button { font-size: 13px; height: 46px; padding: 0 0 4px; gap: 14px; }
+.page-cta-actions { gap: 20px 32px; }
+
+/* Readable eyebrows and small text. */
+.eyebrow { font-size: 12px; font-weight: 650; }
+.hero-bottom-note { font-size: 12px; }
+.section-bottom { justify-content: flex-start; }
+.section-bottom button { font-size: 13px; }
+
+/* Hero: the two-line headline, sized so "Turning Complexity" stays on one line on desktop. */
+.hero-content h1 { font-size: clamp(40px, 5.2vw, 100px); }
+.economic-flow { right: 0; width: 60%; }
+
+/* Service and Lab card illustrations: shapes only, no micro-labels. */
+.visual-topline { justify-content: flex-end; }
+.lv-value-bar { fill: var(--foreground); fill-opacity: 0.8; }
+.lv-line-light { fill: #fff; fill-opacity: 0.75; }
+.lv-cite-line { fill: var(--primary); fill-opacity: 0.6; }
+
+/* Approach: white surface; the timeline line and dots show the order. */
+.approach-section { background: var(--card); }
+.approach-step .stage-title { margin-top: 30px; }
+
+/* About: "At a glance" panel in place of the outline graphic. */
+.about-section { background: var(--card); }
+.about-content > div > .cta-primary { margin-top: 4px; }
+.glance-panel { border: 1px solid var(--border); background: var(--background); padding: 34px 36px 14px; max-width: 520px; justify-self: end; width: 100%; box-sizing: border-box; }
+.glance-panel h3 { margin: 0 0 18px; font-size: 13px; font-weight: 650; color: var(--primary); }
+.glance-panel dl { margin: 0; }
+.glance-panel dl > div { border-top: 1px solid var(--border); padding: 16px 0 18px; }
+.glance-panel dt { font-size: 12px; font-weight: 600; color: var(--muted-foreground); margin-bottom: 6px; }
+.glance-panel dd { margin: 0; font-size: 17px; font-weight: 550; line-height: 1.45; color: var(--foreground); }
+
+/* Lab: a dark navy band (the heading colour) with light text and the light brand blue. */
+.lab-section { background: var(--foreground); color: var(--on-dark); }
+.lab-section .eyebrow, .lab-section .section-heading p { color: var(--on-dark-muted); }
+.lab-section .section-heading h2 { color: var(--on-dark); }
+.lab-accent { color: var(--chart-2); } /* #4D9AFB, 5.4:1 on the navy band */
+.lab-section .section-heading .lab-disclaimer { margin-top: 6px; font-size: 14px; color: var(--on-dark); }
+.lab-section .lab-product-name, .lab-section .lab-product-pillar, .lab-section .lab-product-heading svg { color: var(--on-dark); }
+.lab-section .lab-product-copy { color: var(--on-dark-muted); }
+.lab-section .lab-product:hover .lab-product-name { color: var(--chart-2); }
+.lab-section a:focus-visible, .lab-section .lab-product:focus-visible { outline: 2px solid var(--chart-2); outline-offset: 8px; }
+
+/* Lab pages: compact intro so the demo shows in the first screen. */
+.lab-intro { padding: 30px 0 18px; gap: 24px 40px; }
+.lab-intro h1 { font-size: 44px; margin: 12px 0 8px; }
+.lab-intro p { font-size: 15px; line-height: 1.65; }
+.lab-intro .lab-intro-meta { display: flex; flex-direction: row; align-items: center; gap: 9px; margin: 0; font-size: 13px; font-weight: 550; text-transform: none; white-space: nowrap; color: var(--muted-foreground); }
+.lab-stage-bar { padding: 12px 0 16px; font-size: 13px; font-weight: 550; text-transform: none; }
+
+/* Contact form: labels, required marks, errors and privacy note. */
+.contact-form label { font-size: 13px; }
+.form-required-note { margin: 0 0 22px; font-size: 12px; color: var(--muted-foreground); }
+.required-mark { color: var(--primary); }
+.contact-form .form-note { font-size: 12px; }
+.contact-form .form-note:empty { margin: 0; }
+.contact-form .form-error { color: var(--error); font-weight: 600; } /* 6.3:1 */
+.form-privacy a { color: var(--foreground); }
+.contact-layout > div > .cta-primary { margin-top: 4px; }
+.form-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* Footer: full name in the wordmark style, readable text, privacy link. */
+.site-footer .wordmark { font-size: 22px; white-space: nowrap; }
+.site-footer > span { font-size: 12px; }
+.footer-legal a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.footer-legal a:hover { color: var(--primary); }
+
+/* Booking page. */
+.booking-intro { padding: 70px 0 30px; }
+.booking-intro .cta-secondary { margin-left: 4px; }
+.booking-section { padding-bottom: 90px; }
+.booking-calendar { min-height: 720px; border: 1px solid var(--border); background: var(--card); overflow: hidden; }
+.booking-loading { padding: 30px; font-size: 14px; color: var(--muted-foreground); }
+.booking-fallback { max-width: 560px; }
+.booking-fallback .contact-form { padding-top: 0; }
+
+/* Privacy policy. */
+.policy { max-width: 760px; padding-bottom: 90px; }
+.policy-intro { padding-bottom: 30px; }
+.policy section { border-top: 1px solid var(--border); padding: 28px 0 8px; }
+.policy h2 { font-size: 24px; font-weight: 600; margin: 0 0 14px; }
+.policy section p { font-size: 15px; line-height: 1.8; margin: 0 0 16px; color: var(--foreground); }
+.policy a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.policy-todo { background: oklch(0.94 0.09 95); color: var(--foreground); padding: 1px 4px; font-weight: 600; }
+
+/* Below 1024px: no side dots (they covered text). Tablets get a tighter nav. */
+@media (max-width: 1023px) { .section-progress { display: none; } }
+@media (min-width: 701px) and (max-width: 1023px) { .desktop-nav { margin-left: 24px; gap: 2px; }.desktop-nav > * { padding: 0 10px; font-size: 12px; } }
+@media (max-width: 1050px) { .site-footer .wordmark { font-size: 20px; } }
+
+@media (max-width: 700px) {
+  .eyebrow { font-size: 11px; }
+  .desktop-nav.open { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .desktop-nav.open > * { padding: 0; height: 40px; font-size: 15px; }
+  .hero-section { height: auto; min-height: 100svh; padding-bottom: 320px; }
+  .hero-content h1 { font-size: 40px; }
+  .hero-description { font-size: 14px; line-height: 1.7; }
+  .economic-flow { width: 100%; right: 0; height: 250px; bottom: 56px; }
+  .hero-bottom-note { font-size: 11px; }
+  .cta-primary { height: 44px; font-size: 13px; }
+  .explore-button { height: 44px; font-size: 13px; }
+  .section-heading p { font-size: 13px; }
+  .expertise-link > p, .applications-grid p, .approach-step .stage-copy { font-size: 13px; }
+  .approach-step .stage-title { margin-top: 0; }
+  .about-content p { font-size: 14px; }
+  .glance-panel { justify-self: stretch; padding: 26px 22px 6px; }
+  .glance-panel dd { font-size: 15px; }
+  /* Lab list: no empty screen-height gap below it. */
+  .lab-section { min-height: auto; padding-bottom: 72px; }
+  .lab-section .lab-products, .lab-section .lab-product { border-color: oklch(1 0 0 / 0.16); }
+  .lab-product-copy { padding-left: 0; font-size: 13px; }
+  .lab-intro { padding: 22px 0 12px; gap: 10px; }
+  .lab-intro h1 { font-size: 32px; margin: 10px 0 6px; }
+  .lab-intro p { font-size: 13px; line-height: 1.6; }
+  .lab-intro .lab-intro-meta { font-size: 12px; white-space: normal; }
+  .lab-stage-bar { font-size: 12px; padding: 10px 0 14px; }
+  .contact-layout p { font-size: 14px; }
+  .contact-section { padding-bottom: 200px; }
+  .site-footer .wordmark { font-size: 20px; white-space: normal; }
+  .site-footer > span, .site-footer > span:first-of-type, .site-footer > span:nth-of-type(2) { font-size: 11px; max-width: none; }
+  .booking-intro { padding: 44px 0 20px; }
+  .booking-calendar { min-height: 640px; }
+  .policy h2 { font-size: 20px; }
+  .policy section p { font-size: 14px; }
 }

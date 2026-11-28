@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-/** The Erun mark, as used in the site header. */
+/** The brand mark, as used in the site header. */
 export function ErunMark({ size = 28, className }: { size?: number; className?: string }) {
   return (
     <img
@@ -13,11 +13,11 @@ export function ErunMark({ size = 28, className }: { size?: number; className?: 
   );
 }
 
-/** "erun." wordmark, as in the site footer. */
+/** "Erun Consulting Group." wordmark, as in the site footer. */
 export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={cn("font-extrabold text-foreground", className)}>
-      erun<span className="text-primary">.</span>
+      Erun Consulting Group<span className="text-primary">.</span>
     </span>
   );
 }

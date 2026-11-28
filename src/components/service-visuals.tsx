@@ -6,7 +6,6 @@ export function AnalyticsVisual() {
   return (
     <div className="service-visual analytics-visual" aria-hidden="true">
       <div className="visual-topline">
-        <span>ANALYSIS / LIVE</span>
         <span className="live-dot" />
       </div>
       <svg viewBox="0 0 340 190">
@@ -26,11 +25,6 @@ export function AnalyticsVisual() {
         />
         <circle className="chart-point" cx="269" cy="50" r="5" />
       </svg>
-      <div className="visual-bottomline">
-        <span>COLLECT</span>
-        <span>CONNECT</span>
-        <span className="text-primary">CLARIFY ↗</span>
-      </div>
     </div>
   );
 }
@@ -38,7 +32,6 @@ export function WorkflowVisual() {
   return (
     <div className="service-visual workflow-visual" aria-hidden="true">
       <div className="visual-topline">
-        <span>WORKFLOW / CONNECTED</span>
         <span className="live-dot" />
       </div>
       <div className="workflow-system">
@@ -58,11 +51,6 @@ export function WorkflowVisual() {
           <Check size={24} />
         </div>
       </div>
-      <div className="visual-bottomline">
-        <span>INPUT</span>
-        <span>PROCESS</span>
-        <span className="text-primary">COMPLETE ↗</span>
-      </div>
     </div>
   );
 }
@@ -70,7 +58,6 @@ export function AIVisual() {
   return (
     <div className="service-visual ai-visual" aria-hidden="true">
       <div className="visual-topline">
-        <span>INTELLIGENCE / APPLIED</span>
         <span className="live-dot" />
       </div>
       <div className="intelligence-system">
@@ -93,11 +80,6 @@ export function AIVisual() {
           <i />
           <i />
         </div>
-      </div>
-      <div className="visual-bottomline">
-        <span>CONTEXT</span>
-        <span>REASON</span>
-        <span className="text-primary">ACTION ↗</span>
       </div>
     </div>
   );
