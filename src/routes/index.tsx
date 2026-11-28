@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/contact-form";
 import { AnalyticsVisual, ReportingVisual, ResearchVisual } from "@/components/service-visuals";
 import { IntersectionDiagram } from "@/components/intersection-diagram";
-import { LabSection } from "@/components/lab/lab-section";
 import { ParticleWave } from "@/components/particle-wave";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
 import { servicePath } from "@/lib/services";
@@ -31,8 +30,9 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const sections = ["home", "expertise", "approach", "about", "lab", "contact"];
-const labels = ["Home", "Expertise", "Approach", "About", "Lab", "Contact"];
+// The Lab section (components/lab/lab-section.tsx) is hidden from the homepage for now.
+const sections = ["home", "expertise", "approach", "about", "contact"];
+const labels = ["Home", "Expertise", "Approach", "About", "Contact"];
 const approachStages = [
   {
     title: "Understand",
@@ -251,7 +251,6 @@ function Index() {
             <IntersectionDiagram />
           </div>
         </section>
-        <LabSection />
         <section id="contact" className="snap-section contact-section">
           <div className="contact-layout">
             <div>

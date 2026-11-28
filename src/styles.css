@@ -783,3 +783,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .about-venn figcaption { margin-top: 14px; text-align: center; font-size: 13px; color: var(--muted-foreground); }
 @keyframes venn-settle { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: none; } }
 @media (max-width: 700px) { .about-venn { justify-self: center; max-width: 340px; margin-top: 0; }.about-content > div > p:last-of-type { margin-bottom: 0; } }
+
+/* Lab section hidden: Contact takes the white surface so sections still alternate. */
+.contact-section { background: var(--card); }
