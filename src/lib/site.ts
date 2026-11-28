@@ -5,15 +5,21 @@ export const LINKEDIN_URL = "https://www.linkedin.com/company/erungroup";
 export const CONTACT_EMAIL = "contact@erungroup.ca";
 export const LOCATION = "Victoria, BC";
 
-/** The hero headline, kept in one place: line 1, then line 2 with the accent word in blue. */
-export const HEADLINE = { line1: "Turning Complexity", line2: "into", accent: "Clarity" } as const;
-/** The headline as one sentence: "Turning Complexity into Clarity." */
-export const TAGLINE = `${HEADLINE.line1} ${HEADLINE.line2} ${HEADLINE.accent}.`;
-export const HOME_TITLE = `${SITE_NAME} | Economic Analytics, Automation & AI | ${LOCATION}`;
+/** The hero headline, kept in one place: line 1, then the accent line in the brand blue. */
+export const HEADLINE = { line1: "Economics in", accent: "Motion" } as const;
+/** The headline as one sentence, also the footer tagline: "Economics in Motion." */
+export const TAGLINE = `${HEADLINE.line1} ${HEADLINE.accent}.`;
+export const HOME_TITLE = `${SITE_NAME} | Economic Research & Advanced Analytics`;
 export const HOME_DESCRIPTION =
-  "Erun Consulting Group is an economics and data consultancy in Victoria, BC, offering economic analytics, workflow automation and practical AI adoption.";
-/** The three services, in order, as shown in the footer and metadata. */
-export const SERVICE_NAMES = ["Analytics", "Automation", "AI Adoption"] as const;
+  "Erun Consulting Group is a Canadian economic research and analytics consultancy leveraging advanced technology, automation and artificial intelligence to deliver meaningful economic insights.";
+/** One-line company description. */
+export const COMPANY_DESCRIPTION = "Economic research and analytics, powered by modern technology.";
+/** The three areas of expertise, in order, as shown in the footer and metadata. */
+export const SERVICE_NAMES = [
+  "Economic Research",
+  "Advanced Analytics",
+  "Intelligent Reporting",
+] as const;
 
 /** Booking page that every "Book a consultation" button leads to. */
 export const BOOKING_PATH = "/book";
@@ -28,23 +34,24 @@ export const SOCIAL_IMAGE = {
   url: `${SITE_URL}/og-image.png`,
   width: 1200,
   height: 630,
-  alt: `${SITE_NAME}: ${TAGLINE} Analytics, Automation and AI Adoption in ${LOCATION}.`,
+  alt: `${SITE_NAME}: ${TAGLINE} Economic Research, Advanced Analytics and Intelligent Reporting.`,
 };
 /** Square brand mark, used as the logo in structured data. */
 export const LOGO_URL = `${SITE_URL}/icon-512.png`;
 
 const services = [
   {
-    name: "Analytics",
-    description: "Economic modelling, forecasting, market analysis and scenario analysis.",
+    name: "Economic Research",
+    description:
+      "Market analysis, policy evaluation, economic impact assessment and regional economics.",
   },
   {
-    name: "Automation",
-    description: "Data pipelines, automated reporting, indicator monitoring and data validation.",
+    name: "Advanced Analytics",
+    description: "Econometric modelling, forecasting, scenario analysis and data visualization.",
   },
   {
-    name: "AI Adoption",
-    description: "Practical AI for research, knowledge management and decision-making.",
+    name: "Intelligent Reporting",
+    description: "Automated reporting, economic monitoring and AI-assisted research workflows.",
   },
 ];
 
@@ -76,7 +83,9 @@ export const structuredData = {
       knowsAbout: [
         "Economics",
         "Econometrics",
+        "Economic research",
         "Economic forecasting",
+        "Data analytics",
         ...services.map((service) => service.name),
       ],
       areaServed,

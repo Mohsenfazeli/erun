@@ -11,17 +11,23 @@ const visuals: Record<LabSlug, () => ReactNode> = {
   "hr-assistant": () => <AssistantVisual />,
 };
 
-/** Homepage section after About: "See It Working." and the three Lab prototypes, on a dark band. */
+/** Homepage section after About: "Ideas into Practice." and the three Lab prototypes, on a dark band. */
 export function LabSection() {
   return (
     <section id="lab" className="snap-section lab-section">
       <div className="section-heading">
-        <div className="eyebrow">The Lab</div>
+        <div className="eyebrow">Erun Lab</div>
         <h2>
-          See It <span className="lab-accent">Working</span>.
+          Ideas into <span className="lab-accent">Practice</span>.
         </h2>
-        <p>One working prototype for each of our services. Pick one and try it yourself.</p>
+        <p>
+          Explore how economic thinking and modern technology come together through interactive
+          analytical tools, research prototypes and intelligent applications.
+        </p>
         <p className="lab-disclaimer">Live prototypes using sample data for a fictional company.</p>
+        <Link to={labPath(LAB_PRODUCTS[0]!.slug)} className="lab-cta">
+          Explore the Lab <ArrowUpRight size={16} aria-hidden="true" />
+        </Link>
       </div>
       <nav className="lab-products" aria-label="Lab prototypes">
         {LAB_PRODUCTS.map((p) => (

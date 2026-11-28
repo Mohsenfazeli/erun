@@ -12,6 +12,8 @@ import { AIVisual, AnalyticsVisual, WorkflowVisual } from "@/components/service-
 
 import { servicePath, services, type Service, type ServiceSlug } from "@/lib/services";
 
+const DISCUSS_LABEL = "Discuss a Project";
+
 const visuals: Record<ServiceSlug, () => ReactNode> = {
   "economic-analytics": () => <AnalyticsVisual />,
   "economic-workflow-automation": () => <WorkflowVisual />,
@@ -21,11 +23,19 @@ const visuals: Record<ServiceSlug, () => ReactNode> = {
 export function ServicePage({ service }: { service: Service }) {
   const others = services.filter((item) => item.slug !== service.slug);
   return (
-    <PageShell cta={<ConsultationCta title={service.ctaTitle} />}>
+    <PageShell
+      cta={
+        <ConsultationCta
+          title={service.ctaTitle}
+          text={service.ctaText}
+          buttonLabel={DISCUSS_LABEL}
+        />
+      }
+    >
       <section className="service-hero">
         <div className="service-hero-text">
           <div className="eyebrow">
-            <span className="small-rule" /> Services / {service.name}
+            <span className="small-rule" /> {service.name}
           </div>
           <h1>
             {service.headline.replace(/\.$/, "")}
@@ -33,7 +43,7 @@ export function ServicePage({ service }: { service: Service }) {
           </h1>
           <p>{service.intro}</p>
           <div className="service-hero-actions">
-            <ConsultationLink />
+            <ConsultationLink label={DISCUSS_LABEL} />
             <SendMessageLink />
           </div>
         </div>
@@ -59,6 +69,7 @@ export function ServicePage({ service }: { service: Service }) {
         <div className="service-block-label">
           <span className="eyebrow">Practical applications</span>
           <h2 id="applications-title">Where it helps</h2>
+          <p>{service.applicationsIntro}</p>
         </div>
         <ul className="application-list">
           {service.applications.map((item) => (
@@ -72,17 +83,16 @@ export function ServicePage({ service }: { service: Service }) {
 
       <section className="service-block" aria-labelledby="results-title">
         <div className="service-block-label">
-          <span className="eyebrow">Deliverables & outcomes</span>
+          <span className="eyebrow">Deliverables</span>
           <h2 id="results-title">What you receive</h2>
         </div>
-        <div className="results-grid">
-          <ResultList title="Deliverables" items={service.deliverables} />
-          <ResultList title="Outcomes" items={service.outcomes} />
+        <div className="results-grid results-single">
+          <ResultList items={service.deliverables} />
         </div>
       </section>
 
-      <nav className="other-services" aria-label="Other services">
-        <span className="eyebrow">Other services</span>
+      <nav className="other-services" aria-label="Other areas of expertise">
+        <span className="eyebrow">Other expertise</span>
         {others.map((item) => (
           <Link key={item.slug} to={servicePath(item.slug)}>
             {item.name} <ArrowUpRight size={18} />
@@ -93,10 +103,9 @@ export function ServicePage({ service }: { service: Service }) {
   );
 }
 
-function ResultList({ title, items }: { title: string; items: string[] }) {
+function ResultList({ items }: { items: string[] }) {
   return (
     <div>
-      <h3>{title}</h3>
       <ul>
         {items.map((item) => (
           <li key={item}>
